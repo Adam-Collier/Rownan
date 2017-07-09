@@ -5,35 +5,55 @@ const {dialog} = require('electron').remote;
 
 function drop(sel) {
   console.log(sel.value);
+  var s = sel.parentNode;
+  console.log(parent);
   switch (sel.value) {
     case 'full':
       console.log(sel);
-      $(sel).parent().find('div').html(full);
+      s.querySelector('div').innerHTML = full;
       break;
     case 'center':
       console.log(sel);
-      $(sel).parent().find('div').html(center);
+      s.querySelector('div').innerHTML = center;
       break;
     case 'left':
       console.log(sel);
-      $(sel).parent().find('div').html(left);
+      s.querySelector('div').innerHTML = left;
       break;
     case 'right':
       console.log(sel);
-      $(sel).parent().find('div').html(right);
+      s.querySelector('div').innerHTML = right;
       break;
     case 'two':
       console.log(sel);
-      $(sel).parent().find('div').html(two);
+      s.querySelector('div').innerHTML = two;
       break;
     case 'three':
       console.log(sel);
-      $(sel).parent().find('div').html(three);
+      s.querySelector('div').innerHTML = three;
       break;
     default:
-      $(sel).parent().find('div').html("");
+      s.querySelector('div').innerHTML = "";
   }
 }
+var button = document.querySelector(".button");
+button.addEventListener("click", function() {
+  document.querySelector('.container').insertAdjacentHTML('beforeend', dropdown);
+  // $(".container").append(dropdown);
+});
+
+document.querySelector('.container').addEventListener('click', function(e){
+  if(e.target.matches('.remove')){
+    console.log("clicked");
+    e.target.parentNode.remove();
+  }
+});
+
+// $('.container').on("click", ".remove", function(e) {
+//   e.preventDefault();
+//   $(this).parent('div').remove();
+// });
+
 
 var dropdown = `
   <div class="selection">
@@ -78,29 +98,29 @@ var full = `
   `;
 
 var center = `
-    <label>URL</label><br>
-    <input type="text" class="url"><br>
-    <label>Image</label><br>
-    <span>../image/upload/q_70/</span><input type="text" class="image"><br>
-    <label>Mobile Image</label><br>
-    <span>../image/upload/q_70/</span><input type="text" class="mobile"><br>
-    <div id="radio">
-      <label>Text</label><br>
-      <input type="radio" name="radio" value="center" checked><p>center</p>
-      <input type="radio" name="radio" value="left"><p>left</p>
-      <input type="radio" name="radio" value="center"><p>right</p><br>
-    </div>
-    <label>Title</label><br>
-    <input type="text" class="title"><br>
-    <label>Subtitle</label><br>
-    <input type="text" class="subtitle"><br>
-    <label>CTA</label><br>
-    <input type="text" class="cta"><br>
-    <label>URL2</label><br>
-    <input type="text" class="url2"><br>
-    <label>CTA 2</label><br>
-    <input type="text" class="cta2"><br>
-  `;
+      <label>URL</label><br>
+      <input type="text" class="url"><br>
+      <label>Image</label><br>
+      <span>../image/upload/q_70/</span><input type="text" class="image"><br>
+      <label>Mobile Image</label><br>
+      <span>../image/upload/q_70/</span><input type="text" class="mobile"><br>
+      <div id="radio">
+        <label>Text</label><br>
+        <input type="radio" name="radio" value="center" checked><p>center</p>
+        <input type="radio" name="radio" value="left"><p>left</p>
+        <input type="radio" name="radio" value="center"><p>right</p><br>
+      </div>
+      <label>Title</label><br>
+      <input type="text" class="title"><br>
+      <label>Subtitle</label><br>
+      <input type="text" class="subtitle"><br>
+      <label>CTA</label><br>
+      <input type="text" class="cta"><br>
+      <label>URL2</label><br>
+      <input type="text" class="url2"><br>
+      <label>CTA 2</label><br>
+      <input type="text" class="cta2"><br>
+    `;
 
 var left = `
     <label>URL</label><br>
@@ -293,7 +313,7 @@ document.querySelector('#preview').addEventListener('click', function() {
         src="https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_768,dpr_1/${o.items[i].mobile}" sizes="100vw">
         <img src="https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70/${o.items[i].image}" alt="backup">
       </picture>
-      <div class="banner_content">
+      <div class="banner_content ${o.items[i].radio}">
         <h2 class="title1 white">${o.items[i].title}</h2>
         <h4 class="subtitle1 white">${o.items[i].subtitle}</h4>
         <button class="button">${o.items[i].cta}</button>
@@ -439,25 +459,7 @@ document.querySelector('#preview').addEventListener('click', function() {
       var html = Prism.highlight(code, Prism.languages.markup);
       var syntax = document.getElementsByTagName("code")[0];
       syntax.innerHTML = html;
-
-        fs.readFile('./preview.html','utf8', function(err,preview) {
-
-        $ = cheerio.load(preview);
-        $('.preview-container').html(data);
-        fs.writeFile('preview.html', $.html());
-      });
   });
-});
-
-var button = document.querySelector(".button");
-
-button.addEventListener("click", function() {
-  $(".container").append(dropdown);
-});
-
-$('.container').on("click", ".remove", function(e) {
-  e.preventDefault();
-  $(this).parent('div').remove();
 });
 
 function saveToFile () {
