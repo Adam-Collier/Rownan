@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello World!</title>
+    <link rel="stylesheet" href="./node_modules/prismjs/themes/prism.css" />
+    <link rel="stylesheet" href="./css/main.css">
+    </head>
+  <body>
+    <div class="left">
+      <div class = "form">
+        <div class="container">
+          <div class = "selection">
+            <select onchange="drop(this)">
+              <option value="general" selected>Please Select</option>
+              <option value="full">Full Width</option>
+              <option value="center">Center</option>
+              <option value="left">Left</option>
+              <option value="right">Right</option>
+              <option value="two">Two Column</option>
+              <option value="three">Three Column</option>
+            </select>
+            <div>
+              <!-- remove this -->
+              <label>URL</label><br>
+              <input type="text" class="url"><br>
+              <label>Image</label><br>
+              <span>../image/upload/q_70/</span><input type="text" class="image"><br>
+              <label>Mobile Image</label><br>
+              <span>../image/upload/q_70/</span><input type="text" class="mobile"><br>
+              <div id="radio">
+                <label>Text</label><br>
+                <input type="radio" name="radio" value="center" checked><p>center</p>
+                <input type="radio" name="radio" value="left"><p>left</p>
+                <input type="radio" name="radio" value="center"><p>right</p><br>
+              </div>
+              <label>Title</label><br>
+              <input type="text" class="title"><br>
+              <label>Subtitle</label><br>
+              <input type="text" class="subtitle"><br>
+              <label>CTA</label><br>
+              <input type="text" class="cta"><br>
+              <label>URL2</label><br>
+              <input type="text" class="url2"><br>
+              <label>CTA 2</label><br>
+              <input type="text" class="cta2"><br>
+              <!-- remove this -->
+            </div>
+          </div>
+        </div>
+        <p>
+          <input class = "button" type="button" value="+"/>
+        </p>
+        <!-- <div id='console'></div> -->
+      </div>
+      <div class = "buttons">
+        <button class="add" id="preview">GENERATE</button>
+        <button id="saveFile" onclick="saveToFile();">SAVE</button>
+      </div>
+    </div>
+    <div class="right">
+      <div class="preview">
+        <iframe src="./preview.html">
+        </iframe>
+      </div>
+      <pre>
+        <code class="language-markup">
+        </code>
+      </pre>
+      <button class="preview-button">preview</button>
+    </div>
+
+    <script src="main.js"></script>
+    <script>window.$ = window.jQuery = require('./js/jquery.js');</script>
+    <script src="./js/script.js"></script>
+
+  </body>
+
+</html>
