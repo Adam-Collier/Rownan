@@ -2913,7 +2913,7 @@ table td {
   }
 }
 
-@font-face {
+/*@font-face {
   font-family: Missguided;
   font-weight: 300;
   src: url(../fonts/missguided/missguided-light.woff2) format("woff2"), url(../fonts/missguided/missguided-light.woff) format("woff"), url(../fonts/missguided/missguided-light.ttf) format("truetype")
@@ -2923,7 +2923,7 @@ table td {
   font-family: Missguided;
   font-weight: 700;
   src: url(../fonts/missguided/missguided-bold.woff2) format("woff2"), url(../fonts/missguided/missguided-bold.woff) format("woff"), url(../fonts/missguided/missguided-bold.ttf) format("truetype")
-}
+}*/
 
 .background-overlay {
   position: fixed;

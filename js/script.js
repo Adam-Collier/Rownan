@@ -1,7 +1,7 @@
 var fs = require('fs');
 var Prism = require('prismjs');
 const {dialog} = require('electron').remote;
-// var cheerio = require('cheerio');
+var cheerio = require('cheerio');
 
 function drop(sel) {
   console.log(sel.value);
@@ -53,7 +53,6 @@ document.querySelector('.container').addEventListener('click', function(e){
 //   e.preventDefault();
 //   $(this).parent('div').remove();
 // });
-
 
 var dropdown = `
   <div class="selection">
@@ -271,161 +270,157 @@ document.querySelector('#preview').addEventListener('click', function() {
     });
   });
 
-
   // $('#console').text(JSON.stringify(o)); // strigify to show
-
-
     fs.writeFile('output.html', '', function(){console.log('done');});
 
     var inputs = document.querySelectorAll('select');
     Array.prototype.forEach.call(inputs, function(el, i) {
       // console.log(el.options[el.selectedIndex].value, i);
 
+    var f = `
+<div class="row fullwidth" id="row${i+1}">
+  <a href="${o.items[i].url}" class="tracking">
+    <picture>
+      <!-- desktop -->
+      <source media="(min-width: 768px)" srcset="https://media.missguided.co.uk/image/upload/c_scale,w_768,q_70/${o.items[i].url} 768w, https://media.missguided.co.uk/image/upload/c_scale,w_967,q_70/${o.items[i].image} 967w, https://media.missguided.co.uk/image/upload/c_scale,w_1147,q_70/${o.items[i].image} 1147w, https://media.missguided.co.uk/image/upload/c_scale,w_1294,q_70/${o.items[i].image} 1294w, https://media.missguided.co.uk/image/upload/c_scale,w_1453,q_70/${o.items[i].image} 1453w, https://media.missguided.co.uk/image/upload/c_scale,w_1591,q_70/${o.items[i].image} 1591w, https://media.missguided.co.uk/image/upload/c_scale,w_1718,q_70/${o.items[i].image} 1718w, https://media.missguided.co.uk/image/upload/c_scale,w_1856,q_70/${o.items[i].image} 1856w, https://media.missguided.co.uk/image/upload/c_scale,w_1919,q_70/${o.items[i].image} 1919w, https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70/${o.items[i].image} 1920w">
+      <!-- mobile -->
+      <source media="(max-width: 767px)"  srcset="https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_320/${o.items[i].mobile} 320w, https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_375,dpr_1/${o.items[i].mobile} 375w, https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_414,dpr_1/${o.items[i].mobile} 414w"
+      src="https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_768,dpr_1/${o.items[i].mobile}" sizes="100vw">
+      <img src="https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70/${o.items[i].image}" alt="backup">
+    </picture>
+    <div class="banner_content ${o.items[i].radio}">
+      <h2 class="title1 white">${o.items[i].title}</h2>
+      <h4 class="subtitle1 white">${o.items[i].subtitle}</h4>
+      <button class="button">${o.items[i].cta}</button>
+    </div>
+  </a>
+</div>
+    `;
 
-      var f = `
-  <div class="row fullwidth" id="row${i+1}">
-    <a href="${o.items[i].url}" class="tracking">
-      <picture>
-        <!-- desktop -->
-        <source media="(min-width: 768px)" srcset="https://media.missguided.co.uk/image/upload/c_scale,w_768,q_70/${o.items[i].url} 768w, https://media.missguided.co.uk/image/upload/c_scale,w_967,q_70/${o.items[i].image} 967w, https://media.missguided.co.uk/image/upload/c_scale,w_1147,q_70/${o.items[i].image} 1147w, https://media.missguided.co.uk/image/upload/c_scale,w_1294,q_70/${o.items[i].image} 1294w, https://media.missguided.co.uk/image/upload/c_scale,w_1453,q_70/${o.items[i].image} 1453w, https://media.missguided.co.uk/image/upload/c_scale,w_1591,q_70/${o.items[i].image} 1591w, https://media.missguided.co.uk/image/upload/c_scale,w_1718,q_70/${o.items[i].image} 1718w, https://media.missguided.co.uk/image/upload/c_scale,w_1856,q_70/${o.items[i].image} 1856w, https://media.missguided.co.uk/image/upload/c_scale,w_1919,q_70/${o.items[i].image} 1919w, https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70/${o.items[i].image} 1920w">
-        <!-- mobile -->
-        <source media="(max-width: 767px)"  srcset="https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_320/${o.items[i].mobile} 320w, https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_375,dpr_1/${o.items[i].mobile} 375w, https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_414,dpr_1/${o.items[i].mobile} 414w"
-        src="https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_768,dpr_1/${o.items[i].mobile}" sizes="100vw">
-        <img src="https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70/${o.items[i].image}" alt="backup">
-      </picture>
-      <div class="banner_content ${o.items[i].radio}">
-        <h2 class="title1 white">${o.items[i].title}</h2>
-        <h4 class="subtitle1 white">${o.items[i].subtitle}</h4>
+    var c= `
+<div class="row" id="row${i+1}">
+  <a href="${o.items[i].url}" class="tracking">
+    <picture>
+      <!-- desktop -->
+      <source media="(min-width: 768px)" srcset="https://media.missguided.co.uk/image/upload/c_scale,w_768,q_70/${o.items[i].url} 768w, https://media.missguided.co.uk/image/upload/c_scale,w_967,q_70/${o.items[i].image} 967w, https://media.missguided.co.uk/image/upload/c_scale,w_1147,q_70/${o.items[i].image} 1147w, https://media.missguided.co.uk/image/upload/c_scale,w_1294,q_70/${o.items[i].image} 1294w, https://media.missguided.co.uk/image/upload/c_scale,w_1453,q_70/${o.items[i].image} 1453w, https://media.missguided.co.uk/image/upload/c_scale,w_1591,q_70/${o.items[i].image} 1591w, https://media.missguided.co.uk/image/upload/c_scale,w_1718,q_70/${o.items[i].image} 1718w, https://media.missguided.co.uk/image/upload/c_scale,w_1856,q_70/${o.items[i].image} 1856w, https://media.missguided.co.uk/image/upload/c_scale,w_1919,q_70/${o.items[i].image} 1919w, https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70/${o.items[i].image} 1920w">
+      <!-- mobile -->
+      <source media="(max-width: 767px)"  srcset="https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_320/${o.items[i].mobile} 320w, https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_375,dpr_1/${o.items[i].mobile} 375w, https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_414,dpr_1/${o.items[i].mobile} 414w"
+      src="https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_768,dpr_1/${o.items[i].mobile}" sizes="100vw">
+      <img src="https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70/${o.items[i].image}" alt="backup">
+    </picture>
+    <div class="banner_content ${o.items[i].radio}">
+      <h2 class="title1 white">${o.items[i].title}</h2>
+      <h4 class="subtitle1 white">${o.items[i].subtitle}</h4>
+      <button class="button">${o.items[i].cta}</button>
+    </div>
+  </a>
+</div>
+    `;
+
+    var l= `
+<div class="row fullwidth" id="row${i+1}">
+  <a href="${o.items[i].url}" class="tracking">
+    <div class="feature-row">
+      <div class="imgContainer left">
+        <img src="https://media.missguided.co.uk/image/upload/q_70/${o.items[i].image}">
+      </div>
+      <div class="title-right">
+        <h2 class="title2">${o.items[i].title}</h2>
+        <h4 class="subtitle2">${o.items[i].subtitle}</h4>
         <button class="button">${o.items[i].cta}</button>
       </div>
-    </a>
-  </div>
-      `;
+    </div>
+  </a>
+</div>
+    `;
 
-      var c= `
-  <div class="row" id="row${i+1}">
-    <a href="${o.items[i].url}" class="tracking">
-      <picture>
-        <!-- desktop -->
-        <source media="(min-width: 768px)" srcset="https://media.missguided.co.uk/image/upload/c_scale,w_768,q_70/${o.items[i].url} 768w, https://media.missguided.co.uk/image/upload/c_scale,w_967,q_70/${o.items[i].image} 967w, https://media.missguided.co.uk/image/upload/c_scale,w_1147,q_70/${o.items[i].image} 1147w, https://media.missguided.co.uk/image/upload/c_scale,w_1294,q_70/${o.items[i].image} 1294w, https://media.missguided.co.uk/image/upload/c_scale,w_1453,q_70/${o.items[i].image} 1453w, https://media.missguided.co.uk/image/upload/c_scale,w_1591,q_70/${o.items[i].image} 1591w, https://media.missguided.co.uk/image/upload/c_scale,w_1718,q_70/${o.items[i].image} 1718w, https://media.missguided.co.uk/image/upload/c_scale,w_1856,q_70/${o.items[i].image} 1856w, https://media.missguided.co.uk/image/upload/c_scale,w_1919,q_70/${o.items[i].image} 1919w, https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70/${o.items[i].image} 1920w">
-        <!-- mobile -->
-        <source media="(max-width: 767px)"  srcset="https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_320/${o.items[i].mobile} 320w, https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_375,dpr_1/${o.items[i].mobile} 375w, https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_414,dpr_1/${o.items[i].mobile} 414w"
-        src="https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_768,dpr_1/${o.items[i].mobile}" sizes="100vw">
-        <img src="https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70/${o.items[i].image}" alt="backup">
-      </picture>
-      <div class="banner_content ${o.items[i].radio}">
-        <h2 class="title1 white">${o.items[i].title}</h2>
-        <h4 class="subtitle1 white">${o.items[i].subtitle}</h4>
+    var r= `
+<div class="row fullwidth" id="row${i+1}">
+  <a href="${o.items[i].url}" class="tracking">
+    <div class="feature-row">
+      <div class="imgContainer right">
+        <img src="https://media.missguided.co.uk/image/upload/q_70/${o.items[i].image}">
+      </div>
+      <div class="title-left">
+        <h2 class="title2">${o.items[i].title}</h2>
+        <h4 class="subtitle2">${o.items[i].subtitle}</h4>
         <button class="button">${o.items[i].cta}</button>
       </div>
-    </a>
-  </div>
-      `;
-
-      var l= `
-  <div class="row fullwidth" id="row${i+1}">
-    <a href="${o.items[i].url}" class="tracking">
-      <div class="feature-row">
-        <div class="imgContainer left">
-          <img src="https://media.missguided.co.uk/image/upload/q_70/${o.items[i].image}">
-        </div>
-        <div class="title-right">
-          <h2 class="title2">${o.items[i].title}</h2>
-          <h4 class="subtitle2">${o.items[i].subtitle}</h4>
+    </div>
+  </a>
+</div>
+    `;
+var tw= `
+<div class="row" id="row${i+1}">
+  <div class="two-col">
+    <div>
+      <a href="${o.items[i].url}" class="tracking">
+        <div class="imgContainer"><img src="https://media.missguided.co.uk/image/upload/q_70/${o.items[i].image}">  </div>
+        <div class="title-below">
+          <h2 class="title3">${o.items[i].title}</h2>
           <button class="button">${o.items[i].cta}</button>
         </div>
-      </div>
-    </a>
-  </div>
-      `;
-
-      var r= `
-  <div class="row fullwidth" id="row${i+1}">
-    <a href="${o.items[i].url}" class="tracking">
-      <div class="feature-row">
-        <div class="imgContainer right">
-          <img src="https://media.missguided.co.uk/image/upload/q_70/${o.items[i].image}">
+      </a>
+    </div>
+    <div>
+      <a href="${o.items[i].url3}" class="tracking">
+        <div class="imgContainer"><img src="https://media.missguided.co.uk/image/upload/q_70/${o.items[i].image2}"></div>
+        <div class="title-below">
+          <h2 class="title3">${o.items[i].title2}</h2>
+          <button class="button">${o.items[i].cta3}</button>
         </div>
-        <div class="title-left">
-          <h2 class="title2">${o.items[i].title}</h2>
-          <h4 class="subtitle2">${o.items[i].subtitle}</h4>
+      </a>
+    </div>
+  </div>
+</div>
+`;
+
+var th =`
+<div class="row" id="row${i+1}">
+  <div class="three-col">
+    <div>
+      <a href="${o.items[i].url}" class="tracking">
+        <div class="imgContainer">
+          <img src="https://media.missguided.co.uk/image/upload/w_300,q_70/${o.items[i].image}">
+        </div>
+        <div class="title-below">
+          <h2 class="title4">${o.items[i].title}</h2>
+          <h4 class="subtitle3">${o.items[i].subtitle}</h4>
           <button class="button">${o.items[i].cta}</button>
         </div>
-      </div>
-    </a>
-  </div>
-      `;
-  var tw= `
-  <div class="row" id="row${i+1}">
-    <div class="two-col">
-      <div>
-        <a href="${o.items[i].url}" class="tracking">
-          <div class="imgContainer"><img src="https://media.missguided.co.uk/image/upload/q_70/${o.items[i].image}">  </div>
-          <div class="title-below">
-            <h2 class="title3">${o.items[i].title}</h2>
-            <button class="button">${o.items[i].cta}</button>
-          </div>
-        </a>
-      </div>
-      <div>
-        <a href="${o.items[i].url3}" class="tracking">
-          <div class="imgContainer"><img src="https://media.missguided.co.uk/image/upload/q_70/${o.items[i].image2}"></div>
-          <div class="title-below">
-            <h2 class="title3">${o.items[i].title2}</h2>
-            <button class="button">${o.items[i].cta3}</button>
-          </div>
-        </a>
-      </div>
+      </a>
+    </div>
+    <div>
+      <a href="${o.items[i].url2}" class="tracking">
+        <div class="imgContainer">
+          <video playsinline="" autoplay loop muted>
+            <source type="video/webm" src="${o.items[i].vid}.webm">
+            <source type="video/mp4" src="${o.items[i].vid}.mp4" onerror="fallback(parentNode)">
+            <img src="${o.items[i].vid}.jpg">
+          </video>
+        </div>
+        <div class="title-below">
+          <h2 class="title4">${o.items[i].title2}</h2>
+          <h4 class="subtitle3">${o.items[i].subtitle2}</h4>
+          <button class="button">${o.items[i].cta2}</button>
+        </div>
+      </a>
+    </div>
+    <div>
+      <a href="${o.items[i].url3}" class="tracking">
+        <div class="imgContainer">
+          <img src="https://media.missguided.co.uk/image/upload/w_300,q_70/${o.items[i].image3}">
+        </div>
+        <div class="title-below">
+          <h2 class="title4">${o.items[i].title3}</h2>
+          <h4 class="subtitle3">${o.items[i].title3}</h4>
+          <button class="button">${o.items[i].cta3}</button>
+        </div>
+      </a>
     </div>
   </div>
-  `;
-
-  var th =`
-  <div class="row" id="row${i+1}">
-    <div class="three-col">
-      <div>
-        <a href="${o.items[i].url}" class="tracking">
-          <div class="imgContainer">
-            <img src="https://media.missguided.co.uk/image/upload/w_300,q_70/${o.items[i].image}">
-          </div>
-          <div class="title-below">
-            <h2 class="title4">${o.items[i].title}</h2>
-            <h4 class="subtitle3">${o.items[i].subtitle}</h4>
-            <button class="button">${o.items[i].cta}</button>
-          </div>
-        </a>
-      </div>
-      <div>
-        <a href="${o.items[i].url2}" class="tracking">
-          <div class="imgContainer">
-            <video playsinline="" autoplay loop muted>
-              <source type="video/webm" src="${o.items[i].vid}.webm">
-              <source type="video/mp4" src="${o.items[i].vid}.mp4" onerror="fallback(parentNode)">
-              <img src="${o.items[i].vid}.jpg">
-            </video>
-          </div>
-          <div class="title-below">
-            <h2 class="title4">${o.items[i].title2}</h2>
-            <h4 class="subtitle3">${o.items[i].subtitle2}</h4>
-            <button class="button">${o.items[i].cta2}</button>
-          </div>
-        </a>
-      </div>
-      <div>
-        <a href="${o.items[i].url3}" class="tracking">
-          <div class="imgContainer">
-            <img src="https://media.missguided.co.uk/image/upload/w_300,q_70/${o.items[i].image3}">
-          </div>
-          <div class="title-below">
-            <h2 class="title4">${o.items[i].title3}</h2>
-            <h4 class="subtitle3">${o.items[i].title3}</h4>
-            <button class="button">${o.items[i].cta3}</button>
-          </div>
-        </a>
-      </div>
-    </div>
-  </div>
-  `;
+</div>
+`;
 
       switch(el.options[el.selectedIndex].value){
         case 'full':
@@ -460,6 +455,15 @@ document.querySelector('#preview').addEventListener('click', function() {
       var syntax = document.getElementsByTagName("code")[0];
       syntax.innerHTML = html;
   });
+
+    fs.readFile('./preview.html', function(err, data){
+      var $ = cheerio.load(data);
+      fs.readFile('./output.html', function(err, output){
+        $('.preview-container').html(output);
+        fs.writeFile('preview.html', $.html());
+      });
+    });
+    document.querySelector('iframe').src += '';
 });
 
 function saveToFile () {
@@ -483,8 +487,7 @@ function saveToFile () {
   });
 }
 
-var button = document.querySelector('.preview-button');
-  button.addEventListener("click", function(){
+document.querySelector('.preview-button').addEventListener("click", function(){
   var preview = document.querySelector('.preview');
   if(preview.style.display === 'none'){
     preview.style.display = 'block';
