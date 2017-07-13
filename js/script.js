@@ -72,28 +72,40 @@ var dropdown = `
 `;
 
 var full = `
-    <label>URL</label><br>
-    <input type="text" class="url"><br>
-    <label>Image</label><br>
-    <span>../image/upload/q_70/</span><input type="text" class="image"><br>
-    <label>Mobile Image</label><br>
-    <span>../image/upload/q_70/</span><input type="text" class="mobile"><br>
-    <div id="radio">
-      <label>Text</label><br>
-      <input type="radio" name="radio" value="center" checked><p>center</p>
-      <input type="radio" name="radio" value="left"><p>left</p>
-      <input type="radio" name="radio" value="center"><p>right</p><br>
-    </div>
-    <label>Title</label><br>
-    <input type="text" class="title"><br>
-    <label>Subtitle</label><br>
-    <input type="text" class="subtitle"><br>
-    <label>CTA</label><br>
-    <input type="text" class="cta"><br>
-    <label>URL2</label><br>
-    <input type="text" class="url2"><br>
-    <label>CTA 2</label><br>
-    <input type="text" class="cta2"><br>
+      <div class="inline">
+        <div>
+          <label>URL</label><br>
+          <input type="text" class="url"><br>
+        </div>
+        <div>
+          <label>URL2</label><br>
+          <input type="text" class="url2"><br>
+        </div>
+      </div>
+      <label>Image</label><br>
+      <span>../image/upload/q_70/</span><input type="text" class="image"><br>
+      <label>Mobile Image</label><br>
+      <span>../image/upload/q_70/</span><input type="text" class="mobile"><br>
+      <div id="radio">
+        <label>Text</label><br>
+        <input type="radio" name="radio" value="center" checked><p>center</p>
+        <input type="radio" name="radio" value="left"><p>left</p>
+        <input type="radio" name="radio" value="right"><p>right</p><br>
+      </div>
+      <label>Title</label><br>
+      <input type="text" class="title"><br>
+      <label>Subtitle</label><br>
+      <input type="text" class="subtitle"><br>
+      <div class="inline">
+        <div>
+          <label>CTA</label><br>
+          <input type="text" class="cta"><br>
+        </div>
+        <div>
+          <label>CTA 2</label><br>
+          <input type="text" class="cta2"><br>
+        </div>
+      </div>
   `;
 
 var center = `
@@ -311,7 +323,12 @@ document.querySelector('#preview').addEventListener('click', function() {
     <div class="banner_content ${o.items[i].radio}">
       <h2 class="title1 white">${o.items[i].title}</h2>
       <h4 class="subtitle1 white">${o.items[i].subtitle}</h4>
-      <button class="button">${o.items[i].cta}</button>
+      <div class="more-buttons">
+        <button class="button">${o.items[i].cta}</button>
+        <a href = "${o.items[i].url2}">
+          <button class="button">${o.items[i].cta2}</button>
+        </a>
+      </div>
     </div>
   </a>
 </div>
@@ -327,7 +344,12 @@ document.querySelector('#preview').addEventListener('click', function() {
       <div class="title-right">
         <h2 class="title2">${o.items[i].title}</h2>
         <h4 class="subtitle2">${o.items[i].subtitle}</h4>
-        <button class="button">${o.items[i].cta}</button>
+        <div class="more-buttons">
+          <button class="button">${o.items[i].cta}</button>
+          <a href = "${o.items[i].url2}">
+            <button class="button">${o.items[i].cta2}</button>
+          </a>
+        </div>
       </div>
     </div>
   </a>
@@ -344,7 +366,12 @@ document.querySelector('#preview').addEventListener('click', function() {
       <div class="title-left">
         <h2 class="title2">${o.items[i].title}</h2>
         <h4 class="subtitle2">${o.items[i].subtitle}</h4>
-        <button class="button">${o.items[i].cta}</button>
+        <div class="more-buttons">
+          <button class="button">${o.items[i].cta}</button>
+          <a href = "${o.items[i].url2}">
+            <button class="button">${o.items[i].cta2}</button>
+          </a>
+        </div>
       </div>
     </div>
   </a>
@@ -358,7 +385,12 @@ var tw= `
         <div class="imgContainer"><img src="https://media.missguided.co.uk/image/upload/q_70/${o.items[i].image}">  </div>
         <div class="title-below">
           <h2 class="title3">${o.items[i].title}</h2>
-          <button class="button">${o.items[i].cta}</button>
+          <div class="more-buttons">
+            <button class="button">${o.items[i].cta}</button>
+            <a href = "${o.items[i].url2}">
+              <button class="button">${o.items[i].cta2}</button>
+            </a>
+          </div>
         </div>
       </a>
     </div>
@@ -367,7 +399,12 @@ var tw= `
         <div class="imgContainer"><img src="https://media.missguided.co.uk/image/upload/q_70/${o.items[i].image2}"></div>
         <div class="title-below">
           <h2 class="title3">${o.items[i].title2}</h2>
-          <button class="button">${o.items[i].cta3}</button>
+          <div class="more-buttons">
+            <button class="button">${o.items[i].cta3}</button>
+            <a href = "${o.items[i].url4}">
+              <button class="button">${o.items[i].cta4}</button>
+            </a>
+          </div>
         </div>
       </a>
     </div>
@@ -461,9 +498,10 @@ var th =`
       fs.readFile('./output.html', function(err, output){
         $('.preview-container').html(output);
         fs.writeFile('preview.html', $.html());
+        document.querySelector('iframe').src += '';
       });
     });
-    document.querySelector('iframe').src += '';
+
 });
 
 function saveToFile () {
@@ -482,6 +520,17 @@ function saveToFile () {
           console.log(error);
         }
         console.log("file saved");
+        const notification = {
+          title: 'File Saved',
+          body: 'Saved to: '+fileName
+        }
+        // const notificationButton = document.getElementById('basic-noti')
+
+          const myNotification = new window.Notification(notification.title, notification)
+
+          myNotification.onclick = () => {
+            console.log('Notification clicked')
+          }
       });
     });
   });

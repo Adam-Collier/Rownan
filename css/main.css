@@ -33,7 +33,7 @@ body{
   background: #C85977;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
   padding: 30px;
 }
@@ -54,6 +54,11 @@ button{
   margin: 16px 0px 0px 16px;
   cursor: pointer;
   letter-spacing: 0.5px;
+  transition: all ease-in-out 200ms;
+}
+button:active{
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.6);
+  transform: scale(0.96);
 }
 button:focus{
   outline: none;
@@ -102,7 +107,9 @@ select:focus{
   box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
 }
 .left{
+  min-width: 400px;
   width: 40%;
+  max-width: 400px;
   height: calc(100vh - 60px);
   display: flex;
   flex-direction: column;
@@ -120,6 +127,7 @@ select:focus{
 .right{
   width: 60%;
   position: relative;
+  flex-grow: 1;
 }
 .preview-button{
   position: absolute;
@@ -131,15 +139,21 @@ pre.language-markup, .preview{
   margin: 0px 0px 0px 30px;
   border-radius: 5px;
   height: calc(100vh - 60px);
-  padding: 0px;
-  width: calc(100% - 30px);
   position: relative;
   z-index: 2;
+}
+pre.language-markup{
+  font-size: 12px;
+  padding: 0px 15px;
+  width: calc(100% - 60px);
 }
 .preview{
   position: absolute;
   z-index: 3;
+  border-radius: 5px;
   background: white;
+  width: calc(100% - 30px);
+  overflow: hidden;
 }
 iframe{
   width: 200%;
@@ -148,7 +162,8 @@ iframe{
   transform-origin: 0 0;
   border: none;
   border-radius: 5px;
-  z-index: 5;
+  z-index: 2;
+  -webkit-overflow-scrolling: touch;
 }
 .selection{
   margin-bottom: 15px;
@@ -181,7 +196,7 @@ label{
 input[type=text]{
   margin-bottom: 10px;
   height: 22px;
-  width: 160px;
+  width: calc(100% - 10px);
   border-radius: 2px;
   border: none;
   box-shadow: 0px 0px 2px rgba(0,0,0,0.3);
@@ -215,6 +230,19 @@ input[type=radio]:focus{
 }
 input[type=radio]:not(:nth-of-type(1)){
   margin-left: 10px;
+}
+.inline{
+  display: flex;
+  justify-content: space-between;
+}
+.inline div{
+  width: 49%;
+}
+.inline input[type=text]{
+  width: calc(100% - 10px);
+}
+input.image, input.mobile{
+  width: 55%;
 }
 #radio{
   margin-bottom: 8px;
