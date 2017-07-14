@@ -355,7 +355,7 @@ document.querySelector('#preview').addEventListener('click', function() {
       <h4 class="subtitle1 ${o.items[i].color}">${o.items[i].subtitle}</h4>
       <div class="more-buttons">
         <button class="button">${o.items[i].cta}</button>
-        <a href = "${o.items[i].url2}">
+        <a href="${o.items[i].url2}">
           <button class="button">${o.items[i].cta2}</button>
         </a>
       </div>
@@ -515,9 +515,30 @@ var th =`
           throw err;
       }
 
-      data = data.replace(/<[^\/>][^>]*><\/[^>]+>/gim, "");
+      // data = data.replace(/<[^\/>][^>]*><\/[^>]+>/gim, "");
 
-      fs.writeFile('output.html', data, function(err, data) { //write the new JSON to the file
+      // filename = process.argv[0];
+      //
+      // var options = {
+      //     'remove-empty-tags': ['h4', 'button', 'a']
+      // };
+
+      // cleaner.clean(data, options, function (html) {
+        // fs.writeFile('output.html', html, function(err, data) {
+        //   if (err) {
+        //     console.log(error);
+        //   }
+        //   console.log("clean html written");
+        // });
+      //     data = html;
+      // });
+      do{
+        temp = data;
+        data = data.replace(/<(\w+)\b(?:\s+[\w\-.:]+(?:\s*=\s*(?:"[^"]*"|"[^"]*"|[\w\-.:]+))?)*\s*\/?>\s*<\/\1\s*>/gi, '').replace(/^\s*\n/gm, '');//removing more that one white space
+
+      }while(data !== temp);
+
+      fs.writeFile('output.html', data, function(err, data) {
         if (err) {
           console.log(error);
         }
@@ -525,8 +546,12 @@ var th =`
       });
 
 
+      // data = data.replace(/<(\w+)\b(?:\s+[\w\-.:]+(?:\s*=\s*(?:"[^"]*"|"[^"]*"|[\w\-.:]+))?)*\s*\/?>\s*<\/\1\s*>/gi, '');
+
       // The code snippet you want to highlight, as a string
       var code = data;
+
+      console.log(code);
 
       // Returns a highlighted HTML string
       var html = Prism.highlight(code, Prism.languages.markup);
@@ -538,7 +563,6 @@ var th =`
           $('.preview-container').html(code);
           fs.writeFile('preview.html', $.html());
           document.querySelector('iframe').src += '';
-
       });
     });
 });
