@@ -2,6 +2,7 @@ var fs = require('fs');
 var Prism = require('prismjs');
 const {dialog} = require('electron').remote;
 var cheerio = require('cheerio');
+var cleaner = require('clean-html')
 
 function drop(sel) {
   console.log(sel.value);
@@ -87,10 +88,15 @@ var full = `
       <label>Mobile Image</label><br>
       <span>../image/upload/q_70/</span><input type="text" class="mobile"><br>
       <div id="radio">
-        <label>Text</label><br>
+        <label>Text vertical</label><br>
+        <input type="radio" name="vertical" value="banner_content"><p>center</p>
+        <input type="radio" name="vertical" value="title-below"><p>below</p><br>
+      </div>
+      <div id="radio">
+        <label>Text horizontal</label><br>
         <input type="radio" name="radio" value="center" checked><p>center</p>
         <input type="radio" name="radio" value="left"><p>left</p>
-        <input type="radio" name="radio" value="right"><p>right</p><br>
+        <input type="radio" name="radio" value="center"><p>right</p><br>
       </div>
       <label>Title</label><br>
       <input type="text" class="title"><br>
@@ -109,14 +115,27 @@ var full = `
   `;
 
 var center = `
-      <label>URL</label><br>
-      <input type="text" class="url"><br>
+      <div class="inline">
+        <div>
+          <label>URL</label><br>
+          <input type="text" class="url"><br>
+        </div>
+        <div>
+          <label>URL2</label><br>
+          <input type="text" class="url2"><br>
+        </div>
+      </div>
       <label>Image</label><br>
       <span>../image/upload/q_70/</span><input type="text" class="image"><br>
       <label>Mobile Image</label><br>
       <span>../image/upload/q_70/</span><input type="text" class="mobile"><br>
       <div id="radio">
-        <label>Text</label><br>
+        <label>Text vertical</label><br>
+        <input type="radio" name="vertical" value="banner_content"><p>center</p>
+        <input type="radio" name="vertical" value="title-below"><p>below</p><br>
+      </div>
+      <div id="radio">
+        <label>Text horizontal</label><br>
         <input type="radio" name="radio" value="center" checked><p>center</p>
         <input type="radio" name="radio" value="left"><p>left</p>
         <input type="radio" name="radio" value="center"><p>right</p><br>
@@ -125,12 +144,16 @@ var center = `
       <input type="text" class="title"><br>
       <label>Subtitle</label><br>
       <input type="text" class="subtitle"><br>
-      <label>CTA</label><br>
-      <input type="text" class="cta"><br>
-      <label>URL2</label><br>
-      <input type="text" class="url2"><br>
-      <label>CTA 2</label><br>
-      <input type="text" class="cta2"><br>
+      <div class="inline">
+        <div>
+          <label>CTA</label><br>
+          <input type="text" class="cta"><br>
+        </div>
+        <div>
+          <label>CTA 2</label><br>
+          <input type="text" class="cta2"><br>
+        </div>
+      </div>
     `;
 
 var left = `
@@ -266,13 +289,20 @@ document.querySelector('#preview').addEventListener('click', function() {
     var radio = el.querySelectorAll('input[type="radio"]');
     console.log(radio);
     radio.forEach(function(x) {
-      if(x.checked === true){
+      if(x.name == 'radio' && x.checked === true){
         console.log(x);
         obj["radio"] = "" + x.value;
       }
+      if(x.name == "vertical" && x.checked === true){
+        console.log(x);
+        obj["vertical"] = "" + x.value;
+        if(x.value == "banner_content"){
+          obj["color"] = "white";
+        }
+      }
     });
 
-    // console.log(obj);
+    console.log(obj);
     o.items.push(obj); // push in the "o" object created
     fs.writeFile('output.json', JSON.stringify(o, null, 2), function(err, data) { //write the new JSON to the file
       if (err) {
@@ -300,7 +330,7 @@ document.querySelector('#preview').addEventListener('click', function() {
       src="https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_768,dpr_1/${o.items[i].mobile}" sizes="100vw">
       <img src="https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70/${o.items[i].image}" alt="backup">
     </picture>
-    <div class="banner_content ${o.items[i].radio}">
+    <div class="${o.items[i].vertical} ${o.items[i].radio}">
       <h2 class="title1 white">${o.items[i].title}</h2>
       <h4 class="subtitle1 white">${o.items[i].subtitle}</h4>
       <button class="button">${o.items[i].cta}</button>
@@ -320,9 +350,9 @@ document.querySelector('#preview').addEventListener('click', function() {
       src="https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_768,dpr_1/${o.items[i].mobile}" sizes="100vw">
       <img src="https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70/${o.items[i].image}" alt="backup">
     </picture>
-    <div class="banner_content ${o.items[i].radio}">
-      <h2 class="title1 white">${o.items[i].title}</h2>
-      <h4 class="subtitle1 white">${o.items[i].subtitle}</h4>
+    <div class="${o.items[i].vertical} ${o.items[i].radio}">
+      <h2 class="title1 ${o.items[i].color}">${o.items[i].title}</h2>
+      <h4 class="subtitle1 ${o.items[i].color}">${o.items[i].subtitle}</h4>
       <div class="more-buttons">
         <button class="button">${o.items[i].cta}</button>
         <a href = "${o.items[i].url2}">
@@ -484,6 +514,17 @@ var th =`
       if (err) {
           throw err;
       }
+
+      data = data.replace(/<[^\/>][^>]*><\/[^>]+>/gim, "");
+
+      fs.writeFile('output.html', data, function(err, data) { //write the new JSON to the file
+        if (err) {
+          console.log(error);
+        }
+        console.log("clean html written");
+      });
+
+
       // The code snippet you want to highlight, as a string
       var code = data;
 
@@ -491,17 +532,15 @@ var th =`
       var html = Prism.highlight(code, Prism.languages.markup);
       var syntax = document.getElementsByTagName("code")[0];
       syntax.innerHTML = html;
-  });
 
-    fs.readFile('./preview.html', function(err, data){
-      var $ = cheerio.load(data);
-      fs.readFile('./output.html', function(err, output){
-        $('.preview-container').html(output);
-        fs.writeFile('preview.html', $.html());
-        document.querySelector('iframe').src += '';
+      fs.readFile('./preview.html', function(err, data){
+        var $ = cheerio.load(data);
+          $('.preview-container').html(code);
+          fs.writeFile('preview.html', $.html());
+          document.querySelector('iframe').src += '';
+
       });
     });
-
 });
 
 function saveToFile () {
