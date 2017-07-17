@@ -157,72 +157,118 @@ var center = `
     `;
 
 var left = `
-    <label>URL</label><br>
-    <input type="text" class="url"><br>
+    <div class="inline">
+      <div>
+        <label>URL</label><br>
+        <input type="text" class="url"><br>
+      </div>
+      <div>
+        <label>URL2</label><br>
+        <input type="text" class="url2"><br>
+      </div>
+    </div>
     <label>Image</label><br>
     <span>../image/upload/q_70/</span><input type="text" class="image"><br>
     <label>Title</label><br>
     <input type="text" class="title"><br>
     <label>Subtitle</label><br>
     <input type="text" class="subtitle"><br>
-    <label>CTA</label><br>
-    <input type="text" class="cta"><br>
-    <label>URL2</label><br>
-    <input type="text" class="url2"><br>
-    <label>CTA 2</label><br>
-    <input type="text" class="cta2"><br>
+    <div class="inline">
+      <div>
+        <label>CTA</label><br>
+        <input type="text" class="cta"><br>
+      </div>
+      <div>
+        <label>CTA 2</label><br>
+        <input type="text" class="cta2"><br>
+      </div>
+    </div>
 `;
 
 var right = `
-    <label>URL</label><br>
-    <input type="text" class="url"><br>
+    <div class="inline">
+      <div>
+        <label>URL</label><br>
+        <input type="text" class="url"><br>
+      </div>
+      <div>
+        <label>URL2</label><br>
+        <input type="text" class="url2"><br>
+      </div>
+    </div>
     <label>Image</label><br>
     <span>../image/upload/q_70/</span><input type="text" class="image"><br>
     <label>Title</label><br>
     <input type="text" class="title"><br>
     <label>Subtitle</label><br>
     <input type="text" class="subtitle"><br>
-    <label>CTA</label><br>
-    <input type="text" class="cta"><br>
-    <label>URL2</label><br>
-    <input type="text" class="url2"><br>
-    <label>CTA 2</label><br>
-    <input type="text" class="cta2"><br>
+    <div class="inline">
+      <div>
+        <label>CTA</label><br>
+        <input type="text" class="cta"><br>
+      </div>
+      <div>
+        <label>CTA 2</label><br>
+        <input type="text" class="cta2"><br>
+      </div>
+    </div>
 `;
 
 var two = `
-  <p>First column</p>
-      <label>URL</label>
-      <input type="text" class="url"><br>
-      <label>Image https://media.missguided.co.uk/image/upload/q_70/</label>
-      <input type="text" class="image"><br>
-      <label>Mobile Image</label>
-      <input type="text" class="mobile"><br>
-      <label>Title</label>
+    <h3>First column</h3>
+      <div class="inline">
+        <div>
+          <label>URL</label><br>
+          <input type="text" class="url"><br>
+        </div>
+        <div>
+          <label>URL2</label><br>
+          <input type="text" class="url2"><br>
+        </div>
+      </div>
+      <label>Image</label><br>
+      <span>../image/upload/q_70/</span><input type="text" class="image"><br>
+      <label>Title</label><br>
       <input type="text" class="title"><br>
-      <label>Subtitle</label>
+      <label>Subtitle</label><br>
       <input type="text" class="subtitle"><br>
-      <label>CTA</label>
-      <input type="text" class="cta"><br>
-      <label>URL2</label>
-      <input type="text" class="url2"><br>
-      <label>CTA 2</label>
-      <input type="text" class="cta2"><br>
-    <p>Second column</p>
-      <label>URL</label>
-      <input type="text" class="url3"><br>
-      <label>Image https://media.missguided.co.uk/image/upload/q_70/</label>
-      <input type="text" class="image2"><br>
-      <label>Title</label>
+      <div class="inline">
+        <div>
+          <label>CTA</label><br>
+          <input type="text" class="cta"><br>
+        </div>
+        <div>
+          <label>CTA 2</label><br>
+          <input type="text" class="cta2"><br>
+        </div>
+      </div>
+    <h3>Second column</h3>
+      <div class="inline">
+        <div>
+          <label>URL</label><br>
+          <input type="text" class="url3"><br>
+        </div>
+        <div>
+          <label>URL2</label><br>
+          <input type="text" class="url4"><br>
+        </div>
+      </div>
+      <label>Image</label><br>
+      <span>../image/upload/q_70/</span><input type="text" class="image2"><br>
+      <label>Title</label><br>
       <input type="text" class="title2"><br>
-      <label>Subtitle</label>
+      <label>Subtitle</label><br>
       <input type="text" class="subtitle2"><br>
-      <label>CTA</label>
-      <input type="text" class="cta3"><br>
-      <label>URL2</label>
-      <input type="text" class="url4"><br>
-      <label>CTA 2</label>
-      <input type="text" class="cta4"><br>
+      <div class="inline">
+        <div>
+          <label>CTA</label><br>
+          <input type="text" class="cta3"><br>
+        </div>
+        <div>
+          <label>CTA 2</label><br>
+          <input type="text" class="cta4"><br>
+        </div>
+      </div>
 `;
 
 var three = `
@@ -515,28 +561,12 @@ var th =`
           throw err;
       }
 
-      // data = data.replace(/<[^\/>][^>]*><\/[^>]+>/gim, "");
-
-      // filename = process.argv[0];
-      //
-      // var options = {
-      //     'remove-empty-tags': ['h4', 'button', 'a']
-      // };
-
-      // cleaner.clean(data, options, function (html) {
-        // fs.writeFile('output.html', html, function(err, data) {
-        //   if (err) {
-        //     console.log(error);
-        //   }
-        //   console.log("clean html written");
-        // });
-      //     data = html;
-      // });
       do{
         temp = data;
-        data = data.replace(/<(\w+)\b(?:\s+[\w\-.:]+(?:\s*=\s*(?:"[^"]*"|"[^"]*"|[\w\-.:]+))?)*\s*\/?>\s*<\/\1\s*>/gi, '').replace(/^\s*\n/gm, '');//removing more that one white space
-
+        data = data.replace(/<(\w+)\b(?:\s+[\w\-.:]+(?:\s*=\s*(?:"[^"]*"|"[^"]*"|[\w\-.:]+))?)*\s*\/?>\s*<\/\1\s*>/gi, '');//removing more that one white space
       }while(data !== temp);
+
+      data = data.replace(/^\s*\n/gm, '');
 
       fs.writeFile('output.html', data, function(err, data) {
         if (err) {
@@ -544,9 +574,6 @@ var th =`
         }
         console.log("clean html written");
       });
-
-
-      // data = data.replace(/<(\w+)\b(?:\s+[\w\-.:]+(?:\s*=\s*(?:"[^"]*"|"[^"]*"|[\w\-.:]+))?)*\s*\/?>\s*<\/\1\s*>/gi, '');
 
       // The code snippet you want to highlight, as a string
       var code = data;
