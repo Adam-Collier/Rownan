@@ -272,41 +272,57 @@ var two = `
 `;
 
 var three = `
-  <p>First column</p>
-      <label>URL</label>
-      <input type="text" class="url"><br>
-      <label>Image https://media.missguided.co.uk/image/upload/q_70/</label>
-      <input type="text" class="image"><br>
-      <label>Mobile Image</label>
-      <input type="text" class="mobile"><br>
-      <label>Title</label>
+      <h3>First column</h3>
+      <div class="inline">
+        <div>
+          <label>URL</label><br>
+          <input type="text" class="url"><br>
+        </div>
+        <div>
+          <label>CTA</label><br>
+          <input type="text" class="cta"><br>
+        </div>
+      </div>
+      <label>Image</label><br>
+      <span>../image/upload/q_70/</span><input type="text" class="image"><br>
+      <label>Title</label><br>
       <input type="text" class="title"><br>
-      <label>Subtitle</label>
+      <label>Subtitle</label><br>
       <input type="text" class="subtitle"><br>
-      <label>CTA</label>
-      <input type="text" class="cta"><br>
-    <p>Second column</p>
-      <label>URL</label>
-      <input type="text" class="url2"><br>
-      <label>Video</label>
-      <input type="text" class="vid"><br>
-      <label>Title</label>
+    <h3>Second column</h3>
+      <div class="inline">
+        <div>
+          <label>URL</label><br>
+          <input type="text" class="url2"><br>
+        </div>
+        <div>
+          <label>CTA</label><br>
+          <input type="text" class="cta3"><br>
+        </div>
+      </div>
+      <label>Video</label><br>
+      <span>../video/upload/q_70/</span><input type="text" class="vid"><br>
+      <label>Title</label><br>
       <input type="text" class="title2"><br>
-      <label>Subtitle</label>
+      <label>Subtitle</label><br>
       <input type="text" class="subtitle2"><br>
-      <label>CTA</label>
-      <input type="text" class="cta2"><br>
-    <p>Third column</p>
-      <label>URL</label>
-      <input type="text" class="url3"><br>
-      <label>Image https://media.missguided.co.uk/image/upload/q_70/</label>
-      <input type="text" class="image3"><br>
-      <label>Title</label>
+      <h3>Third column</h3>
+      <div class="inline">
+        <div>
+          <label>URL</label><br>
+          <input type="text" class="url3"><br>
+        </div>
+        <div>
+        <label>CTA</label><br>
+        <input type="text" class="cta3"><br>
+        </div>
+      </div>
+      <label>Image</label><br>
+      <span>../image/upload/q_70/</span><input type="text" class="image2"><br>
+      <label>Title</label><br>
       <input type="text" class="title3"><br>
-      <label>Subtitle</label>
+      <label>Subtitle</label><br>
       <input type="text" class="subtitle3"><br>
-      <label>CTA</label>
-      <input type="text" class="cta3"><br>
 `;
 
 var o = {
@@ -507,9 +523,9 @@ var th =`
       <a href="${o.items[i].url2}" class="tracking">
         <div class="imgContainer">
           <video playsinline="" autoplay loop muted>
-            <source type="video/webm" src="${o.items[i].vid}.webm">
-            <source type="video/mp4" src="${o.items[i].vid}.mp4" onerror="fallback(parentNode)">
-            <img src="${o.items[i].vid}.jpg">
+            <source type="video/webm" src="http://media.missguided.co.uk/video/upload/${o.items[i].vid}.webm">
+            <source type="video/mp4" src="http://media.missguided.co.uk/video/upload/${o.items[i].vid}.mp4" onerror="fallback(parentNode)">
+            <img src="http://media.missguided.co.uk/video/upload/${o.items[i].vid}.jpg">
           </video>
         </div>
         <div class="title-below">
@@ -522,7 +538,7 @@ var th =`
     <div>
       <a href="${o.items[i].url3}" class="tracking">
         <div class="imgContainer">
-          <img src="https://media.missguided.co.uk/image/upload/w_300,q_70/${o.items[i].image3}">
+          <img src="https://media.missguided.co.uk/image/upload/w_300,q_70/${o.items[i].image2}">
         </div>
         <div class="title-below">
           <h2 class="title4">${o.items[i].title3}</h2>
