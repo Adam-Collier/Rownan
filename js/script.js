@@ -2,12 +2,266 @@ var fs = require('fs');
 var Prism = require('prismjs');
 const {dialog} = require('electron').remote;
 var cheerio = require('cheerio');
-var cleaner = require('clean-html')
+var cleaner = require('clean-html');
 
 function drop(sel) {
   console.log(sel.value);
   var s = sel.parentNode;
+  ind = Array.prototype.slice.call(document.querySelectorAll('select')).indexOf(sel);
+  console.log(ind);
   console.log(parent);
+  var full = `
+    <div class="inline">
+      <div>
+        <label>URL</label><br>
+        <input type="text" class="url"><br>
+      </div>
+      <div>
+        <label>URL2</label><br>
+        <input type="text" class="url2"><br>
+      </div>
+    </div>
+    <label>Image</label><br>
+    <span>../image/upload/q_70/</span><input type="text" class="image"><br>
+    <label>Mobile Image</label><br>
+    <span>../image/upload/q_70/</span><input type="text" class="mobile"><br>
+    <div id="radio">
+      <label>Text vertical</label><br>
+      <input type="radio" name="vertical${ind}" value="banner_content"><p>center</p>
+      <input type="radio" name="vertical${ind}" value="title-below"><p>below</p><br>
+    </div>
+    <div id="radio">
+      <label>Text horizontal</label><br>
+      <input type="radio" name="radio${ind}" value="center" checked><p>center</p>
+      <input type="radio" name="radio${ind}" value="left"><p>left</p>
+      <input type="radio" name="radio${ind}" value="center"><p>right</p><br>
+    </div>
+    <label>Title</label><br>
+    <input type="text" class="title"><br>
+    <label>Subtitle</label><br>
+    <input type="text" class="subtitle"><br>
+    <div class="inline">
+      <div>
+        <label>CTA</label><br>
+        <input type="text" class="cta"><br>
+      </div>
+      <div>
+        <label>CTA 2</label><br>
+        <input type="text" class="cta2"><br>
+      </div>
+    </div>
+    `;
+
+  var center = `
+    <div class="inline">
+      <div>
+        <label>URL</label><br>
+        <input type="text" class="url"><br>
+      </div>
+      <div>
+        <label>URL2</label><br>
+        <input type="text" class="url2"><br>
+      </div>
+    </div>
+    <label>Image</label><br>
+    <span>../image/upload/q_70/</span><input type="text" class="image"><br>
+    <label>Mobile Image</label><br>
+    <span>../image/upload/q_70/</span><input type="text" class="mobile"><br>
+    <div id="radio">
+      <label>Text vertical</label><br>
+      <input type="radio" name="vertical${ind}" value="banner_content"><p>center</p>
+      <input type="radio" name="vertical${ind}" value="title-below"><p>below</p><br>
+    </div>
+    <div id="radio">
+      <label>Text horizontal</label><br>
+      <input type="radio" name="radio${ind}" value="center" checked><p>center</p>
+      <input type="radio" name="radio${ind}" value="left"><p>left</p>
+      <input type="radio" name="radio${ind}" value="center"><p>right</p><br>
+    </div>
+    <label>Title</label><br>
+    <input type="text" class="title"><br>
+    <label>Subtitle</label><br>
+    <input type="text" class="subtitle"><br>
+    <div class="inline">
+      <div>
+        <label>CTA</label><br>
+        <input type="text" class="cta"><br>
+      </div>
+      <div>
+        <label>CTA 2</label><br>
+        <input type="text" class="cta2"><br>
+      </div>
+    </div>
+  `;
+
+  var left = `
+    <div class="inline">
+      <div>
+        <label>URL</label><br>
+        <input type="text" class="url"><br>
+      </div>
+      <div>
+        <label>URL2</label><br>
+        <input type="text" class="url2"><br>
+      </div>
+    </div>
+    <label>Image</label><br>
+    <span>../image/upload/q_70/</span><input type="text" class="image"><br>
+    <label>Title</label><br>
+    <input type="text" class="title"><br>
+    <label>Subtitle</label><br>
+    <input type="text" class="subtitle"><br>
+    <div class="inline">
+      <div>
+        <label>CTA</label><br>
+        <input type="text" class="cta"><br>
+      </div>
+      <div>
+        <label>CTA 2</label><br>
+        <input type="text" class="cta2"><br>
+      </div>
+    </div>
+  `;
+
+  var right = `
+    <div class="inline">
+      <div>
+        <label>URL</label><br>
+        <input type="text" class="url"><br>
+      </div>
+      <div>
+        <label>URL2</label><br>
+        <input type="text" class="url2"><br>
+      </div>
+    </div>
+    <label>Image</label><br>
+    <span>../image/upload/q_70/</span><input type="text" class="image"><br>
+    <label>Title</label><br>
+    <input type="text" class="title"><br>
+    <label>Subtitle</label><br>
+    <input type="text" class="subtitle"><br>
+    <div class="inline">
+      <div>
+        <label>CTA</label><br>
+        <input type="text" class="cta"><br>
+      </div>
+      <div>
+        <label>CTA 2</label><br>
+        <input type="text" class="cta2"><br>
+      </div>
+    </div>
+  `;
+
+  var two = `
+    <h3>First column</h3>
+      <div class="inline">
+        <div>
+          <label>URL</label><br>
+          <input type="text" class="url"><br>
+        </div>
+        <div>
+          <label>URL2</label><br>
+          <input type="text" class="url2"><br>
+        </div>
+      </div>
+      <label>Image</label><br>
+      <span>../image/upload/q_70/</span><input type="text" class="image"><br>
+      <label>Title</label><br>
+      <input type="text" class="title"><br>
+      <label>Subtitle</label><br>
+      <input type="text" class="subtitle"><br>
+      <div class="inline">
+        <div>
+          <label>CTA</label><br>
+          <input type="text" class="cta"><br>
+        </div>
+        <div>
+          <label>CTA 2</label><br>
+          <input type="text" class="cta2"><br>
+        </div>
+      </div>
+    <h3>Second column</h3>
+      <div class="inline">
+        <div>
+          <label>URL</label><br>
+          <input type="text" class="url3"><br>
+        </div>
+        <div>
+          <label>URL2</label><br>
+          <input type="text" class="url4"><br>
+        </div>
+      </div>
+      <label>Image</label><br>
+      <span>../image/upload/q_70/</span><input type="text" class="image2"><br>
+      <label>Title</label><br>
+      <input type="text" class="title2"><br>
+      <label>Subtitle</label><br>
+      <input type="text" class="subtitle2"><br>
+      <div class="inline">
+        <div>
+          <label>CTA</label><br>
+          <input type="text" class="cta3"><br>
+        </div>
+        <div>
+          <label>CTA 2</label><br>
+          <input type="text" class="cta4"><br>
+        </div>
+      </div>
+  `;
+
+  var three = `
+  <h3>First column</h3>
+    <div class="inline">
+      <div>
+        <label>URL</label><br>
+        <input type="text" class="url"><br>
+      </div>
+      <div>
+        <label>CTA</label><br>
+        <input type="text" class="cta"><br>
+      </div>
+    </div>
+    <label>Image</label><br>
+    <span>../image/upload/q_70/</span><input type="text" class="image"><br>
+    <label>Title</label><br>
+    <input type="text" class="title"><br>
+    <label>Subtitle</label><br>
+    <input type="text" class="subtitle"><br>
+  <h3>Second column</h3>
+    <div class="inline">
+      <div>
+        <label>URL</label><br>
+        <input type="text" class="url2"><br>
+      </div>
+      <div>
+        <label>CTA</label><br>
+        <input type="text" class="cta3"><br>
+      </div>
+    </div>
+    <label>Video</label><br>
+    <span>../video/upload/q_70/</span><input type="text" class="vid"><br>
+    <label>Title</label><br>
+    <input type="text" class="title2"><br>
+    <label>Subtitle</label><br>
+    <input type="text" class="subtitle2"><br>
+    <h3>Third column</h3>
+    <div class="inline">
+      <div>
+        <label>URL</label><br>
+        <input type="text" class="url3"><br>
+      </div>
+      <div>
+      <label>CTA</label><br>
+      <input type="text" class="cta3"><br>
+      </div>
+    </div>
+    <label>Image</label><br>
+    <span>../image/upload/q_70/</span><input type="text" class="image2"><br>
+    <label>Title</label><br>
+    <input type="text" class="title3"><br>
+    <label>Subtitle</label><br>
+    <input type="text" class="subtitle3"><br>
+  `;
   switch (sel.value) {
     case 'full':
       console.log(sel);
@@ -72,258 +326,7 @@ var dropdown = `
   </div>
 `;
 
-var full = `
-      <div class="inline">
-        <div>
-          <label>URL</label><br>
-          <input type="text" class="url"><br>
-        </div>
-        <div>
-          <label>URL2</label><br>
-          <input type="text" class="url2"><br>
-        </div>
-      </div>
-      <label>Image</label><br>
-      <span>../image/upload/q_70/</span><input type="text" class="image"><br>
-      <label>Mobile Image</label><br>
-      <span>../image/upload/q_70/</span><input type="text" class="mobile"><br>
-      <div id="radio">
-        <label>Text vertical</label><br>
-        <input type="radio" name="vertical" value="banner_content"><p>center</p>
-        <input type="radio" name="vertical" value="title-below"><p>below</p><br>
-      </div>
-      <div id="radio">
-        <label>Text horizontal</label><br>
-        <input type="radio" name="radio" value="center" checked><p>center</p>
-        <input type="radio" name="radio" value="left"><p>left</p>
-        <input type="radio" name="radio" value="center"><p>right</p><br>
-      </div>
-      <label>Title</label><br>
-      <input type="text" class="title"><br>
-      <label>Subtitle</label><br>
-      <input type="text" class="subtitle"><br>
-      <div class="inline">
-        <div>
-          <label>CTA</label><br>
-          <input type="text" class="cta"><br>
-        </div>
-        <div>
-          <label>CTA 2</label><br>
-          <input type="text" class="cta2"><br>
-        </div>
-      </div>
-  `;
 
-var center = `
-      <div class="inline">
-        <div>
-          <label>URL</label><br>
-          <input type="text" class="url"><br>
-        </div>
-        <div>
-          <label>URL2</label><br>
-          <input type="text" class="url2"><br>
-        </div>
-      </div>
-      <label>Image</label><br>
-      <span>../image/upload/q_70/</span><input type="text" class="image"><br>
-      <label>Mobile Image</label><br>
-      <span>../image/upload/q_70/</span><input type="text" class="mobile"><br>
-      <div id="radio">
-        <label>Text vertical</label><br>
-        <input type="radio" name="vertical" value="banner_content"><p>center</p>
-        <input type="radio" name="vertical" value="title-below"><p>below</p><br>
-      </div>
-      <div id="radio">
-        <label>Text horizontal</label><br>
-        <input type="radio" name="radio" value="center" checked><p>center</p>
-        <input type="radio" name="radio" value="left"><p>left</p>
-        <input type="radio" name="radio" value="center"><p>right</p><br>
-      </div>
-      <label>Title</label><br>
-      <input type="text" class="title"><br>
-      <label>Subtitle</label><br>
-      <input type="text" class="subtitle"><br>
-      <div class="inline">
-        <div>
-          <label>CTA</label><br>
-          <input type="text" class="cta"><br>
-        </div>
-        <div>
-          <label>CTA 2</label><br>
-          <input type="text" class="cta2"><br>
-        </div>
-      </div>
-    `;
-
-var left = `
-    <div class="inline">
-      <div>
-        <label>URL</label><br>
-        <input type="text" class="url"><br>
-      </div>
-      <div>
-        <label>URL2</label><br>
-        <input type="text" class="url2"><br>
-      </div>
-    </div>
-    <label>Image</label><br>
-    <span>../image/upload/q_70/</span><input type="text" class="image"><br>
-    <label>Title</label><br>
-    <input type="text" class="title"><br>
-    <label>Subtitle</label><br>
-    <input type="text" class="subtitle"><br>
-    <div class="inline">
-      <div>
-        <label>CTA</label><br>
-        <input type="text" class="cta"><br>
-      </div>
-      <div>
-        <label>CTA 2</label><br>
-        <input type="text" class="cta2"><br>
-      </div>
-    </div>
-`;
-
-var right = `
-    <div class="inline">
-      <div>
-        <label>URL</label><br>
-        <input type="text" class="url"><br>
-      </div>
-      <div>
-        <label>URL2</label><br>
-        <input type="text" class="url2"><br>
-      </div>
-    </div>
-    <label>Image</label><br>
-    <span>../image/upload/q_70/</span><input type="text" class="image"><br>
-    <label>Title</label><br>
-    <input type="text" class="title"><br>
-    <label>Subtitle</label><br>
-    <input type="text" class="subtitle"><br>
-    <div class="inline">
-      <div>
-        <label>CTA</label><br>
-        <input type="text" class="cta"><br>
-      </div>
-      <div>
-        <label>CTA 2</label><br>
-        <input type="text" class="cta2"><br>
-      </div>
-    </div>
-`;
-
-var two = `
-    <h3>First column</h3>
-      <div class="inline">
-        <div>
-          <label>URL</label><br>
-          <input type="text" class="url"><br>
-        </div>
-        <div>
-          <label>URL2</label><br>
-          <input type="text" class="url2"><br>
-        </div>
-      </div>
-      <label>Image</label><br>
-      <span>../image/upload/q_70/</span><input type="text" class="image"><br>
-      <label>Title</label><br>
-      <input type="text" class="title"><br>
-      <label>Subtitle</label><br>
-      <input type="text" class="subtitle"><br>
-      <div class="inline">
-        <div>
-          <label>CTA</label><br>
-          <input type="text" class="cta"><br>
-        </div>
-        <div>
-          <label>CTA 2</label><br>
-          <input type="text" class="cta2"><br>
-        </div>
-      </div>
-    <h3>Second column</h3>
-      <div class="inline">
-        <div>
-          <label>URL</label><br>
-          <input type="text" class="url3"><br>
-        </div>
-        <div>
-          <label>URL2</label><br>
-          <input type="text" class="url4"><br>
-        </div>
-      </div>
-      <label>Image</label><br>
-      <span>../image/upload/q_70/</span><input type="text" class="image2"><br>
-      <label>Title</label><br>
-      <input type="text" class="title2"><br>
-      <label>Subtitle</label><br>
-      <input type="text" class="subtitle2"><br>
-      <div class="inline">
-        <div>
-          <label>CTA</label><br>
-          <input type="text" class="cta3"><br>
-        </div>
-        <div>
-          <label>CTA 2</label><br>
-          <input type="text" class="cta4"><br>
-        </div>
-      </div>
-`;
-
-var three = `
-      <h3>First column</h3>
-      <div class="inline">
-        <div>
-          <label>URL</label><br>
-          <input type="text" class="url"><br>
-        </div>
-        <div>
-          <label>CTA</label><br>
-          <input type="text" class="cta"><br>
-        </div>
-      </div>
-      <label>Image</label><br>
-      <span>../image/upload/q_70/</span><input type="text" class="image"><br>
-      <label>Title</label><br>
-      <input type="text" class="title"><br>
-      <label>Subtitle</label><br>
-      <input type="text" class="subtitle"><br>
-    <h3>Second column</h3>
-      <div class="inline">
-        <div>
-          <label>URL</label><br>
-          <input type="text" class="url2"><br>
-        </div>
-        <div>
-          <label>CTA</label><br>
-          <input type="text" class="cta3"><br>
-        </div>
-      </div>
-      <label>Video</label><br>
-      <span>../video/upload/q_70/</span><input type="text" class="vid"><br>
-      <label>Title</label><br>
-      <input type="text" class="title2"><br>
-      <label>Subtitle</label><br>
-      <input type="text" class="subtitle2"><br>
-      <h3>Third column</h3>
-      <div class="inline">
-        <div>
-          <label>URL</label><br>
-          <input type="text" class="url3"><br>
-        </div>
-        <div>
-        <label>CTA</label><br>
-        <input type="text" class="cta3"><br>
-        </div>
-      </div>
-      <label>Image</label><br>
-      <span>../image/upload/q_70/</span><input type="text" class="image2"><br>
-      <label>Title</label><br>
-      <input type="text" class="title3"><br>
-      <label>Subtitle</label><br>
-      <input type="text" class="subtitle3"><br>
-`;
 
 var o = {
   "items": []
@@ -351,15 +354,18 @@ document.querySelector('#preview').addEventListener('click', function() {
     var radio = el.querySelectorAll('input[type="radio"]');
     console.log(radio);
     radio.forEach(function(x) {
-      if(x.name == 'radio' && x.checked === true){
+      console.log(x.name);
+      if(x.name.indexOf('radio') !== -1 && x.checked === true){
         console.log(x);
         obj["radio"] = "" + x.value;
       }
-      if(x.name == "vertical" && x.checked === true){
+      if(x.name.indexOf("vertical") !== -1 && x.checked === true){
         console.log(x);
         obj["vertical"] = "" + x.value;
         if(x.value == "banner_content"){
-          obj["color"] = "white";
+          obj["color"] = " white";
+        }else{
+          obj["color"] = "";
         }
       }
     });
@@ -413,8 +419,8 @@ document.querySelector('#preview').addEventListener('click', function() {
       <img src="https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70/${o.items[i].image}" alt="backup">
     </picture>
     <div class="${o.items[i].vertical} ${o.items[i].radio}">
-      <h2 class="title1 ${o.items[i].color}">${o.items[i].title}</h2>
-      <h4 class="subtitle1 ${o.items[i].color}">${o.items[i].subtitle}</h4>
+      <h2 class="title1${o.items[i].color}">${o.items[i].title}</h2>
+      <h4 class="subtitle1${o.items[i].color}">${o.items[i].subtitle}</h4>
       <div class="more-buttons">
         <button class="button">${o.items[i].cta}</button>
         <a href="${o.items[i].url2}">
