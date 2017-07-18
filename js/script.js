@@ -381,7 +381,7 @@ document.querySelector('#preview').addEventListener('click', function() {
   });
 
   // $('#console').text(JSON.stringify(o)); // strigify to show
-    fs.writeFile('output.html', '', function(){console.log('done');});
+    fs.writeFile(path.join(__dirname, 'output.html'), '', function(){console.log('done');});
 
     var inputs = document.querySelectorAll('select');
     Array.prototype.forEach.call(inputs, function(el, i) {
@@ -559,26 +559,26 @@ var th =`
 
       switch(el.options[el.selectedIndex].value){
         case 'full':
-          fs.appendFileSync('output.html', f);
+          fs.appendFileSync(path.join(__dirname, 'output.html'), f);
           break;
         case 'center':
-          fs.appendFileSync('output.html', c);
+          fs.appendFileSync(path.join(__dirname, 'output.html'), c);
           break;
         case 'left':
-          fs.appendFileSync('output.html', l);
+          fs.appendFileSync(path.join(__dirname, 'output.html'), l);
           break;
         case 'right':
-          fs.appendFileSync('output.html', r);
+          fs.appendFileSync(path.join(__dirname, 'output.html'), r);
           break;
         case 'two':
-          fs.appendFileSync('output.html', tw);
+          fs.appendFileSync(path.join(__dirname, 'output.html'), tw);
           break;
         case 'three':
-          fs.appendFileSync('output.html', th);
+          fs.appendFileSync(path.join(__dirname, 'output.html'), th);
           break;
       }
     });
-    fs.readFile('./output.html','utf8', function(err,data) {
+    fs.readFile(path.join(__dirname, 'output.html'),'utf8', function(err,data) {
       if (err) {
           throw err;
       }
@@ -590,7 +590,7 @@ var th =`
 
       data = data.replace(/^\s*\n/gm, '');
 
-      fs.writeFile('output.html', data, function(err, data) {
+      fs.writeFile(path.join(__dirname, 'output.html'), data, function(err, data) {
         if (err) {
           console.log(error);
         }
@@ -607,10 +607,10 @@ var th =`
       var syntax = document.getElementsByTagName("code")[0];
       syntax.innerHTML = html;
 
-      fs.readFile('./preview.html', function(err, data){
+      fs.readFile(path.join(__dirname, 'preview.html'), function(err, data){
         var $ = cheerio.load(data);
           $('.preview-container').html(code);
-          fs.writeFile('preview.html', $.html());
+          fs.writeFile(path.join(__dirname, 'preview.html'), $.html());
           document.querySelector('iframe').src += '';
       });
     });
@@ -622,7 +622,7 @@ function saveToFile () {
 
     if (fileName === undefined) return;
 
-    fs.readFile('./output.html','utf8', function(err,data) {
+    fs.readFile(path.join(__dirname, 'output.html'),'utf8', function(err,data) {
       if (err) {
           throw err;
       }
