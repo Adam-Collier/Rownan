@@ -1,5 +1,15 @@
 {
   "items": [
-    {}
+    {
+      "url": "",
+      "url2": "",
+      "image": "",
+      "mobile": "",
+      "title": "",
+      "subtitle": "",
+      "cta": "",
+      "cta2": "",
+      "radio": "center"
+    }
   ]
 }

@@ -1,4 +1,4 @@
-@font-face {
+/*@font-face {
    font-family: Poppins;
    src: url('../fonts/Poppins-Bold.ttf');
    font-weight: 700;
@@ -22,7 +22,8 @@
    font-family: Poppins;
    src: url('../fonts/Poppins-Light.ttf');
    font-weight: 300;
-}
+}*/
+
 @font-face {
    font-family: Geomanist;
    src: url('../fonts/Geomanist-Black.otf');
@@ -38,6 +39,12 @@
 @font-face {
    font-family: Geomanist;
    src: url('../fonts/Geomanist-Medium.otf');
+   font-weight: 600;
+}
+
+@font-face {
+   font-family: Geomanist;
+   src: url('../fonts/Geomanist-Book.otf');
    font-weight: 500;
 }
 
@@ -58,7 +65,7 @@ html{
 }
 body{
   margin: 0px;
-  font-family: Poppins;
+  font-family: Geomanist;
   background: #C85977;
   display: flex;
   flex-direction: row;
@@ -72,7 +79,7 @@ label{
 }
 button{
   background: white;
-  font-family: Poppins;
+  font-family: Geomanist;
   font-size: 14px;
   color: #3D3D3D;
   padding: 10px 25px 8px 25px;
@@ -100,10 +107,10 @@ select{
    border: none;
    border-radius: 3px;
    box-shadow: 0px 0px 2px rgba(0,0,0,0.3);
-   font-family: Poppins;
-   font-weight: 600;
-   font-size: 14px;
-   padding: 5px 35px 6px 25px;
+   font-family: Geomanist;
+   font-weight: 500;
+   font-size: 16px;
+   padding: 8px 35px 6px 16px;
    cursor: pointer;
 }
 select:focus{
@@ -211,7 +218,7 @@ iframe{
   margin: 0px;
 }
 .inputs .inline:nth-child(1), .inputs h3:nth-child(1){
-  padding-top: 15px;
+  padding-top: 20px;
 }
 .inline:last-child input{
   margin-bottom: 0px;
@@ -227,14 +234,14 @@ iframe{
 }
 label{
   display: block;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 400;
   margin-bottom: 4px;
   line-height: 1.1;
 }
 .selection span{
   color: #c5c5c5;
-  font-family: Poppins;
+  font-family: Geomanist;
   font-weight: 200;
   font-size: 12px;
   padding-right: 8px;
@@ -288,7 +295,7 @@ input[type=radio]:not(:nth-of-type(1)){
   width: calc(100% - 10px);
 }
 input.image, input.mobile, input.image2, input.vid{
-  width: 55%;
+  width: 61.5%;
 }
 #radio{
   margin-bottom: 8px;
@@ -302,5 +309,5 @@ input.image, input.mobile, input.image2, input.vid{
 
 }
 #radio label{
-  margin-bottom: 2px;
+  margin-bottom: 5px;
 }
