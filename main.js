@@ -8,7 +8,7 @@ const BrowserWindow = electron.BrowserWindow
 const path = require('path')
 const url = require('url')
 
-// require('electron-reload')('**/*.{css,js,html}');
+require('electron-reload')('**/*.{css,js,html}');
 // require('electron-reload')('./css/main.css');
 // require('electron-reload')('./index.html');
 // require('electron-reload')('./js/script.html');
