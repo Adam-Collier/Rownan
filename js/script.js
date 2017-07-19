@@ -34,7 +34,7 @@ function drop(sel) {
       <label>Text horizontal</label><br>
       <input type="radio" name="radio${ind}" value="center" checked><p>center</p>
       <input type="radio" name="radio${ind}" value="left"><p>left</p>
-      <input type="radio" name="radio${ind}" value="center"><p>right</p><br>
+      <input type="radio" name="radio${ind}" value="right"><p>right</p><br>
     </div>
     <label>Title</label><br>
     <input type="text" class="title"><br>
@@ -76,7 +76,7 @@ function drop(sel) {
       <label>Text horizontal</label><br>
       <input type="radio" name="radio${ind}" value="center" checked><p>center</p>
       <input type="radio" name="radio${ind}" value="left"><p>left</p>
-      <input type="radio" name="radio${ind}" value="center"><p>right</p><br>
+      <input type="radio" name="radio${ind}" value="right"><p>right</p><br>
     </div>
     <label>Title</label><br>
     <input type="text" class="title"><br>
@@ -321,7 +321,7 @@ var dropdown = `
       <option value="three">Three Column</option>
     </select>
     <a href='#' class='remove'>Remove</a>
-    <div>
+    <div class="inputs">
     </div>
   </div>
 `;
@@ -380,12 +380,12 @@ document.querySelector('#preview').addEventListener('click', function() {
     });
   });
 
-  // $('#console').text(JSON.stringify(o)); // strigify to show
+    // $('#console').text(JSON.stringify(o)); // strigify to show
     fs.writeFile(path.join(__dirname, 'output.html'), '', function(){console.log('done');});
 
     var inputs = document.querySelectorAll('select');
     Array.prototype.forEach.call(inputs, function(el, i) {
-      // console.log(el.options[el.selectedIndex].value, i);
+    // console.log(el.options[el.selectedIndex].value, i);
 
     var f = `
 <div class="row fullwidth" id="row${i+1}">
@@ -399,8 +399,8 @@ document.querySelector('#preview').addEventListener('click', function() {
       <img src="https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70/${o.items[i].image}" alt="backup">
     </picture>
     <div class="${o.items[i].vertical} ${o.items[i].radio}">
-      <h2 class="title1 white">${o.items[i].title}</h2>
-      <h4 class="subtitle1 white">${o.items[i].subtitle}</h4>
+      <h2 class="title1${o.items[i].color}">${o.items[i].title}</h2>
+      <h4 class="subtitle1${o.items[i].color}">${o.items[i].subtitle}</h4>
       <button class="button">${o.items[i].cta}</button>
     </div>
   </a>
@@ -607,13 +607,18 @@ var th =`
       var syntax = document.getElementsByTagName("code")[0];
       syntax.innerHTML = html;
 
-      fs.readFile(path.join(__dirname, 'preview.html'), function(err, data){
-        var $ = cheerio.load(data);
-          $('.preview-container').html(code);
-          fs.writeFile(path.join(__dirname, 'preview.html'), $.html());
-          document.querySelector('iframe').src += '';
+    fs.readFile(path.join(__dirname, 'preview.html'), function(err, data){
+      var $ = cheerio.load(data);
+      $('.preview-container').html(code);
+      fs.writeFile(path.join(__dirname, 'preview.html'), $.html(), function(err){
+        if(err) {
+          return console.log(err);
+        }
+        document.querySelector('iframe').src += '';
+        console.log("iframe refresh");
       });
     });
+  });
 });
 
 function saveToFile () {
