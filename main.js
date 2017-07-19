@@ -8,7 +8,7 @@ const BrowserWindow = electron.BrowserWindow
 const path = require('path')
 const url = require('url')
 
-// require('electron-reload')('**/*.{css,js,html}');
+require('electron-reload')('**/*.{css,js,html}');
 // require('electron-reload')('./css/main.css');
 // require('electron-reload')('./index.html');
 // require('electron-reload')('./js/script.html');
@@ -31,7 +31,7 @@ function createWindow () {
   }))
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools()
+  // mainWindow.webContents.openDevTools()
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {

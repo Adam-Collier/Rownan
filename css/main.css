@@ -137,7 +137,7 @@ select:focus{
 pre.language-markup, .preview{
   margin: 0px 0px 0px 30px;
   border-radius: 5px;
-  height: calc(100vh - 60px);
+  height: calc(100vh - 75px);
   position: relative;
   z-index: 2;
 }

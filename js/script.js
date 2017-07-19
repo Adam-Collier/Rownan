@@ -27,7 +27,7 @@ function drop(sel) {
     <span>../image/upload/q_70/</span><input type="text" class="mobile"><br>
     <div id="radio">
       <label>Text vertical</label><br>
-      <input type="radio" name="vertical${ind}" value="banner_content"><p>center</p>
+      <input type="radio" name="vertical${ind}" value="banner_content" checked><p>center</p>
       <input type="radio" name="vertical${ind}" value="title-below"><p>below</p><br>
     </div>
     <div id="radio">
@@ -69,7 +69,7 @@ function drop(sel) {
     <span>../image/upload/q_70/</span><input type="text" class="mobile"><br>
     <div id="radio">
       <label>Text vertical</label><br>
-      <input type="radio" name="vertical${ind}" value="banner_content"><p>center</p>
+      <input type="radio" name="vertical${ind}" value="banner_content" checked><p>center</p>
       <input type="radio" name="vertical${ind}" value="title-below"><p>below</p><br>
     </div>
     <div id="radio">
