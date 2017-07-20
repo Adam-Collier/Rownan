@@ -6,7 +6,10 @@ var cleaner = require('clean-html');
 
 function drop(sel) {
   console.log(sel.value);
-  var s = sel.parentNode;
+  var s = sel.parentNode.querySelector('div');
+  s.addEventListener('webkitAnimationEnd', function(){
+      this.style.webkitAnimationName = '';
+  }, false);
   ind = Array.prototype.slice.call(document.querySelectorAll('select')).indexOf(sel);
   console.log(ind);
   console.log(parent);
@@ -265,30 +268,36 @@ function drop(sel) {
   switch (sel.value) {
     case 'full':
       console.log(sel);
-      s.querySelector('div').innerHTML = full;
+      s.innerHTML = full;
+      s.style.webkitAnimationName = 'show';
       break;
     case 'center':
       console.log(sel);
-      s.querySelector('div').innerHTML = center;
+      s.innerHTML = center;
+      s.style.webkitAnimationName = 'show';
       break;
     case 'left':
       console.log(sel);
-      s.querySelector('div').innerHTML = left;
+      s.innerHTML = left;
+      s.style.webkitAnimationName = 'show';
       break;
     case 'right':
       console.log(sel);
-      s.querySelector('div').innerHTML = right;
+      s.innerHTML = right;
+      s.style.webkitAnimationName = 'show';
       break;
     case 'two':
       console.log(sel);
-      s.querySelector('div').innerHTML = two;
+      s.innerHTML = two;
+      s.style.webkitAnimationName = 'show';
       break;
     case 'three':
       console.log(sel);
-      s.querySelector('div').innerHTML = three;
+      s.innerHTML = three;
+      s.style.webkitAnimationName = 'show';
       break;
     default:
-      s.querySelector('div').innerHTML = "";
+      s.innerHTML = "";
   }
 }
 var button = document.querySelector(".button");
