@@ -1,6 +1,7 @@
 const {Menu} = require('electron')
 const electron = require('electron')
 const app = electron.app
+const BrowserWindow = electron.BrowserWindow;
 
 const template = [
   {
@@ -11,6 +12,27 @@ const template = [
       },
       {
         role: 'redo'
+      },
+      {
+        type: 'separator'
+      },
+      {
+        label: 'Save',
+        accelerator: 'CmdOrCtrl+s',
+        click: () => {
+          console.log('Saved');
+          var focusedWindow = BrowserWindow.getFocusedWindow();
+          focusedWindow.webContents.send('save');
+        }
+      },
+      {
+        label: 'Generate',
+        accelerator: 'CmdOrCtrl+enter',
+        click: () => {
+          console.log('Generated');
+          var focusedWindow = BrowserWindow.getFocusedWindow();
+          focusedWindow.webContents.send('generate');
+        }
       },
       {
         type: 'separator'

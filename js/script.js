@@ -1,6 +1,7 @@
 var fs = require('fs');
 var Prism = require('prismjs');
 const {dialog} = require('electron').remote;
+const ipcRenderer = require('electron').ipcRenderer;
 var cheerio = require('cheerio');
 var cleaner = require('clean-html');
 
@@ -340,7 +341,7 @@ var o = {
   "items": []
 };
 
-document.querySelector('#preview').addEventListener('click', function() {
+function generate(){
 
   o = {
     "items": []
@@ -627,6 +628,14 @@ var th =`
       });
     });
   });
+}
+
+// document.querySelector('#preview').addEventListener('click', generate());
+ipcRenderer.on('generate', function() {
+  generate();
+});
+ipcRenderer.on('save', function() {
+  saveToFile();
 });
 
 function saveToFile () {
