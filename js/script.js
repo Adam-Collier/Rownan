@@ -303,7 +303,6 @@ function drop(sel) {
 var button = document.querySelector(".button");
 button.addEventListener("click", function() {
   document.querySelector('.container').insertAdjacentHTML('beforeend', dropdown);
-  // $(".container").append(dropdown);
 });
 
 document.querySelector('.container').addEventListener('click', function(e){

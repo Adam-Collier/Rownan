@@ -74,6 +74,7 @@
 html{
   overflow: hidden;
 }
+
 body{
   margin: 0px;
   font-family: Geomanist;
@@ -82,11 +83,12 @@ body{
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
-  padding: 30px;
 }
-label{
-  font-size: 16px;
-  color: #A0A0A0;
+.selection, .language-markup{
+  -webkit-app-region: drag;
+}
+input[type=text], input[type=radio], div, p, label, button, select{
+  -webkit-app-region: no-drag;
 }
 button{
   background: white;
@@ -114,8 +116,10 @@ select{
   -webkit-appearance: none;
    -moz-appearance: none;
    appearance: none;
-   background: white;
+   background: #2E3235;
+   color: #FFFFFF;
    border: none;
+   border: 1px solid white;
    border-radius: 3px;
    box-shadow: 0px 0px 2px rgba(0,0,0,0.3);
    font-family: Geomanist;
@@ -128,7 +132,9 @@ select:focus{
   outline: none;
 }
 .buttons{
-  display: flex;
+  /*display: flex;*/
+  display: none;
+  position: absolute;
   justify-content: flex-end;
   align-items: center;
   align-self: flex-end;
@@ -158,15 +164,14 @@ select:focus{
   min-width: 400px;
   width: 40%;
   max-width: 400px;
-  height: calc(100vh - 60px);
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 .form{
-  height: calc(100vh - 124px);
-  background: #ffffff;
-  border-radius: 5px;
+  height: 100vh;
+  background: #2E3235;
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
   font-size: 0px;
@@ -183,24 +188,21 @@ select:focus{
   z-index: 4;
 }
 pre.language-markup, .preview{
-  margin: 0px 0px 0px 30px;
-  border-radius: 5px;
-  height: calc(100vh - 75px);
+  height: 100vh;
   position: relative;
   z-index: 2;
 }
 pre.language-markup{
   font-size: 12px;
-  padding: 15px 15px 0px 15px;
-  width: calc(100% - 60px);
+  padding: 0px;
+  margin: 0px;
+  width: 100%
 }
 .preview{
   position: absolute;
   z-index: 3;
-  border-radius: 5px;
   background: white;
-  width: calc(100% - 30px);
-  max-width: calc(100% - 30px);
+  width: 100%;
   overflow: hidden;
   height: 100%;
 }
@@ -210,17 +212,20 @@ iframe{
   height: 200%;
   transform-origin: 0 0;
   border: none;
-  border-radius: 5px;
   z-index: 2;
   -webkit-overflow-scrolling: touch;
 }
 .selection{
-  padding: 20px;
+  padding: 20px 20px 20px 20px;
+}
+.selection:nth-of-type(1){
+  padding: 40px 20px 20px 20px;
 }
 .selection:nth-child(even){
-  background-color: #f8f8f8;
+  background-color: #292d2f;
 }
 .selection h3{
+  color: #FFFFFF;
   margin: 0px 0px 10px 0px;
   font-size: 14px;
   font-weight: 400;
@@ -238,10 +243,9 @@ iframe{
 .inline:last-child input{
   margin-bottom: 0px;
 }
-
 .remove{
   font-size: 12px;
-  color: #000000;
+  color: #FFFFFF;
   text-decoration: none;
   padding-left: 15px;
   padding-top: 3px;
@@ -249,28 +253,33 @@ iframe{
 }
 label{
   display: block;
-  font-size: 13px;
+  color: #A0A0A0;
+  font-size: 14px;
   font-weight: 400;
   margin-bottom: 4px;
   line-height: 1.1;
+  letter-spacing: 0.4px;
 }
 .selection span{
   display: inline-block;
-  color: #c5c5c5;
+  color: #848484;
   font-family: Geomanist;
   font-weight: 200;
   font-size: 12px;
   padding-right: 8px;
 }
 input[type=text]{
+  background: #383D41;
+  color: #FFFFFF;
   margin-bottom: 10px;
   height: 22px;
   width: calc(100% - 10px);
   border-radius: 2px;
   border: none;
-  box-shadow: 0px 0px 1px rgba(0,0,0,0.5);
+  box-shadow: 0px 0px 1px rgba(0,0,0,0);
   padding-left: 5px;
   font-size: 14px;
+  font-weight: 300;
 }
 input[type=text]:focus{
   outline: none;
@@ -283,6 +292,7 @@ input[type=radio]{
    height: 14px;
    box-shadow: 0px 0px 2px rgba(0,0,0,0.3);
    border-radius: 50%;
+   background: #b7b7b7;
    cursor: pointer;
    vertical-align: -5px;
    margin-right: 10px;
@@ -291,7 +301,7 @@ input[type=radio]:checked{
   height: 14px;
   width: 14px;
   border-radius: 50%;
-  border: 4px solid white;
+  border: 4px solid #b7b7b7;
   background: black;
 }
 input[type=radio]:focus{
@@ -319,7 +329,7 @@ input.image, input.mobile, input.image2, input.vid{
 #radio p{
   display: inline-block;
   font-size: 12px;
-  color: #c5c5c5;
+  color: #848484;
   font-weight: 200;
   padding-top: 2px;
 
