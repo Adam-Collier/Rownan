@@ -409,7 +409,7 @@ function generate(){
       <img src="https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70/${o.items[i].image}" alt="backup">
     </picture>
     <div class="${o.items[i].vertical} ${o.items[i].radio}">
-      <h2 class="title1${o.items[i].color}">${o.items[i].title}</h2>
+      <h2 class="title2${o.items[i].color}">${o.items[i].title}</h2>
       <h4 class="subtitle1${o.items[i].color}">${o.items[i].subtitle}</h4>
       <button class="button">${o.items[i].cta}</button>
     </div>
@@ -429,8 +429,8 @@ function generate(){
       <img src="https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70/${o.items[i].image}" alt="backup">
     </picture>
     <div class="${o.items[i].vertical} ${o.items[i].radio}">
-      <h2 class="title1${o.items[i].color}">${o.items[i].title}</h2>
-      <h4 class="subtitle1${o.items[i].color}">${o.items[i].subtitle}</h4>
+      <h2 class="title2${o.items[i].color}">${o.items[i].title}</h2>
+      <h4 class="subtitle2${o.items[i].color}">${o.items[i].subtitle}</h4>
       <div class="more-buttons">
         <button class="button">${o.items[i].cta}</button>
         <a href="${o.items[i].url2}">
@@ -493,6 +493,7 @@ var tw= `
         <div class="imgContainer"><img src="https://media.missguided.co.uk/image/upload/q_70/${o.items[i].image}">  </div>
         <div class="title-below">
           <h2 class="title3">${o.items[i].title}</h2>
+          <h4 class="subtitle2}">${o.items[i].subtitle}</h4>
           <div class="more-buttons">
             <button class="button">${o.items[i].cta}</button>
             <a href = "${o.items[i].url2}">
@@ -507,6 +508,7 @@ var tw= `
         <div class="imgContainer"><img src="https://media.missguided.co.uk/image/upload/q_70/${o.items[i].image2}"></div>
         <div class="title-below">
           <h2 class="title3">${o.items[i].title2}</h2>
+          <h4 class="subtitle2}">${o.items[i].subtitle}</h4>
           <div class="more-buttons">
             <button class="button">${o.items[i].cta3}</button>
             <a href = "${o.items[i].url4}">
