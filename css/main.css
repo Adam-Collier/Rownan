@@ -84,9 +84,9 @@ body{
   align-items: flex-start;
 }
 ::-webkit-scrollbar {
-    height: 12px;
-    width: 12px;
+    display: none;
     background: transparent;
+    width: 0px;
 }
 ::-webkit-scrollbar-corner {
     background: transparent;
@@ -123,7 +123,8 @@ select{
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  background: #2E3235;
+  background: url(../img/chevron.svg) no-repeat 93% 48%;
+  background-size: 16px 16px;
   color: #FFFFFF;
   border: none;
   border: 1px solid white;
@@ -132,6 +133,7 @@ select{
   font-family: Geomanist;
   font-weight: 500;
   font-size: 16px;
+  letter-spacing: 0.6px;
   padding: 8px 35px 6px 16px;
   cursor: pointer;
 }
@@ -139,8 +141,8 @@ select:focus{
   outline: none;
 }
 .buttons{
-  display: flex;
-  /*display: none;*/
+  /*display: flex;*/
+  display: none;
   position: absolute;
   justify-content: flex-end;
   align-items: center;
@@ -169,8 +171,7 @@ select:focus{
 }
 .left{
   min-width: 400px;
-  width: 40%;
-  max-width: 400px;
+  width: 400px;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -185,14 +186,83 @@ select:focus{
   font-size: 0px;
 }
 .right{
-  width: 60%;
-  position: relative;
+  /*width: 60%;
   flex-grow: 1;
+  flex-shrink: 1;*/
+  position: relative;
+  width: calc(60% - 400px);
+  flex: 1 1 60%;
+}
+.right svg{
+  height: 30px;
+  width: 30px;
+  position: fixed;
+  bottom: 20px;
+  right: 15px;
+  stroke: #A0A0A0;
+  z-index: 10;
+  cursor: pointer;
+  transition: all 100ms ease-in-out;
+}
+.right svg:hover{
+  stroke: #4e4e4e;
+  transform: scale(1.005);
+}
+.right svg:nth-of-type(2){
+  bottom: 65px;
+}
+.right svg:nth-of-type(3){
+  bottom: 105px;
+}
+.right svg:nth-of-type(4){
+  bottom: 145px;
+  height: 35px;
+  width: 35px;
+  right:  10px;
+}
+.resize{
+  width: 0px;
+  stroke: none;
+  fill: #A0A0A0;
+}
+@keyframes resize{
+  0%{
+    width: 0px;
+  }
+  100%{
+    width: 21.892px;
+  }
+}
+@keyframes resize-reverse{
+  0%{
+    width: 21.892px;
+  }
+  100%{
+    width: 0px;
+  }
+}
+.save-icon{
+  width: 0px;
+  stroke: none;
+  fill: #A0A0A0;
+}
+@keyframes save{
+  0%{
+    width: 0px;
+  }
+  100%{
+    width: 13.57px;
+  }
+}
+@keyframes save-reverse{
+  0%{
+    width: 13.57px;
+  }
+  100%{
+    width: 0px;
+  }
 }
 .preview-button{
-  position: absolute;
-  top: 0;
-  right: 15px;
   z-index: 4;
 }
 pre.language-markup, .preview{
@@ -201,10 +271,11 @@ pre.language-markup, .preview{
   z-index: 2;
 }
 pre.language-markup{
+  height: calc(100vh - 60px);
   font-size: 12px;
   padding: 30px;
   margin: 0px;
-  width: 100%;
+  width: calc(100% - 60px);
   -webkit-app-region: drag;
 }
 code.language-markup{
@@ -216,18 +287,20 @@ code.language-markup{
   background: white;
   width: 100%;
   overflow: hidden;
-  height: 100%;
-  pointer-events: none;
+  height: 100vh;
+  /*pointer-events: none;*/
   user-select: none;
 }
 iframe{
-  position: absolute;
+  position: relative;
   top: 50%;
   left: 50%;
-  width: 200%;
+  /*width: calc(200% + 16px);
   transform: translate(-50%, -50%) scale(0.5);
-  height: 200%;
-  transform-origin: center center;
+  height: 200%;*/
+  width: 160%;
+  transform: translate(-50%, -50%) scale(0.626);
+  height: 160%;
   border: none;
   z-index: 2;
   -webkit-overflow-scrolling: touch;
@@ -242,7 +315,7 @@ iframe{
   background-color: #292d2f;
 }
 .selection h3{
-  color: #FFFFFF;
+  color: #d0d0d0;
   margin: 0px 0px 10px 0px;
   font-size: 14px;
   font-weight: 400;
@@ -275,7 +348,7 @@ label{
   font-weight: 400;
   margin-bottom: 4px;
   line-height: 1.1;
-  letter-spacing: 0.4px;
+  letter-spacing: 0.5px;
 }
 .selection span{
   display: inline-block;
@@ -284,6 +357,7 @@ label{
   font-weight: 200;
   font-size: 12px;
   padding-right: 8px;
+  letter-spacing: 0.6px;
 }
 *::selection {
     background-color: #ff8e95;
@@ -296,7 +370,7 @@ code.language-markup::selection, code.language-markup span::selection {
 input[type=text]{
   background: #383D41;
   color: #FFFFFF;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   height: 22px;
   width: calc(100% - 10px);
   border: none;
@@ -345,7 +419,7 @@ input[type=radio]:not(:nth-of-type(1)){
   width: calc(100% - 10px);
 }
 input.image, input.mobile, input.image2, input.vid{
-  width: 61.5%;
+  width: 58%;
 }
 #radio{
   margin-bottom: 8px;

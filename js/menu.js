@@ -35,6 +35,15 @@ const template = [
         }
       },
       {
+        label: 'Preview',
+        accelerator: 'CmdOrCtrl+p',
+        click: () => {
+          console.log('Preview');
+          var focusedWindow = BrowserWindow.getFocusedWindow();
+          focusedWindow.webContents.send('preview');
+        }
+      },
+      {
         type: 'separator'
       },
       {

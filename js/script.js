@@ -1,6 +1,7 @@
 var fs = require('fs');
 var Prism = require('prismjs');
-const {dialog} = require('electron').remote;
+const {dialog} = require('electron').remote,
+      resize = require('electron').remote;
 const ipcRenderer = require('electron').ipcRenderer;
 var cheerio = require('cheerio');
 var cleaner = require('clean-html');
@@ -239,7 +240,7 @@ function drop(sel) {
       </div>
       <div>
         <label>CTA</label><br>
-        <input type="text" class="cta3"><br>
+        <input type="text" class="cta2"><br>
       </div>
     </div>
     <label>Video</label><br>
@@ -453,7 +454,7 @@ function generate(){
         <h4 class="subtitle2">${o.items[i].subtitle}</h4>
         <div class="more-buttons">
           <button class="button">${o.items[i].cta}</button>
-          <a href = "${o.items[i].url2}">
+          <a href="${o.items[i].url2}">
             <button class="button">${o.items[i].cta2}</button>
           </a>
         </div>
@@ -475,7 +476,7 @@ function generate(){
         <h4 class="subtitle2">${o.items[i].subtitle}</h4>
         <div class="more-buttons">
           <button class="button">${o.items[i].cta}</button>
-          <a href = "${o.items[i].url2}">
+          <a href="${o.items[i].url2}">
             <button class="button">${o.items[i].cta2}</button>
           </a>
         </div>
@@ -640,7 +641,24 @@ ipcRenderer.on('save', function() {
 
 function saveToFile () {
 
+  var s = document.querySelectorAll('.save-icon');
+
+  s.forEach(function(x){
+    var rect = x.getBoundingClientRect();
+    console.log(rect);
+    if(rect.width === 0){
+      x.style.webkitAnimation = 'save 800ms forwards';
+    }
+  });
+
   dialog.showSaveDialog(function(fileName) {
+
+    s.forEach(function(x){
+      var rect = x.getBoundingClientRect();
+      if(rect.width > 0){
+        x.style.webkitAnimation = 'save-reverse 800ms forwards';
+      }
+    });
 
     if (fileName === undefined) return;
 
@@ -660,21 +678,54 @@ function saveToFile () {
         }
         // const notificationButton = document.getElementById('basic-noti')
 
-          const myNotification = new window.Notification(notification.title, notification)
+        const myNotification = new window.Notification(notification.title, notification)
 
-          myNotification.onclick = () => {
-            console.log('Notification clicked')
-          }
+        myNotification.onclick = () => {
+          console.log('Notification clicked')
+        }
       });
     });
   });
 }
 
-document.querySelector('.preview-button').addEventListener("click", function(){
+function preview(){
   var preview = document.querySelector('.preview');
   if(preview.style.display === 'none'){
     preview.style.display = 'block';
   }else{
     preview.style.display = 'none';
   }
+}
+
+document.querySelector('svg.preview-button').addEventListener("click", function(){
+  preview();
+});
+
+ipcRenderer.on('preview', function() {
+  preview();
+});
+
+function mobileSize(){
+  // var win = resize.getCurrentWindow();
+  var win = resize.getCurrentWindow();
+  var size = win.getSize();
+  console.log(resize.getCurrentWindow().getSize())
+  if(size[0] > 750){
+    win.setSize(540, size[1]);
+  }else{
+    win.setSize(1125, size[1]);
+  }
+}
+
+document.querySelector('.resize-icon').addEventListener("click", function(){
+  var m = document.querySelector('.resize');
+  var rect = m.getBoundingClientRect();
+
+  if(rect.width === 0){
+    m.style.webkitAnimation = 'resize 800ms forwards';
+  }else{
+    m.style.webkitAnimation = 'resize-reverse 800ms forwards';
+  }
+  mobileSize();
+  // console.log(m.style.webkitAnimation);
 });

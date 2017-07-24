@@ -19,7 +19,7 @@ let mainWindow;
 
 function createWindow () {
   // Create the browser window.
-  mainWindow = new BrowserWindow({titleBarStyle: 'hidden', width: 1125, height: 800, backgroundColor: '#2E3235'})
+  mainWindow = new BrowserWindow({titleBarStyle: 'hidden', width: 1125, height: 800, backgroundColor: '#2E3235', minWidth: 750, minHeight: 300, useContentSize: false});
 
   // and load the index.html of the app.
   mainWindow.loadURL(url.format({
