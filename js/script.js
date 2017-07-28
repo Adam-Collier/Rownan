@@ -631,6 +631,13 @@ var th =`
       });
     });
   });
+  var m = document.querySelectorAll('.pupil, .iris');
+    m.forEach(function(x){
+      x.style.webkitAnimation = 'blink 500ms forwards';
+      x.addEventListener('webkitAnimationEnd', function(){
+      this.style.webkitAnimationName = '';
+    }, false);
+  });
 }
 
 // document.querySelector('#preview').addEventListener('click', generate());
@@ -639,6 +646,12 @@ ipcRenderer.on('generate', function() {
 });
 ipcRenderer.on('save', function() {
   saveToFile();
+});
+ipcRenderer.on('preview', function() {
+  preview();
+});
+ipcRenderer.on('mobileView', function() {
+  mobileSize();
 });
 
 function saveToFile () {
@@ -697,13 +710,16 @@ function preview(){
   }else{
     preview.style.display = 'none';
   }
+  var m = document.querySelectorAll('.switch');
+    m.forEach(function(x){
+      if(x.style.fill === 'rgb(160, 160, 160)'){
+        x.style.fill = 'none';
+      }else{
+        x.style.fill = 'rgb(160, 160, 160)';
+      }
+  });
 }
-
 document.querySelector('svg.preview-button').addEventListener("click", function(){
-  preview();
-});
-
-ipcRenderer.on('preview', function() {
   preview();
 });
 
@@ -717,17 +733,14 @@ function mobileSize(){
   }else{
     win.setSize(1125, size[1]);
   }
-}
-
-document.querySelector('.resize-icon').addEventListener("click", function(){
   var m = document.querySelector('.resize');
   var rect = m.getBoundingClientRect();
-
   if(rect.width === 0){
     m.style.webkitAnimation = 'resize 800ms forwards';
   }else{
     m.style.webkitAnimation = 'resize-reverse 800ms forwards';
   }
+}
+document.querySelector('.resize-icon').addEventListener("click", function(){
   mobileSize();
-  // console.log(m.style.webkitAnimation);
 });

@@ -87,6 +87,15 @@ const template = [
         type: 'separator'
       },
       {
+        label: 'Mobile View',
+        accelerator: 'CmdOrCtrl+;',
+        click: () => {
+          console.log('Mobile View');
+          var focusedWindow = BrowserWindow.getFocusedWindow();
+          focusedWindow.webContents.send('mobileView');
+        }
+      },
+      {
         role: 'resetzoom'
       },
       {
