@@ -6,11 +6,16 @@
     <title>Rownan</title>
     <link rel="stylesheet" href="./node_modules/prismjs/themes/prism.css" />
     <link rel="stylesheet" href="./css/main.css">
-    </head>
+    <link rel="stylesheet" href="./css/codemirror.css">
+    <link rel="stylesheet" href="./css/monokai.css">
+  </head>
   <body>
     <div class="left">
       <div class = "form">
         <div class="container">
+          <textarea id="editor"><style>
+
+</style></textarea>
           <div class = "selection">
             <select onchange="drop(this)">
               <option value="general" selected>Please Select</option>
@@ -20,6 +25,7 @@
               <option value="right">Right</option>
               <option value="two">Two Column</option>
               <option value="three">Three Column</option>
+              <option value="custom">Custom</option>
             </select>
             <div class="inputs">
               <!-- remove this -->
@@ -95,8 +101,25 @@
 
     <script src="main.js"></script>
     <!-- <script>window.$ = window.jQuery = require('./js/jquery.js');</script> -->
+    <script src="./js/codemirror.js"></script>
+    <script src="./js/css.js"></script>
+    <script src="./js/htmlmixed.js"></script>
+    <script src="./js/javascript.js"></script>
+    <script src="./js/xml.js"></script>
+    <script type="text/javascript">
+      var myCodeMirror = CodeMirror.fromTextArea(editor, {
+        lineNumbers: false,
+        mode: "css",
+        theme: "monokai",
+        tabSize: 2
+      });
+    </script>
+
     <script src="./js/script.js"></script>
 
+    <!-- <script>
+      require('./js/resize');
+    </script> -->
   </body>
 
 </html>

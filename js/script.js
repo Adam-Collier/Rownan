@@ -6,6 +6,17 @@ const ipcRenderer = require('electron').ipcRenderer;
 var cheerio = require('cheerio');
 var cleaner = require('clean-html');
 
+
+function customEditors(){
+  var customEditor = document.querySelectorAll('.custom');
+    CodeMirror.fromTextArea(customEditor[customEditor.length-1], {
+      matchBrackets: true,
+      mode: "htmlmixed",
+      theme: 'monokai'
+    });
+}
+
+
 function drop(sel) {
   console.log(sel.value);
   var s = sel.parentNode.querySelector('div');
@@ -267,6 +278,10 @@ function drop(sel) {
     <label>Subtitle</label><br>
     <input type="text" class="subtitle3"><br>
   `;
+  var custom = `
+  <textarea class="custom"></textarea>
+  `;
+
   switch (sel.value) {
     case 'full':
       console.log(sel);
@@ -296,6 +311,12 @@ function drop(sel) {
     case 'three':
       console.log(sel);
       s.innerHTML = three;
+      s.style.webkitAnimationName = 'show';
+      break;
+    case 'custom':
+      console.log(sel);
+      s.innerHTML = custom;
+      customEditors();
       s.style.webkitAnimationName = 'show';
       break;
     default:
@@ -329,6 +350,7 @@ var dropdown = `
       <option value="right">Right</option>
       <option value="two">Two Column</option>
       <option value="three">Three Column</option>
+      <option value="custom">Custom</option>
     </select>
     <a href='#' class='remove'>Remove</a>
     <div class="inputs">
@@ -343,6 +365,9 @@ var o = {
 };
 
 function generate(){
+
+
+
 
   o = {
     "items": []
@@ -391,7 +416,7 @@ function generate(){
   });
 
     // $('#console').text(JSON.stringify(o)); // strigify to show
-    fs.writeFile(path.join(__dirname, 'output.html'), '', function(){console.log('done');});
+    fs.writeFile(path.join(__dirname, 'output.html'), '', function(){console.log('empty');});
 
     var inputs = document.querySelectorAll('select');
     Array.prototype.forEach.call(inputs, function(el, i) {
@@ -492,8 +517,8 @@ var tw= `
       <a href="${o.items[i].url}" class="tracking">
         <div class="imgContainer"><img src="https://media.missguided.co.uk/image/upload/q_70/${o.items[i].image}">  </div>
         <div class="title-below">
-          <h2 class="title3">${o.items[i].title}</h2>
-          <h4 class="subtitle2}">${o.items[i].subtitle}</h4>
+          <h2 class="title2">${o.items[i].title}</h2>
+          <h4 class="subtitle2">${o.items[i].subtitle}</h4>
           <div class="more-buttons">
             <button class="button">${o.items[i].cta}</button>
             <a href = "${o.items[i].url2}">
@@ -507,8 +532,8 @@ var tw= `
       <a href="${o.items[i].url3}" class="tracking">
         <div class="imgContainer"><img src="https://media.missguided.co.uk/image/upload/q_70/${o.items[i].image2}"></div>
         <div class="title-below">
-          <h2 class="title3">${o.items[i].title2}</h2>
-          <h4 class="subtitle2}">${o.items[i].subtitle}</h4>
+          <h2 class="title2">${o.items[i].title2}</h2>
+          <h4 class="subtitle2">${o.items[i].subtitle2}</h4>
           <div class="more-buttons">
             <button class="button">${o.items[i].cta3}</button>
             <a href = "${o.items[i].url4}">
@@ -568,6 +593,7 @@ var th =`
   </div>
 </div>
 `;
+      fs.appendFileSync(path.join(__dirname, 'output.html'), myCodeMirror.getValue(), function(){console.log('CSS added');});
 
       switch(el.options[el.selectedIndex].value){
         case 'full':
@@ -614,10 +640,10 @@ var th =`
 
       console.log(code);
 
-      // Returns a highlighted HTML string
-      var html = Prism.highlight(code, Prism.languages.markup);
-      var syntax = document.getElementsByTagName("code")[0];
-      syntax.innerHTML = html;
+    // Returns a highlighted HTML string
+    var html = Prism.highlight(code, Prism.languages.markup);
+    var syntax = document.getElementsByTagName("code")[0];
+    syntax.innerHTML = html;
 
     fs.readFile(path.join(__dirname, 'preview.html'), function(err, data){
       var $ = cheerio.load(data);
