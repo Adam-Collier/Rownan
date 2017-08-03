@@ -137,9 +137,10 @@ select{
   padding: 8px 35px 6px 16px;
   cursor: pointer;
 }
-.cm-s-monokai.CodeMirror, textarea{
-  font-size: 16px;
+.cm-s-one-dark.CodeMirror, textarea{
   padding: 35px 25px 25px 25px;
+  border-radius: 3px;
+  background: hsl(220, 13%, 18%);
 }
 .CodeMirror .resizer {
   width: 100%;
@@ -150,7 +151,7 @@ select{
   bottom: 0;
   cursor: ns-resize;
 }
-.inputs .cm-s-monokai.CodeMirror{
+.inputs .cm-s-one-dark.CodeMirror{
   margin-top: 20px;
   padding: 10px;
   min-height: 200px;

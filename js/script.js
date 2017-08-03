@@ -1,21 +1,22 @@
-var fs = require('fs');
-var Prism = require('prismjs');
-const {dialog} = require('electron').remote,
-      resize = require('electron').remote;
+const fs = require('fs');
+const Prism = require('prismjs');
+const {dialog} = require('electron').remote;
 const ipcRenderer = require('electron').ipcRenderer;
-var cheerio = require('cheerio');
-var cleaner = require('clean-html');
-
+const cheerio = require('cheerio');
+const cleaner = require('clean-html');
+const notify = require('./js/notify.js');
+const mobileSize = require('./js/mobileSize.js');
 
 function customEditors(){
   var customEditor = document.querySelectorAll('.custom');
     CodeMirror.fromTextArea(customEditor[customEditor.length-1], {
       matchBrackets: true,
       mode: "htmlmixed",
-      theme: 'monokai'
-    });
+      theme: "one-dark",
+      autoCloseBrackets: true,
+      autoCloseTags: true
+  });
 }
-
 
 function drop(sel) {
   console.log(sel.value);
@@ -366,15 +367,11 @@ var o = {
 
 function generate(){
 
-
-
-
   o = {
     "items": []
   };
 
  // create an object with key items to hold array
-
   var elements = document.querySelectorAll('.selection');
   Array.prototype.forEach.call(elements, function(el) {
     // loop in to the input's wrapper
@@ -385,6 +382,10 @@ function generate(){
     content.forEach(function(el) {
       obj["" + el.className] = "" + el.value;
     });
+
+    if(el.querySelector('.CodeMirror')){
+      obj.custom = "" + el.querySelector('.CodeMirror').CodeMirror.getValue();
+    }
 
     var radio = el.querySelectorAll('input[type="radio"]');
     console.log(radio);
@@ -593,6 +594,9 @@ var th =`
   </div>
 </div>
 `;
+var cu=`
+${o.items[i].custom}
+`;
       fs.appendFileSync(path.join(__dirname, 'output.html'), myCodeMirror.getValue(), function(){console.log('CSS added');});
 
       switch(el.options[el.selectedIndex].value){
@@ -613,6 +617,9 @@ var th =`
           break;
         case 'three':
           fs.appendFileSync(path.join(__dirname, 'output.html'), th);
+          break;
+        case 'custom':
+          fs.appendFileSync(path.join(__dirname, 'output.html'), cu);
           break;
       }
     });
@@ -719,15 +726,14 @@ function saveToFile () {
         }
         // const notificationButton = document.getElementById('basic-noti')
 
-        const myNotification = new window.Notification(notification.title, notification)
+        notify(notification, () => console.log('Notification clicked'));
 
-        myNotification.onclick = () => {
-          console.log('Notification clicked')
-        }
       });
     });
   });
 }
+
+
 
 function preview(){
   var preview = document.querySelector('.preview');
@@ -749,24 +755,7 @@ document.querySelector('svg.preview-button').addEventListener("click", function(
   preview();
 });
 
-function mobileSize(){
-  // var win = resize.getCurrentWindow();
-  var win = resize.getCurrentWindow();
-  var size = win.getSize();
-  console.log(resize.getCurrentWindow().getSize())
-  if(size[0] > 750){
-    win.setSize(540, size[1]);
-  }else{
-    win.setSize(1125, size[1]);
-  }
-  var m = document.querySelector('.resize');
-  var rect = m.getBoundingClientRect();
-  if(rect.width === 0){
-    m.style.webkitAnimation = 'resize 800ms forwards';
-  }else{
-    m.style.webkitAnimation = 'resize-reverse 800ms forwards';
-  }
-}
 document.querySelector('.resize-icon').addEventListener("click", function(){
-  mobileSize();
+  var m = document.querySelector('.resize');
+  mobileSize(m);
 });

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="./node_modules/prismjs/themes/prism.css" />
     <link rel="stylesheet" href="./css/main.css">
     <link rel="stylesheet" href="./css/codemirror.css">
-    <link rel="stylesheet" href="./css/monokai.css">
+    <link rel="stylesheet" href="./css/one-dark.css">
   </head>
   <body>
     <div class="left">
@@ -101,16 +101,20 @@
 
     <script src="main.js"></script>
     <!-- <script>window.$ = window.jQuery = require('./js/jquery.js');</script> -->
-    <script src="./js/codemirror.js"></script>
-    <script src="./js/css.js"></script>
-    <script src="./js/htmlmixed.js"></script>
-    <script src="./js/javascript.js"></script>
-    <script src="./js/xml.js"></script>
+    <script src="./js/codemirror/codemirror.js"></script>
+    <script src="./js/codemirror/css.js"></script>
+    <script src="./js/codemirror/htmlmixed.js"></script>
+    <script src="./js/codemirror/javascript.js"></script>
+    <script src="./js/codemirror/xml.js"></script>
+    <script src="./js/codemirror/closebrackets.js"></script>
+    <script src="./js/codemirror/closetag.js"></script>
     <script type="text/javascript">
       var myCodeMirror = CodeMirror.fromTextArea(editor, {
         lineNumbers: false,
-        mode: "css",
-        theme: "monokai",
+        mode: "htmlmixed",
+        theme: "one-dark",
+        autoCloseBrackets: true,
+        autoCloseTags: true,
         tabSize: 2
       });
     </script>
