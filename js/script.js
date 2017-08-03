@@ -336,10 +336,6 @@ document.querySelector('.container').addEventListener('click', function(e){
   }
 });
 
-// $('.container').on("click", ".remove", function(e) {
-//   e.preventDefault();
-//   $(this).parent('div').remove();
-// });
 
 var dropdown = `
   <div class="selection">
@@ -358,8 +354,6 @@ var dropdown = `
     </div>
   </div>
 `;
-
-
 
 var o = {
   "items": []
@@ -408,13 +402,22 @@ function generate(){
 
     console.log(obj);
     o.items.push(obj); // push in the "o" object created
-    fs.writeFile('output.json', JSON.stringify(o, null, 2), function(err, data) { //write the new JSON to the file
-      if (err) {
-        console.log(error);
+    fs.writeFileSync('output.json', JSON.stringify(o, null, 2), 'utf-8')
+
+    var selected = {"options":[]};
+    document.querySelectorAll('option').forEach(function(x){
+      if(x.selected == true){
+        selected.options.push(x.value);
       }
-      console.log("fucking mint mate");
     });
+    console.log(selected);
+
+    fs.appendFileSync(path.join(__dirname, 'output.json'), JSON.stringify(selected, null, 2));
+
+    
   });
+
+
 
     // $('#console').text(JSON.stringify(o)); // strigify to show
     fs.writeFile(path.join(__dirname, 'output.html'), '', function(){console.log('empty');});
