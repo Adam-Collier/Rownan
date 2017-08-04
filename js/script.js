@@ -404,17 +404,32 @@ function generate(){
     o.items.push(obj); // push in the "o" object created
     fs.writeFileSync('output.json', JSON.stringify(o, null, 2), 'utf-8')
 
-    var selected = {"options":[]};
-    document.querySelectorAll('option').forEach(function(x){
-      if(x.selected == true){
-        selected.options.push(x.value);
+    fs.readFile(path.join(__dirname, 'output.json'),'utf8', function(err,data) {
+      if (err) {
+          throw err;
       }
+      var selected = [];
+      document.querySelectorAll('option').forEach(function(x){
+        if(x.selected == true){
+          selected.push(x.value);
+        }
+      });
+      console.log(selected);
+
+      data = JSON.parse(data);
+      data.options = selected;
+      console.log(data);
+
+      fs.writeFile(path.join(__dirname, 'output.json'),  JSON.stringify(data, null, 2), function(err, data) {
+        if (err) {
+          console.log(error);
+        }
+        console.log("JSON file created");
+      });
     });
-    console.log(selected);
 
-    fs.appendFileSync(path.join(__dirname, 'output.json'), JSON.stringify(selected, null, 2));
 
-    
+
   });
 
 

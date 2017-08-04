@@ -9,31 +9,10 @@
       "subtitle": "",
       "cta": "",
       "cta2": "",
-      "vertical": "banner_content",
-      "color": " white",
       "radio": "center"
-    },
-    {
-      "url": "",
-      "cta": "",
-      "image": "",
-      "title": "",
-      "subtitle": "",
-      "url2": "",
-      "cta2": "",
-      "vid": "",
-      "title2": "",
-      "subtitle2": "",
-      "url3": "",
-      "cta3": "",
-      "image2": "",
-      "title3": "",
-      "subtitle3": ""
     }
-  ]
-}{
+  ],
   "options": [
-    "full",
-    "three"
+    "general"
   ]
 }
