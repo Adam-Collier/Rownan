@@ -715,6 +715,15 @@ function saveToFile () {
   });
 
   dialog.showSaveDialog(function(fileName) {
+    var temp = fileName.match(/^(.*[\/])/);
+    temp = temp + "temp/output.json";
+    console.log(temp);
+    fs.writeFile(temp, "hello world", function(err, data){
+      if (err) {
+        console.log(error);
+      }
+      console.log("temp created");
+    });
 
     s.forEach(function(x){
       var rect = x.getBoundingClientRect();
