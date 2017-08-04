@@ -5,6 +5,29 @@ const BrowserWindow = electron.BrowserWindow;
 
 const template = [
   {
+    label: 'File',
+    submenu: [
+      {
+        label: 'Open',
+        accelerator: 'CmdOrCtrl+o',
+        click: () => {
+          console.log('Opened');
+          var focusedWindow = BrowserWindow.getFocusedWindow();
+          focusedWindow.webContents.send('openFile');
+        }
+      },
+      {
+        label: 'Save',
+        accelerator: 'CmdOrCtrl+s',
+        click: () => {
+          console.log('Saved');
+          var focusedWindow = BrowserWindow.getFocusedWindow();
+          focusedWindow.webContents.send('save');
+        }
+      }
+    ]
+  },
+  {
     label: 'Edit',
     submenu: [
       {
@@ -15,15 +38,6 @@ const template = [
       },
       {
         type: 'separator'
-      },
-      {
-        label: 'Save',
-        accelerator: 'CmdOrCtrl+s',
-        click: () => {
-          console.log('Saved');
-          var focusedWindow = BrowserWindow.getFocusedWindow();
-          focusedWindow.webContents.send('save');
-        }
       },
       {
         label: 'Generate',
@@ -73,14 +87,14 @@ const template = [
         label: 'Reload',
         accelerator: 'CmdOrCtrl+R',
         click (item, focusedWindow) {
-          if (focusedWindow) focusedWindow.reload()
+          if (focusedWindow) focusedWindow.reload();
         }
       },
       {
         label: 'Toggle Developer Tools',
         accelerator: process.platform === 'darwin' ? 'Alt+Command+I' : 'Ctrl+Shift+I',
         click (item, focusedWindow) {
-          if (focusedWindow) focusedWindow.webContents.toggleDevTools()
+          if (focusedWindow) focusedWindow.webContents.toggleDevTools();
         }
       },
       {
@@ -170,7 +184,7 @@ if (process.platform === 'darwin') {
     ]
   })
   // Edit menu.
-  template[1].submenu.push(
+  template[2].submenu.push(
     {
       type: 'separator'
     },
@@ -187,7 +201,7 @@ if (process.platform === 'darwin') {
     }
   )
   // Window menu.
-  template[3].submenu = [
+  template[4].submenu = [
     {
       label: 'Close',
       accelerator: 'CmdOrCtrl+W',

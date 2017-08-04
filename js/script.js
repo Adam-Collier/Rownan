@@ -4,8 +4,8 @@ const {dialog} = require('electron').remote;
 const ipcRenderer = require('electron').ipcRenderer;
 const cheerio = require('cheerio');
 const cleaner = require('clean-html');
-const notify = require('./js/notify.js');
 const mobileSize = require('./js/mobileSize.js');
+const openFile = require('./js/openFile.js');
 
 function customEditors(){
   var customEditor = document.querySelectorAll('.custom');
@@ -402,7 +402,7 @@ function generate(){
 
     console.log(obj);
     o.items.push(obj); // push in the "o" object created
-    fs.writeFileSync('output.json', JSON.stringify(o, null, 2), 'utf-8')
+    fs.writeFileSync(path.join(__dirname, 'output.json'), JSON.stringify(o, null, 2), 'utf-8')
 
     fs.readFile(path.join(__dirname, 'output.json'),'utf8', function(err,data) {
       if (err) {
@@ -414,12 +414,9 @@ function generate(){
           selected.push(x.value);
         }
       });
-      console.log(selected);
-
       data = JSON.parse(data);
       data.options = selected;
-      console.log(data);
-
+      // console.log(data.options);
       fs.writeFile(path.join(__dirname, 'output.json'),  JSON.stringify(data, null, 2), function(err, data) {
         if (err) {
           console.log(error);
@@ -427,9 +424,6 @@ function generate(){
         console.log("JSON file created");
       });
     });
-
-
-
   });
 
 
@@ -704,6 +698,9 @@ ipcRenderer.on('preview', function() {
 ipcRenderer.on('mobileView', function() {
   mobileSize();
 });
+ipcRenderer.on('openFile', function() {
+  openFile();
+});
 
 function saveToFile () {
 
@@ -743,9 +740,11 @@ function saveToFile () {
           body: 'Saved to: '+fileName
         }
         // const notificationButton = document.getElementById('basic-noti')
+        const myNotification = new window.Notification(notification.title, notification)
 
-        notify(notification, () => console.log('Notification clicked'));
-
+        myNotification.onclick = () => {
+          console.log('Notification clicked')
+        }
       });
     });
   });
