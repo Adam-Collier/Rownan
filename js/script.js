@@ -6,6 +6,8 @@ const cheerio = require('cheerio');
 const cleaner = require('clean-html');
 const mobileSize = require('./js/mobileSize.js');
 const openFile = require('./js/openFile.js');
+const showInputs = require('./js/showInputs.js');
+
 
 function customEditors(){
   var customEditor = document.querySelectorAll('.custom');
@@ -340,7 +342,7 @@ document.querySelector('.container').addEventListener('click', function(e){
 var dropdown = `
   <div class="selection">
     <select onchange="drop(this)">
-      <option value="general" selected>Please Select</option>
+      <option value="general">Please Select</option>
       <option value="full">Full Width</option>
       <option value="center">Center</option>
       <option value="left">Left</option>
@@ -715,15 +717,42 @@ function saveToFile () {
   });
 
   dialog.showSaveDialog(function(fileName) {
+
+    //create temp file and get fileName after last slash
     var temp = fileName.match(/^(.*[\/])/);
-    temp = temp + "temp/output.json";
-    console.log(temp);
-    fs.writeFile(temp, "hello world", function(err, data){
-      if (err) {
-        console.log(error);
+    temp = temp[1] + "savedFiles/";
+    var jsonFile = fileName.match(/[^/]+$/);
+    jsonFile = jsonFile[0].slice(0, -5);
+
+    fs.readFile(path.join(__dirname, 'output.json'),'utf8', function(err,jsonData) {
+      console.log(jsonFile);
+      if (fs.existsSync(temp)) {
+      // Do something
+        fs.writeFile(temp+"/"+jsonFile+".json", jsonData, function(err, data) {
+          if(err){
+            console.log(err);
+          }else{
+            console.log("json file created");
+          }
+        });
+      }else{
+      fs.mkdir(temp, function(err){
+        if (err) {
+          console.log(err);
+        }else{
+          fs.writeFile(temp+"/"+jsonFile+".json", jsonData, function(err, data) {
+            if(err){
+              console.log(err);
+            }else{
+              console.log("json file created");
+            }
+        });
       }
-      console.log("temp created");
-    });
+        console.log("temp created");
+      });
+    }
+  });
+
 
     s.forEach(function(x){
       var rect = x.getBoundingClientRect();
