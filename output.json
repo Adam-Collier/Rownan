@@ -1,35 +1,90 @@
 {
   "items": [
     {
-      "url": "skedjbvdj",
-      "url2": "wkjbvkjdb",
-      "image": "ksjbvkjdb",
-      "mobile": "kdjbvkjd",
-      "title": "ejdnbvjkln",
-      "subtitle": "wlknvlekn",
-      "cta": "elkvndlkn",
-      "cta2": "lkenvbldk",
+      "url": "/new-in",
+      "url2": "",
+      "image": "v1500887278/new_in_lb8emk.jpg",
+      "mobile": "v1500887277/new_in_mobile_xikaoz.jpg",
+      "title": "new clothes looking for new homes ",
+      "subtitle": "",
+      "cta": "shop new in",
+      "cta2": "",
+      "vertical": "banner_content",
+      "color": " white",
+      "radio": "center"
+    },
+    {
+      "url": "/londunn-missguided",
+      "url2": "",
+      "image": "v1502120512/jd_US_gr7caa.jpg",
+      "mobile": "v1502100448/jd_mobile_samlx0.jpg",
+      "title": "LONDUNN + MISSGUIDED ",
+      "subtitle": "The ultimate collaboration with super model Jourdan Dunn.",
+      "cta": "shop now",
+      "cta2": "",
       "vertical": "title-below",
       "color": "",
       "radio": "center"
     },
     {
-      "url": "lednsvksn",
+      "url": "/dresses",
       "url2": "",
-      "image": "lkwnvlkn",
-      "mobile": "lknvlkn",
-      "title": "elkvnlde",
-      "subtitle": "lkvnlkn",
-      "cta": "lkenvlkn",
+      "image": "v1502100448/dresses_jpltmg.jpg",
+      "title": "pants, bye.",
+      "subtitle": "",
+      "cta": "shop dresses",
+      "cta2": ""
+    },
+    {
+      "url": "/clothing/tops",
+      "url2": "",
+      "image": "v1500284499/tops_US_n7sue6.jpg",
+      "title": "get on top",
+      "subtitle": "",
+      "cta": "shop tops",
+      "cta2": "",
+      "url3": "/shoes",
+      "url4": "",
+      "image2": "v1502106512/shoes_US_lz9hqz.jpg",
+      "title2": "they go on your feet ",
+      "subtitle2": "",
+      "cta3": "shop shoes",
+      "cta4": ""
+    },
+    {
+      "url": "/clothing/swimwear",
+      "url2": "",
+      "image": "v1502106512/swim_US_yoxooa.jpg",
+      "mobile": "v1502106512/swim_US_mobile_qr1ban.jpg",
+      "title": "get wet ",
+      "subtitle": "",
+      "cta": "shop swimwear",
       "cta2": "",
       "vertical": "banner_content",
       "color": " white",
-      "radio": "right"
+      "radio": "left"
+    },
+    {
+      "url": "/dresses/homecoming-dresses",
+      "url2": "",
+      "image": "v1501502843/homecoming_US_quda8b.jpg",
+      "title": "your limousine is outside...",
+      "subtitle": "",
+      "cta": "shop homecoming",
+      "cta2": ""
+    },
+    {
+      "custom": "<div class=\"row\" id=\"row7\" data-optly-e3fb3756-8687-4f67-89b8-c827bb10bd7a=\"\">\n  <a href=\"http://www.missguided.co.uk/blog/fashion/the-tailoring-edit\" class=\"tracking\" data-optly-e3fb3756-8687-4f67-89b8-c827bb10bd7a=\"\">\n    <picture data-optly-e3fb3756-8687-4f67-89b8-c827bb10bd7a=\"\">\n      <!-- desktop -->\n      <source media=\"(min-width: 768px)\" srcset=\"https://media.missguided.co.uk/image/upload/c_scale,w_768,q_70/ 768w, https://media.missguided.co.uk/image/upload/c_scale,w_967,q_70/v1501490532/Trend_edmehy.jpg 967w, https://media.missguided.co.uk/image/upload/c_scale,w_1147,q_70/v1501490532/Trend_edmehy.jpg 1147w, https://media.missguided.co.uk/image/upload/c_scale,w_1294,q_70/v1501490532/Trend_edmehy.jpg 1294w, https://media.missguided.co.uk/image/upload/c_scale,w_1453,q_70/v1501490532/Trend_edmehy.jpg 1453w, https://media.missguided.co.uk/image/upload/c_scale,w_1591,q_70/v1501490532/Trend_edmehy.jpg 1591w, https://media.missguided.co.uk/image/upload/c_scale,w_1718,q_70/v1501490532/Trend_edmehy.jpg 1718w, https://media.missguided.co.uk/image/upload/c_scale,w_1856,q_70/v1501490532/Trend_edmehy.jpg 1856w, https://media.missguided.co.uk/image/upload/c_scale,w_1919,q_70/v1501490532/Trend_edmehy.jpg 1919w, https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70/v1501490532/Trend_edmehy.jpg 1920w\" data-optly-e3fb3756-8687-4f67-89b8-c827bb10bd7a=\"\">\n      <!-- mobile -->\n      <source media=\"(max-width: 767px)\" srcset=\"https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_320/v1501490532/Trend_edmehy.jpg 320w, https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_375,dpr_1/v1501490532/Trend_edmehy.jpg 375w, https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_414,dpr_1/v1501490532/Trend_edmehy.jpg 414w\" src=\"https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_768,dpr_1/v1501490532/Trend_edmehy.jpg\" sizes=\"100vw\" data-optly-e3fb3756-8687-4f67-89b8-c827bb10bd7a=\"\">\n      <img src=\"https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70/v1501490532/Trend_edmehy.jpg\" alt=\"backup\" data-optly-e3fb3756-8687-4f67-89b8-c827bb10bd7a=\"\">\n    </picture>\n    <div class=\"title-below center\" data-optly-e3fb3756-8687-4f67-89b8-c827bb10bd7a=\"\">\n      <h2 class=\"title2\" data-optly-e3fb3756-8687-4f67-89b8-c827bb10bd7a=\"\">the tailoring edit</h2>\n      <h4 class=\"subtitle2\" data-optly-e3fb3756-8687-4f67-89b8-c827bb10bd7a=\"\">Suits aren't just for men. Show them who wears the trousers.</h4>\n      <div class=\"more-buttons\" data-optly-e3fb3756-8687-4f67-89b8-c827bb10bd7a=\"\">\n        <button class=\"button\" data-optly-e3fb3756-8687-4f67-89b8-c827bb10bd7a=\"\">shop the trend</button>\n      </div>\n    </div>\n  </a>\n</div>"
     }
   ],
   "options": [
+    "full",
     "center",
-    "center"
+    "left",
+    "two",
+    "full",
+    "left",
+    "custom"
   ],
   "styles": "<style>\n\n</style>"
 }
