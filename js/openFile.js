@@ -5,9 +5,16 @@ function openFile () {
   dialog.showOpenDialog({ filters: [{ extensions: ['json'] }]}, function (fileNames) {
     fs.readFile(fileNames[0],'utf8', function(err,data){
       console.log(err);
-      document.querySelector('.selection').remove();
+
+      if(document.querySelector('.selection')){
+        document.querySelector('.selection').remove();
+      }
 
       data = JSON.parse(data);
+
+      console.log(data.styles);
+      document.querySelector('.CodeMirror').CodeMirror.setValue(data.styles);
+      
       var rowOptions = data.options;
       // console.log(rowOptions);
       rowOptions.forEach(function(x, index){

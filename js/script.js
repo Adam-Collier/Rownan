@@ -29,302 +29,9 @@ function drop(sel) {
   ind = Array.prototype.slice.call(document.querySelectorAll('select')).indexOf(sel);
   console.log(ind);
   console.log(parent);
-  var full = `
-    <div class="inline">
-      <div>
-        <label>URL</label><br>
-        <input type="text" class="url"><br>
-      </div>
-      <div>
-        <label>URL2</label><br>
-        <input type="text" class="url2"><br>
-      </div>
-    </div>
-    <label>Image</label><br>
-    <span>../image/upload/q_70/</span><input type="text" class="image"><br>
-    <label>Mobile Image</label><br>
-    <span>../image/upload/q_70/</span><input type="text" class="mobile"><br>
-    <div id="radio">
-      <label>Text vertical</label><br>
-      <input type="radio" name="vertical${ind}" value="banner_content" checked><p>center</p>
-      <input type="radio" name="vertical${ind}" value="title-below"><p>below</p><br>
-    </div>
-    <div id="radio">
-      <label>Text horizontal</label><br>
-      <input type="radio" name="radio${ind}" value="center" checked><p>center</p>
-      <input type="radio" name="radio${ind}" value="left"><p>left</p>
-      <input type="radio" name="radio${ind}" value="right"><p>right</p><br>
-    </div>
-    <label>Title</label><br>
-    <input type="text" class="title"><br>
-    <label>Subtitle</label><br>
-    <input type="text" class="subtitle"><br>
-    <div class="inline">
-      <div>
-        <label>CTA</label><br>
-        <input type="text" class="cta"><br>
-      </div>
-      <div>
-        <label>CTA 2</label><br>
-        <input type="text" class="cta2"><br>
-      </div>
-    </div>
-    `;
 
-  var center = `
-    <div class="inline">
-      <div>
-        <label>URL</label><br>
-        <input type="text" class="url"><br>
-      </div>
-      <div>
-        <label>URL2</label><br>
-        <input type="text" class="url2"><br>
-      </div>
-    </div>
-    <label>Image</label><br>
-    <span>../image/upload/q_70/</span><input type="text" class="image"><br>
-    <label>Mobile Image</label><br>
-    <span>../image/upload/q_70/</span><input type="text" class="mobile"><br>
-    <div id="radio">
-      <label>Text vertical</label><br>
-      <input type="radio" name="vertical${ind}" value="banner_content" checked><p>center</p>
-      <input type="radio" name="vertical${ind}" value="title-below"><p>below</p><br>
-    </div>
-    <div id="radio">
-      <label>Text horizontal</label><br>
-      <input type="radio" name="radio${ind}" value="center" checked><p>center</p>
-      <input type="radio" name="radio${ind}" value="left"><p>left</p>
-      <input type="radio" name="radio${ind}" value="right"><p>right</p><br>
-    </div>
-    <label>Title</label><br>
-    <input type="text" class="title"><br>
-    <label>Subtitle</label><br>
-    <input type="text" class="subtitle"><br>
-    <div class="inline">
-      <div>
-        <label>CTA</label><br>
-        <input type="text" class="cta"><br>
-      </div>
-      <div>
-        <label>CTA 2</label><br>
-        <input type="text" class="cta2"><br>
-      </div>
-    </div>
-  `;
+  showInputs(ind, sel.value, s);
 
-  var left = `
-    <div class="inline">
-      <div>
-        <label>URL</label><br>
-        <input type="text" class="url"><br>
-      </div>
-      <div>
-        <label>URL2</label><br>
-        <input type="text" class="url2"><br>
-      </div>
-    </div>
-    <label>Image</label><br>
-    <span>../image/upload/q_70/</span><input type="text" class="image"><br>
-    <label>Title</label><br>
-    <input type="text" class="title"><br>
-    <label>Subtitle</label><br>
-    <input type="text" class="subtitle"><br>
-    <div class="inline">
-      <div>
-        <label>CTA</label><br>
-        <input type="text" class="cta"><br>
-      </div>
-      <div>
-        <label>CTA 2</label><br>
-        <input type="text" class="cta2"><br>
-      </div>
-    </div>
-  `;
-
-  var right = `
-    <div class="inline">
-      <div>
-        <label>URL</label><br>
-        <input type="text" class="url"><br>
-      </div>
-      <div>
-        <label>URL2</label><br>
-        <input type="text" class="url2"><br>
-      </div>
-    </div>
-    <label>Image</label><br>
-    <span>../image/upload/q_70/</span><input type="text" class="image"><br>
-    <label>Title</label><br>
-    <input type="text" class="title"><br>
-    <label>Subtitle</label><br>
-    <input type="text" class="subtitle"><br>
-    <div class="inline">
-      <div>
-        <label>CTA</label><br>
-        <input type="text" class="cta"><br>
-      </div>
-      <div>
-        <label>CTA 2</label><br>
-        <input type="text" class="cta2"><br>
-      </div>
-    </div>
-  `;
-
-  var two = `
-    <h3>First column</h3>
-      <div class="inline">
-        <div>
-          <label>URL</label><br>
-          <input type="text" class="url"><br>
-        </div>
-        <div>
-          <label>URL2</label><br>
-          <input type="text" class="url2"><br>
-        </div>
-      </div>
-      <label>Image</label><br>
-      <span>../image/upload/q_70/</span><input type="text" class="image"><br>
-      <label>Title</label><br>
-      <input type="text" class="title"><br>
-      <label>Subtitle</label><br>
-      <input type="text" class="subtitle"><br>
-      <div class="inline">
-        <div>
-          <label>CTA</label><br>
-          <input type="text" class="cta"><br>
-        </div>
-        <div>
-          <label>CTA 2</label><br>
-          <input type="text" class="cta2"><br>
-        </div>
-      </div>
-    <h3>Second column</h3>
-      <div class="inline">
-        <div>
-          <label>URL</label><br>
-          <input type="text" class="url3"><br>
-        </div>
-        <div>
-          <label>URL2</label><br>
-          <input type="text" class="url4"><br>
-        </div>
-      </div>
-      <label>Image</label><br>
-      <span>../image/upload/q_70/</span><input type="text" class="image2"><br>
-      <label>Title</label><br>
-      <input type="text" class="title2"><br>
-      <label>Subtitle</label><br>
-      <input type="text" class="subtitle2"><br>
-      <div class="inline">
-        <div>
-          <label>CTA</label><br>
-          <input type="text" class="cta3"><br>
-        </div>
-        <div>
-          <label>CTA 2</label><br>
-          <input type="text" class="cta4"><br>
-        </div>
-      </div>
-  `;
-
-  var three = `
-  <h3>First column</h3>
-    <div class="inline">
-      <div>
-        <label>URL</label><br>
-        <input type="text" class="url"><br>
-      </div>
-      <div>
-        <label>CTA</label><br>
-        <input type="text" class="cta"><br>
-      </div>
-    </div>
-    <label>Image</label><br>
-    <span>../image/upload/q_70/</span><input type="text" class="image"><br>
-    <label>Title</label><br>
-    <input type="text" class="title"><br>
-    <label>Subtitle</label><br>
-    <input type="text" class="subtitle"><br>
-  <h3>Second column</h3>
-    <div class="inline">
-      <div>
-        <label>URL</label><br>
-        <input type="text" class="url2"><br>
-      </div>
-      <div>
-        <label>CTA</label><br>
-        <input type="text" class="cta2"><br>
-      </div>
-    </div>
-    <label>Video</label><br>
-    <span>../video/upload/q_70/</span><input type="text" class="vid"><br>
-    <label>Title</label><br>
-    <input type="text" class="title2"><br>
-    <label>Subtitle</label><br>
-    <input type="text" class="subtitle2"><br>
-    <h3>Third column</h3>
-    <div class="inline">
-      <div>
-        <label>URL</label><br>
-        <input type="text" class="url3"><br>
-      </div>
-      <div>
-      <label>CTA</label><br>
-      <input type="text" class="cta3"><br>
-      </div>
-    </div>
-    <label>Image</label><br>
-    <span>../image/upload/q_70/</span><input type="text" class="image2"><br>
-    <label>Title</label><br>
-    <input type="text" class="title3"><br>
-    <label>Subtitle</label><br>
-    <input type="text" class="subtitle3"><br>
-  `;
-  var custom = `
-  <textarea class="custom"></textarea>
-  `;
-
-  switch (sel.value) {
-    case 'full':
-      console.log(sel);
-      s.innerHTML = full;
-      s.style.webkitAnimationName = 'show';
-      break;
-    case 'center':
-      console.log(sel);
-      s.innerHTML = center;
-      s.style.webkitAnimationName = 'show';
-      break;
-    case 'left':
-      console.log(sel);
-      s.innerHTML = left;
-      s.style.webkitAnimationName = 'show';
-      break;
-    case 'right':
-      console.log(sel);
-      s.innerHTML = right;
-      s.style.webkitAnimationName = 'show';
-      break;
-    case 'two':
-      console.log(sel);
-      s.innerHTML = two;
-      s.style.webkitAnimationName = 'show';
-      break;
-    case 'three':
-      console.log(sel);
-      s.innerHTML = three;
-      s.style.webkitAnimationName = 'show';
-      break;
-    case 'custom':
-      console.log(sel);
-      s.innerHTML = custom;
-      customEditors();
-      s.style.webkitAnimationName = 'show';
-      break;
-    default:
-      s.innerHTML = "";
-  }
 }
 var button = document.querySelector(".button");
 button.addEventListener("click", function() {
@@ -417,8 +124,12 @@ function generate(){
         }
       });
       data = JSON.parse(data);
+      //push to the object
       data.options = selected;
-      // console.log(data.options);
+      //push style contents to the object;
+      data.styles = document.querySelector('.CodeMirror').CodeMirror.getValue();
+      console.log(data.styles);
+
       fs.writeFile(path.join(__dirname, 'output.json'),  JSON.stringify(data, null, 2), function(err, data) {
         if (err) {
           console.log(error);
@@ -428,14 +139,12 @@ function generate(){
     });
   });
 
+  // $('#console').text(JSON.stringify(o)); // strigify to show
+  fs.writeFile(path.join(__dirname, 'output.html'), '', function(){console.log('empty');});
 
-
-    // $('#console').text(JSON.stringify(o)); // strigify to show
-    fs.writeFile(path.join(__dirname, 'output.html'), '', function(){console.log('empty');});
-
-    var inputs = document.querySelectorAll('select');
-    Array.prototype.forEach.call(inputs, function(el, i) {
-    // console.log(el.options[el.selectedIndex].value, i);
+  var inputs = document.querySelectorAll('select');
+  Array.prototype.forEach.call(inputs, function(el, i) {
+  // console.log(el.options[el.selectedIndex].value, i);
 
     var f = `
 <div class="row fullwidth" id="row${i+1}">
@@ -525,7 +234,7 @@ function generate(){
   </a>
 </div>
     `;
-var tw= `
+    var tw= `
 <div class="row" id="row${i+1}">
   <div class="two-col">
     <div>
@@ -562,7 +271,7 @@ var tw= `
 </div>
 `;
 
-var th =`
+    var th =`
 <div class="row" id="row${i+1}">
   <div class="three-col">
     <div>
@@ -608,58 +317,58 @@ var th =`
   </div>
 </div>
 `;
-var cu=`
+    var cu=`
 ${o.items[i].custom}
 `;
-      fs.appendFileSync(path.join(__dirname, 'output.html'), myCodeMirror.getValue(), function(){console.log('CSS added');});
 
-      switch(el.options[el.selectedIndex].value){
-        case 'full':
-          fs.appendFileSync(path.join(__dirname, 'output.html'), f);
-          break;
-        case 'center':
-          fs.appendFileSync(path.join(__dirname, 'output.html'), c);
-          break;
-        case 'left':
-          fs.appendFileSync(path.join(__dirname, 'output.html'), l);
-          break;
-        case 'right':
-          fs.appendFileSync(path.join(__dirname, 'output.html'), r);
-          break;
-        case 'two':
-          fs.appendFileSync(path.join(__dirname, 'output.html'), tw);
-          break;
-        case 'three':
-          fs.appendFileSync(path.join(__dirname, 'output.html'), th);
-          break;
-        case 'custom':
-          fs.appendFileSync(path.join(__dirname, 'output.html'), cu);
-          break;
-      }
-    });
-    fs.readFile(path.join(__dirname, 'output.html'),'utf8', function(err,data) {
+    fs.appendFileSync(path.join(__dirname, 'output.html'), myCodeMirror.getValue(), function(){console.log('CSS added');});
+
+    switch(el.options[el.selectedIndex].value){
+      case 'full':
+        fs.appendFileSync(path.join(__dirname, 'output.html'), f);
+        break;
+      case 'center':
+        fs.appendFileSync(path.join(__dirname, 'output.html'), c);
+        break;
+      case 'left':
+        fs.appendFileSync(path.join(__dirname, 'output.html'), l);
+        break;
+      case 'right':
+        fs.appendFileSync(path.join(__dirname, 'output.html'), r);
+        break;
+      case 'two':
+        fs.appendFileSync(path.join(__dirname, 'output.html'), tw);
+        break;
+      case 'three':
+        fs.appendFileSync(path.join(__dirname, 'output.html'), th);
+        break;
+      case 'custom':
+        fs.appendFileSync(path.join(__dirname, 'output.html'), cu);
+        break;
+    }
+  });
+  fs.readFile(path.join(__dirname, 'output.html'),'utf8', function(err,data) {
+    if (err) {
+      throw err;
+    }
+    do{
+      temp = data;
+      data = data.replace(/<(\w+)\b(?:\s+[\w\-.:]+(?:\s*=\s*(?:"[^"]*"|"[^"]*"|[\w\-.:]+))?)*\s*\/?>\s*<\/\1\s*>/gi, '');//removing more that one white space
+    }while(data !== temp);
+
+    data = data.replace(/^\s*\n/gm, '');
+
+    fs.writeFile(path.join(__dirname, 'output.html'), data, function(err, data) {
       if (err) {
-          throw err;
+        console.log(error);
       }
+      console.log("clean html written");
+    });
 
-      do{
-        temp = data;
-        data = data.replace(/<(\w+)\b(?:\s+[\w\-.:]+(?:\s*=\s*(?:"[^"]*"|"[^"]*"|[\w\-.:]+))?)*\s*\/?>\s*<\/\1\s*>/gi, '');//removing more that one white space
-      }while(data !== temp);
+    // The code snippet you want to highlight, as a string
+    var code = data;
 
-      data = data.replace(/^\s*\n/gm, '');
-
-      fs.writeFile(path.join(__dirname, 'output.html'), data, function(err, data) {
-        if (err) {
-          console.log(error);
-        }
-        console.log("clean html written");
-      });
-
-      // The code snippet you want to highlight, as a string
-      var code = data;
-
-      console.log(code);
+    console.log(code);
 
     // Returns a highlighted HTML string
     var html = Prism.highlight(code, Prism.languages.markup);
@@ -718,6 +427,15 @@ function saveToFile () {
 
   dialog.showSaveDialog(function(fileName) {
 
+    s.forEach(function(x){
+      var rect = x.getBoundingClientRect();
+      if(rect.width > 0){
+        x.style.webkitAnimation = 'save-reverse 800ms forwards';
+      }
+    });
+
+    if (fileName === undefined) return;
+
     //create temp file and get fileName after last slash
     var temp = fileName.match(/^(.*[\/])/);
     temp = temp[1] + "savedFiles/";
@@ -747,21 +465,11 @@ function saveToFile () {
               console.log("json file created");
             }
         });
-      }
-        console.log("temp created");
-      });
-    }
-  });
-
-
-    s.forEach(function(x){
-      var rect = x.getBoundingClientRect();
-      if(rect.width > 0){
-        x.style.webkitAnimation = 'save-reverse 800ms forwards';
+        }
+          console.log("temp created");
+        });
       }
     });
-
-    if (fileName === undefined) return;
 
     fs.readFile(path.join(__dirname, 'output.html'),'utf8', function(err,data) {
       if (err) {
@@ -788,8 +496,6 @@ function saveToFile () {
   });
 }
 
-
-
 function preview(){
   var preview = document.querySelector('.preview');
   if(preview.style.display === 'none'){
@@ -806,6 +512,7 @@ function preview(){
       }
   });
 }
+
 document.querySelector('svg.preview-button').addEventListener("click", function(){
   preview();
 });

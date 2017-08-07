@@ -1,10 +1,35 @@
 {
   "items": [
     {
-      "custom": "<h1>\n  unsurprisingly this is the 4th attempt\n</h1>"
+      "url": "skedjbvdj",
+      "url2": "wkjbvkjdb",
+      "image": "ksjbvkjdb",
+      "mobile": "kdjbvkjd",
+      "title": "ejdnbvjkln",
+      "subtitle": "wlknvlekn",
+      "cta": "elkvndlkn",
+      "cta2": "lkenvbldk",
+      "vertical": "title-below",
+      "color": "",
+      "radio": "center"
+    },
+    {
+      "url": "lednsvksn",
+      "url2": "",
+      "image": "lkwnvlkn",
+      "mobile": "lknvlkn",
+      "title": "elkvnlde",
+      "subtitle": "lkvnlkn",
+      "cta": "lkenvlkn",
+      "cta2": "",
+      "vertical": "banner_content",
+      "color": " white",
+      "radio": "right"
     }
   ],
   "options": [
-    "custom"
-  ]
+    "center",
+    "center"
+  ],
+  "styles": "<style>\n\n</style>"
 }
