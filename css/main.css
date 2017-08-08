@@ -114,7 +114,7 @@ select{
 .cm-s-one-dark.CodeMirror, textarea{
   padding: 35px 25px 25px 25px;
   border-radius: 3px;
-  background: hsl(220, 13%, 18%);
+  background: #21252b;
 }
 .CodeMirror .resizer {
   width: 100%;
@@ -124,6 +124,15 @@ select{
   right: 0;
   bottom: 0;
   cursor: ns-resize;
+}
+.container > .CodeMirror:after{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 30px;
+  -webkit-app-region: drag;
 }
 .inputs .cm-s-one-dark.CodeMirror{
   margin-top: 20px;
@@ -206,7 +215,7 @@ select:focus{
 }
 .pupil, .iris{
   fill: none;
-  transform-origin: center
+  transform-origin: center;
 }
 .right svg:nth-of-type(3){
   bottom: 100px;
@@ -260,9 +269,9 @@ select:focus{
     width: 0px;
   }
 }
-@keyframes blink{
+@keyframes generate{
   0%{
-    transform: scale(1)
+    transform: scale(1);
   }
   40%{
     transform: scale(0);
@@ -297,7 +306,6 @@ code.language-markup{
   width: 100%;
   overflow: hidden;
   height: 100vh;
-  /*pointer-events: none;*/
   user-select: none;
 }
 iframe{
@@ -356,7 +364,7 @@ label{
   line-height: 1.1;
   letter-spacing: 0.5px;
 }
-.selection > span{
+.inputs > span{
   display: inline-block;
   color: #848484;
   font-family: Geomanist;

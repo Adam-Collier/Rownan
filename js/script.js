@@ -381,9 +381,9 @@ ${o.items[i].custom}
   });
   var m = document.querySelectorAll('.pupil, .iris');
     m.forEach(function(x){
-      x.style.webkitAnimation = 'blink 500ms forwards';
+      x.style.webkitAnimation = 'generate 500ms forwards';
       x.addEventListener('webkitAnimationEnd', function(){
-      this.style.webkitAnimationName = '';
+      this.style.webkitAnimation = '';
     }, false);
   });
 }

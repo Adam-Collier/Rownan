@@ -1,9 +1,76 @@
 {
   "items": [
-    {}
+    {
+      "url": "/es/novedades",
+      "url2": "",
+      "image": "v1502100448/new_in_x7fseg.jpg",
+      "mobile": "v1502100449/new_in_mobile_sfik23.jpg",
+      "title": "Ropa nueva busca hogar",
+      "subtitle": "",
+      "cta": "compra novedades",
+      "cta2": "",
+      "vertical": "banner_content",
+      "color": " white",
+      "radio": "center"
+    },
+    {
+      "url": "/es/vestidos",
+      "url2": "/es/vestidos/vestidos-casuales",
+      "image": "v1502100448/dresses_jpltmg.jpg",
+      "title": "¡Pantalones fuera!",
+      "subtitle": "",
+      "cta": "compra vestidos",
+      "cta2": "compra vestidos casuales"
+    },
+    {
+      "url": "/es/ropa/tops",
+      "url2": "",
+      "image": "v1502108542/tops_DE_xvkhgo.jpg",
+      "title": "Súbete al top",
+      "subtitle": "",
+      "cta": "compra tops",
+      "cta2": "",
+      "url3": "/es/ropa/punto",
+      "url4": "",
+      "image2": "v1486124840/knitwear_FR_sp2zjg.jpg",
+      "title2": "Ponte a punto",
+      "subtitle2": "",
+      "cta3": "compra ropa de punto",
+      "cta4": ""
+    },
+    {
+      "url": "/es/ropa/lenceria",
+      "url2": "",
+      "image": "v1492789147/lingerie_xmjigo.jpg",
+      "title": "Luce 100% pibón y por un 50% menos",
+      "subtitle": "Usa código: LUST50",
+      "cta": "compra lencería",
+      "cta2": ""
+    },
+    {
+      "url": "/es/londunn-missguided",
+      "url2": "",
+      "image": "v1502120515/jd_ffwdtm.jpg",
+      "mobile": "v1502100448/jd_mobile_samlx0.jpg",
+      "title": "LONDUNN + MISSGUIDED ",
+      "subtitle": "La última colaboración con la súper modelo Jourdan Dunn.",
+      "cta": "compra ahora",
+      "cta2": "",
+      "vertical": "title-below",
+      "color": "",
+      "radio": "center"
+    },
+    {
+      "custom": "<div class=\"row\" id=\"row7\">\n  <a href=\"/es/comprar-por-tendencia/trajes-de-chaqueta\" class=\"tracking\">\n    <picture>\n      <!-- desktop -->\n      <source media=\"(min-width: 768px)\" srcset=\"https://media.missguided.co.uk/image/upload/c_scale,w_768,q_70/http://www.missguided.co.uk/blog/fashion/the-tailoring-edit 768w, https://media.missguided.co.uk/image/upload/c_scale,w_967,q_70/v1501490532/Trend_edmehy.jpg 967w, https://media.missguided.co.uk/image/upload/c_scale,w_1147,q_70/v1501490532/Trend_edmehy.jpg 1147w, https://media.missguided.co.uk/image/upload/c_scale,w_1294,q_70/v1501490532/Trend_edmehy.jpg 1294w, https://media.missguided.co.uk/image/upload/c_scale,w_1453,q_70/v1501490532/Trend_edmehy.jpg 1453w, https://media.missguided.co.uk/image/upload/c_scale,w_1591,q_70/v1501490532/Trend_edmehy.jpg 1591w, https://media.missguided.co.uk/image/upload/c_scale,w_1718,q_70/v1501490532/Trend_edmehy.jpg 1718w, https://media.missguided.co.uk/image/upload/c_scale,w_1856,q_70/v1501490532/Trend_edmehy.jpg 1856w, https://media.missguided.co.uk/image/upload/c_scale,w_1919,q_70/v1501490532/Trend_edmehy.jpg 1919w, https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70/v1501490532/Trend_edmehy.jpg 1920w\">\n      <!-- mobile -->\n      <source media=\"(max-width: 767px)\" srcset=\"https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_320/v1501490532/Trend_edmehy.jpg 320w, https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_375,dpr_1/v1501490532/Trend_edmehy.jpg 375w, https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_414,dpr_1/v1501490532/Trend_edmehy.jpg 414w\" src=\"https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_768,dpr_1/v1501490532/Trend_edmehy.jpg\" sizes=\"100vw\">\n      <img src=\"https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70/v1501490532/Trend_edmehy.jpg\" alt=\"backup\">\n    </picture>\n    <div class=\"title-below center\">\n      <h2 class=\"title2\">Editorial: Look masculino</h2>\n      <h4 class=\"subtitle2\">Los trajes no son solo para hombres. Enséñales quién lleva los pantalones.&nbsp;</h4>\n          <button class=\"button\">compra look masculino</button>\n    </div>\n  </a>\n</div>"
+    }
   ],
   "options": [
-    "general"
+    "full",
+    "left",
+    "two",
+    "left",
+    "full",
+    "custom"
   ],
   "styles": "<style>\n\n</style>"
 }
