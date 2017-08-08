@@ -1,4 +1,9 @@
 function showInputs(ind, x, addInputs){
+
+  addInputs.addEventListener('webkitAnimationEnd', function(){
+      this.style.webkitAnimationName = '';
+  }, false);
+
   var full = `
     <div class="inline">
       <div>
@@ -289,7 +294,7 @@ function showInputs(ind, x, addInputs){
     case 'custom':
       console.log(x);
       addInputs.innerHTML = custom;
-      customEditors();
+      customEditors(addInputs);
       addInputs.style.webkitAnimationName = 'show';
       break;
     default:

@@ -8,10 +8,9 @@ const mobileSize = require('./js/mobileSize.js');
 const openFile = require('./js/openFile.js');
 const showInputs = require('./js/showInputs.js');
 
-
-function customEditors(){
-  var customEditor = document.querySelectorAll('.custom');
-    CodeMirror.fromTextArea(customEditor[customEditor.length-1], {
+function customEditors(currArea){
+  var customEditor = currArea.querySelector('.custom');
+    CodeMirror.fromTextArea(customEditor, {
       matchBrackets: true,
       mode: "htmlmixed",
       theme: "one-dark",
@@ -23,15 +22,8 @@ function customEditors(){
 function drop(sel) {
   console.log(sel.value);
   var s = sel.parentNode.querySelector('div');
-  s.addEventListener('webkitAnimationEnd', function(){
-      this.style.webkitAnimationName = '';
-  }, false);
   ind = Array.prototype.slice.call(document.querySelectorAll('select')).indexOf(sel);
-  console.log(ind);
-  console.log(parent);
-
   showInputs(ind, sel.value, s);
-
 }
 var button = document.querySelector(".button");
 button.addEventListener("click", function() {
@@ -425,7 +417,8 @@ function saveToFile () {
     }
   });
 
-  dialog.showSaveDialog(function(fileName) {
+  dialog.showSaveDialog({ filters:[{name:'Custom File Type', extensions: ['html']}
+]}, function(fileName) {
 
     s.forEach(function(x){
       var rect = x.getBoundingClientRect();

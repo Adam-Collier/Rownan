@@ -7,14 +7,16 @@ function openFile () {
       console.log(err);
 
       if(document.querySelector('.selection')){
-        document.querySelector('.selection').remove();
+        document.querySelectorAll('.selection').forEach(function(x){
+          x.remove();
+        });
       }
 
       data = JSON.parse(data);
 
       console.log(data.styles);
       document.querySelector('.CodeMirror').CodeMirror.setValue(data.styles);
-      
+
       var rowOptions = data.options;
       // console.log(rowOptions);
       rowOptions.forEach(function(x, index){
