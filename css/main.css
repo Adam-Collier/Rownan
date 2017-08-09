@@ -231,6 +231,7 @@ select:focus{
   width: 0px;
   stroke: none;
   fill: #A0A0A0;
+  fill-opacity: 0.5;
 }
 @keyframes resize{
   0%{
@@ -321,6 +322,8 @@ iframe{
 }
 .selection{
   padding: 20px 20px 20px 20px;
+  position: relative;
+  -webkit-app-region: no-drag;
 }
 .selection:nth-of-type(1){
   padding: 40px 20px 20px 20px;
@@ -354,6 +357,24 @@ iframe{
   padding-left: 15px;
   padding-top: 3px;
   font-weight: 400;
+}
+.handle{
+  width: 8px;
+  position: absolute;
+  right: 25px;
+  top: 28px;
+  -webkit-app-region: no-drag;
+  cursor: -webkit-grab;
+  padding: 0 10px;
+}
+.handle:active{
+  cursor: -webkit-grabbing;
+}
+.sortable-chosen{
+  opacity: 0.2;
+}
+.sortable-ghost{
+  opacity: 0;
 }
 label{
   display: block;

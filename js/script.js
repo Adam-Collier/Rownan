@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 const Prism = require('prismjs');
 const {dialog} = require('electron').remote;
 const ipcRenderer = require('electron').ipcRenderer;
@@ -7,6 +8,7 @@ const cleaner = require('clean-html');
 const mobileSize = require('./js/mobileSize.js');
 const openFile = require('./js/openFile.js');
 const showInputs = require('./js/showInputs.js');
+const Sortable = require('sortablejs');
 
 function customEditors(currArea){
   var customEditor = currArea.querySelector('.custom');
@@ -37,7 +39,6 @@ document.querySelector('.container').addEventListener('click', function(e){
   }
 });
 
-
 var dropdown = `
   <div class="selection">
     <select onchange="drop(this)">
@@ -51,6 +52,7 @@ var dropdown = `
       <option value="custom">Custom</option>
     </select>
     <a href='#' class='remove'>Remove</a>
+    <svg class="handle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 23"><title>Asset 3</title><polyline points="1 5 5 1 9 5" style="fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px"/><polyline points="9 18 5 22 1 18" style="fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px"/><line x1="5" y1="1.5" x2="5" y2="21.5" style="fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px"/></svg>
     <div class="inputs">
     </div>
   </div>
@@ -502,6 +504,7 @@ function preview(){
         x.style.fill = 'none';
       }else{
         x.style.fill = 'rgb(160, 160, 160)';
+        x.style.fillOpacity = '0.5';
       }
   });
 }
@@ -513,4 +516,15 @@ document.querySelector('svg.preview-button').addEventListener("click", function(
 document.querySelector('.resize-icon').addEventListener("click", function(){
   var m = document.querySelector('.resize');
   mobileSize(m);
+});
+
+
+var container = document.getElementById("container");
+var sort = Sortable.create(container, {
+  animation: 150, // ms, animation speed moving items when sorting, `0` — without animation
+  handle: "svg", // Restricts sort start click/touch to the specified element
+  draggable: ".selection", // Specifies which items inside the element should be sortable
+  onUpdate: function (evt/**Event*/){
+     var item = evt.item; // the current dragged HTMLElement
+  }
 });
