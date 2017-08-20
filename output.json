@@ -1,76 +1,35 @@
 {
   "items": [
     {
-      "url": "/pl/nowosci",
+      "url": "",
       "url2": "",
-      "image": "v1502100448/new_in_x7fseg.jpg",
-      "mobile": "v1502100449/new_in_mobile_sfik23.jpg",
-      "title": "Te ciuchy potrzebują nowego domu",
+      "image": "",
+      "mobile": "",
+      "title": "",
       "subtitle": "",
-      "cta": "nowości - kup teraz",
+      "cta": "",
       "cta2": "",
       "vertical": "banner_content",
       "color": " white",
       "radio": "center"
     },
     {
-      "url": "/pl/sukienki ",
-      "url2": "/pl/sukienki/sukienki-na-co-dzien",
-      "image": "v1502100448/dresses_jpltmg.jpg",
-      "title": "Pożegnaj się ze spodniami",
+      "url": "",
+      "url2": "",
+      "image": "",
+      "mobile": "",
+      "title": "",
       "subtitle": "",
-      "cta": "sukienki - kup teraz",
-      "cta2": "sukienki na co dzień - kup teraz"
-    },
-    {
-      "url": "/pl/ubrania/topy",
-      "url2": "",
-      "image": "v1502108542/tops_DE_xvkhgo.jpg",
-      "title": "Bądź na topie",
-      "subtitle": "",
-      "cta": "topy - kup teraz",
+      "cta": "",
       "cta2": "",
-      "url3": "/pl/ubrania/dzianina",
-      "url4": "",
-      "image2": "v1486124840/knitwear_FR_sp2zjg.jpg",
-      "title2": "Dzianinowe szaleństwo",
-      "subtitle2": "",
-      "cta3": "dzianina - kup teraz",
-      "cta4": ""
-    },
-    {
-      "url": "/pl/ubrania/bielizna",
-      "url2": "",
-      "image": "v1492789147/lingerie_xmjigo.jpg",
-      "title": "Wyglądaj 100% hot za 50% mniej",
-      "subtitle": "Użyj kodu: LUST50",
-      "cta": "bielizna - kup teraz",
-      "cta2": ""
-    },
-    {
-      "url": "/pl/londunn-missguided",
-      "url2": "",
-      "image": "v1502100448/jd_awwydq.jpg",
-      "mobile": "v1502100448/jd_mobile_samlx0.jpg",
-      "title": "LONDUNN + MISSGUIDED ",
-      "subtitle": "Wyjątkowa współpraca ze światową ikoną mody Jourdan Dunn",
-      "cta": "kup teraz",
-      "cta2": "",
-      "vertical": "title-below",
-      "color": "",
+      "vertical": "banner_content",
+      "color": " white",
       "radio": "center"
-    },
-    {
-      "custom": "<div class=\"row\" id=\"row7\">\n  <a href=\"/pl/najnowsze-trendy/eleganckie\" class=\"tracking\">\n    <picture>\n      <!-- desktop -->\n      <source media=\"(min-width: 768px)\" srcset=\"https://media.missguided.co.uk/image/upload/c_scale,w_768,q_70/http://www.missguided.co.uk/blog/fashion/the-tailoring-edit 768w, https://media.missguided.co.uk/image/upload/c_scale,w_967,q_70/v1501490532/Trend_edmehy.jpg 967w, https://media.missguided.co.uk/image/upload/c_scale,w_1147,q_70/v1501490532/Trend_edmehy.jpg 1147w, https://media.missguided.co.uk/image/upload/c_scale,w_1294,q_70/v1501490532/Trend_edmehy.jpg 1294w, https://media.missguided.co.uk/image/upload/c_scale,w_1453,q_70/v1501490532/Trend_edmehy.jpg 1453w, https://media.missguided.co.uk/image/upload/c_scale,w_1591,q_70/v1501490532/Trend_edmehy.jpg 1591w, https://media.missguided.co.uk/image/upload/c_scale,w_1718,q_70/v1501490532/Trend_edmehy.jpg 1718w, https://media.missguided.co.uk/image/upload/c_scale,w_1856,q_70/v1501490532/Trend_edmehy.jpg 1856w, https://media.missguided.co.uk/image/upload/c_scale,w_1919,q_70/v1501490532/Trend_edmehy.jpg 1919w, https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70/v1501490532/Trend_edmehy.jpg 1920w\">\n      <!-- mobile -->\n      <source media=\"(max-width: 767px)\" srcset=\"https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_320/v1501490532/Trend_edmehy.jpg 320w, https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_375,dpr_1/v1501490532/Trend_edmehy.jpg 375w, https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_414,dpr_1/v1501490532/Trend_edmehy.jpg 414w\" src=\"https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_768,dpr_1/v1501490532/Trend_edmehy.jpg\" sizes=\"100vw\">\n      <img src=\"https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70/v1501490532/Trend_edmehy.jpg\" alt=\"backup\">\n    </picture>\n    <div class=\"title-below center\">\n      <h2 class=\"title2\">Galowy look&nbsp;</h2>\n      <h4 class=\"subtitle2\">Kto powiedział, że garnitury są tylko dla mężczyzn. Pokaż kto tu nosi spodnie.</h4>\n          <button class=\"button\">kup teraz</button>\n    </div>\n  </a>\n</div>"
     }
   ],
   "options": [
-    "full",
-    "left",
-    "two",
-    "left",
-    "full",
-    "custom"
+    "center",
+    "full"
   ],
-  "styles": "<style>\n\n</style>"
+  "styles": "<style>\n  body{\n    background: blue;\n  }\n</style>"
 }

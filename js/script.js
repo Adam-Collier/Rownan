@@ -137,6 +137,9 @@ function generate(){
   fs.writeFile(path.join(__dirname, 'output.html'), '', function(){console.log('empty');});
 
   var inputs = document.querySelectorAll('select');
+
+  fs.appendFileSync(path.join(__dirname, 'output.html'), myCodeMirror.getValue(), function () { console.log('CSS added'); });
+
   Array.prototype.forEach.call(inputs, function(el, i) {
   // console.log(el.options[el.selectedIndex].value, i);
 
@@ -315,8 +318,6 @@ function generate(){
 ${o.items[i].custom}
 `;
 
-    fs.appendFileSync(path.join(__dirname, 'output.html'), myCodeMirror.getValue(), function(){console.log('CSS added');});
-
     switch(el.options[el.selectedIndex].value){
       case 'full':
         fs.appendFileSync(path.join(__dirname, 'output.html'), f);
@@ -459,7 +460,7 @@ function saveToFile () {
             }else{
               console.log("json file created");
             }
-        });
+          });
         }
           console.log("temp created");
         });
@@ -517,7 +518,6 @@ document.querySelector('.resize-icon').addEventListener("click", function(){
   var m = document.querySelector('.resize');
   mobileSize(m);
 });
-
 
 var container = document.getElementById("container");
 var sort = Sortable.create(container, {
