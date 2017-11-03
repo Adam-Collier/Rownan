@@ -4,18 +4,26 @@ const fs = require('fs');
 function openFile () {
   dialog.showOpenDialog({ filters: [{ extensions: ['json'] }]}, function (fileNames) {
     fs.readFile(fileNames[0],'utf8', function(err,data){
-      console.log(err);
-
+      // console.log(err);
+      // remove existing inputs
       if(document.querySelector('.selection')){
         document.querySelectorAll('.selection').forEach(function(x){
           x.remove();
         });
       }
-
+      // parse the read data
       data = JSON.parse(data);
-
-      console.log(data.styles);
+      // add the styles to the top editor
+      // console.log(data.styles);
       document.querySelector('.CodeMirror').CodeMirror.setValue(data.styles);
+
+      document.querySelectorAll('.categories').forEach(function (x, i) {
+        console.log(x);
+        x.querySelectorAll('input[type=text]').forEach(function (input) {
+          console.log(data.categories[i]);
+          input.value = data.categories[i][input.className];
+        })
+      });
 
       var rowOptions = data.options;
       // console.log(rowOptions);
@@ -36,10 +44,10 @@ function openFile () {
         showInputs(index, x, addInputs);
       });
       document.querySelectorAll('.selection').forEach(function(x, i){
-        console.log(x);
+        // console.log(x);
 
         x.querySelectorAll('input[type=text]').forEach(function(input){
-          console.log(data.items[i]);
+          // console.log(data.items[i]);
           input.value = data.items[i][input.className];
         })
 
@@ -55,7 +63,6 @@ function openFile () {
         if(x.querySelector('.CodeMirror')){
           x.querySelector('.CodeMirror').CodeMirror.setValue(data.items[i].custom);
         }
-
       });
     });
   });

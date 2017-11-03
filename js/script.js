@@ -40,15 +40,11 @@ document.querySelector('.container').addEventListener('click', function(e){
 });
 
 var dropdown = `
-  <div class="selection">
+  <div class = "selection">
     <select onchange="drop(this)">
-      <option value="general">Please Select</option>
-      <option value="full">Full Width</option>
-      <option value="center">Center</option>
-      <option value="left">Left</option>
-      <option value="right">Right</option>
-      <option value="two">Two Column</option>
-      <option value="three">Three Column</option>
+      <option value="general" selected>Please Select</option>
+      <option value="center">Home Slider</option>
+      <option value="three">Three Slider</option>
       <option value="custom">Custom</option>
     </select>
     <a href='#' class='remove'>Remove</a>
@@ -59,12 +55,14 @@ var dropdown = `
 `;
 
 var o = {
+  "categories": [],
   "items": []
 };
 
 function generate(){
 
   o = {
+    "categories":[],
     "items": []
   };
 
@@ -85,7 +83,7 @@ function generate(){
     }
 
     var radio = el.querySelectorAll('input[type="radio"]');
-    console.log(radio);
+    // console.log(radio);
     radio.forEach(function(x) {
       console.log(x.name);
       if(x.name.indexOf('radio') !== -1 && x.checked === true){
@@ -103,8 +101,14 @@ function generate(){
       }
     });
 
+    var catObj = {};
+    document.querySelectorAll('.categories input[type="text"]').forEach(function (el) {
+      catObj["" + el.className] = "" + el.value;
+    });
+
     console.log(obj);
     o.items.push(obj); // push in the "o" object created
+    o.categories.push(catObj);
     fs.writeFileSync(path.join(__dirname, 'output.json'), JSON.stringify(o, null, 2), 'utf-8')
 
     fs.readFile(path.join(__dirname, 'output.json'),'utf8', function(err,data) {
@@ -117,12 +121,14 @@ function generate(){
           selected.push(x.value);
         }
       });
+      
+
       data = JSON.parse(data);
       //push to the object
       data.options = selected;
       //push style contents to the object;
       data.styles = document.querySelector('.CodeMirror').CodeMirror.getValue();
-      console.log(data.styles);
+      // console.log(data.styles);
 
       fs.writeFile(path.join(__dirname, 'output.json'),  JSON.stringify(data, null, 2), function(err, data) {
         if (err) {
@@ -134,213 +140,541 @@ function generate(){
   });
 
   // $('#console').text(JSON.stringify(o)); // strigify to show
-  fs.writeFile(path.join(__dirname, 'output.html'), '', function(){console.log('empty');});
+  var initOutput = `
+<div class="container">
+<div id="homeSlider">
+</div>
+<div class="slick-three">
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
+<script type="text/javascript">
+  (function ($) {
+    $(document).ready(function () {
+      $('#homeSlider').slick({
+        infinite: true,
+        adaptiveHeight: true,
+        autoplay: true,
+        autoplaySpeed: 5000,
+        pauseOnHover: false,
+        dots: true,
+        slide: '.fullwidth',
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        responsive: [{
+            breakpoint: 1000,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1
+            }
+          },
+          {
+            breakpoint: 768,
+            settings: "unslick"
+          }
+        ]
+      });
+    });
+  }(jQuery));
+  (function ($) {
+    $(window).on('resize orientationchange', function () {
+      $('#homeSlider').slick('resize');
+    });
+  }(jQuery));
+</script>
+<script type="text/javascript">
+  (function ($) {
+    $(document).ready(function () {
+      $('.slick-three').slick({
+        infinite: true,
+        adaptiveHeight: false,
+        slide: ':not(.blocker)',
+        dots: false,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        arrows: true,
+        centerMode: true,
+        centerPadding: '0',
+        responsive: [{
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          },
+          centerMode: true,
+          centerPadding: '50',
+          variableWidth: true,
+        }]
+      });
+    });
+  }(jQuery));
+  (function ($) {
+    $(window).on('resize orientationchange', function () {
+      $('.slick-three').slick('resize');
+    });
+  }(jQuery));
+</script>
+<script type="text/javascript">
+  (function ($) {
+    $(window).scroll(_.debounce(function () {
+
+      var wScroll = $(this).scrollTop();
+      console.log(wScroll);
+      if (wScroll > $('.slick-three').offset().top - 400) {
+        $('.slick-slide').css('animation', 'swipe 1200ms ease-in-out forwards');
+
+        setTimeout(function () {
+          $('.blocker').css('display', 'none');
+        }, 1600);
+      }
+    }, 100));
+  })(jQuery);
+</script>
+  `
+  var blocker = `
+    <div class="blocker"></div>
+  `
+  var slick = `
+    <script src="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
+  `
+  var initStyles = `
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick-theme.css" />
+<style>
+    .container {
+        overflow: hidden;
+    }
+
+    .slick-dotted.slick-slider {
+        margin-bottom: 0px;
+    }
+
+    .slick-three .slick-slide {
+        padding: 20px;
+    }
+
+    .slick-three {
+        padding-bottom: 50px;
+    }
+
+    #homeSlider {
+        position: relative;
+    }
+
+    #homeSlider .button {
+        background: transparent;
+        border: white 2px solid;
+        color: #FFFFFF;
+    }
+
+    #homeSlider .button:hover {
+        background: white;
+        border: white 2px solid;
+        color: #323232
+    }
+
+    .slick-next:before {
+        content: "";
+    }
+
+    .slick-next {
+        background: url(https://media.missguided.co.uk/image/upload/v1501081056/chevron-right_x8qrqm.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        height: 30px;
+        width: 30px;
+        right: -35px;
+        top: 37%;
+    }
+
+    .slick-prev:before {
+        content: "";
+    }
+
+    .slick-prev {
+        background: url(https://media.missguided.co.uk/image/upload/v1501081056/chevron-left_pbhwk0.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        height: 30px;
+        width: 30px;
+        top: 37%;
+    }
+
+    .slick-prev:hover,
+    .slick-prev:focus {
+        background: url(https://media.missguided.co.uk/image/upload/v1501081056/chevron-left_pbhwk0.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+
+    .slick-next:hover,
+    .slick-next:focus {
+        background: url(https://media.missguided.co.uk/image/upload/v1501081056/chevron-right_x8qrqm.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+
+    .slick-three {
+        height: auto;
+    }
+
+    .slick-three div {
+        height: auto;
+        padding: 0px;
+        padding-top: 10px;
+    }
+
+    .slick-three .button {
+        margin-top: 12px;
+    }
+
+    .slick-three h2 {
+        margin-bottom: 22px;
+    }
+
+    .gradient {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0.4));
+        pointer-events: none;
+    }
+
+    #promo {
+        margin-bottom: 50px;
+        padding: 6px 0px;
+    }
+
+    #promo h3 {
+        font-size: 20px;
+    }
+
+    .title-below .button {
+        background: transparent;
+        border: #323232 2px solid;
+        color: #323232;
+    }
+
+    .title-below .button:hover {
+        background: #323232;
+        color: #ffffff;
+    }
+
+    .slick-slide,
+    .slick-slide * {
+        outline: none !important;
+    }
+
+    .londunn {
+        width: 30vw;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    @media only screen and (min-width:768px) {
+        #banner {
+            margin-bottom: 65px;
+        }
+        #homeSlider,
+        .slick-three {
+            visibility: hidden;
+        }
+        #homeSlider.slick-initialized,
+        .slick-three.slick-initialized {
+            visibility: visible;
+        }
+        #homeSlider .row {
+            margin-bottom: 0;
+            height: auto;
+        }
+        #homeSlider img,
+        #homeSlider picture {
+            width: 100%;
+            height: auto;
+        }
+        #homeSlider .banner_content {
+            transform: translate(-50% -50%);
+            -webkit-transform: translate(-50%, -50%);
+        }
+        #homeSlider-nav {
+            position: absolute;
+            top: 6%;
+            left: 2%;
+            font-size: 30px;
+            font-weight: 700;
+            padding: 15px;
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+        }
+        #homeSlider-nav a:hover {
+            color: rgba(250, 250, 250, 0.8);
+            text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+        }
+        #homeSlider-nav a {
+            color: white;
+            text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.15);
+            letter-spacing: 0.9px;
+        }
+        ul.slick-dots {
+            bottom: 25px;
+        }
+        .slick-dots li button {
+            font-family: 'slick';
+        }
+        .slick-dots li button:before {
+            font-size: 14px;
+            line-height: 14px;
+            color: #404040;
+            opacity: 1;
+        }
+        .slick-dots li.slick-active button:before {
+            color: white;
+        }
+        .three-col .button {
+            margin-top: 10px;
+        }
+        .three-col h2 {
+            margin-bottom: 20px;
+        }
+        .subtitle3 {
+            padding: 0px 30px;
+        }
+        .slick-three {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            padding-bottom: 50px;
+        }
+        .slick-three div {
+            height: auto;
+            /*padding: 18px;*/
+        }
+        .slick-three ul.slick-dots {
+            display: none !important;
+        }
+    }
+
+    @media only screen and (max-width: 1100px) {
+        #row3 br,
+        #row2 br {
+            display: none;
+        }
+    }
+
+    @media only screen and (max-width: 767px) {
+        #homeSlider .banner_content {
+            margin: 0;
+            position: relative;
+            width: 100%!important;
+            background: none;
+        }
+        #homeSlider .button {
+            margin-top: 10px;
+        }
+        .banner_content .title1 {
+            color: #474747;
+        }
+        #homeSlider .banner_content .button {
+            background: transparent;
+            border: #323232 2px solid;
+            color: #323232;
+        }
+        #homeSlider .banner_content .button:hover {
+            background: #323232;
+            border: #323232 2px solid;
+            color: #FFFFFF;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+        }
+        #homeSlider {
+            display: flex;
+            flex-direction: column;
+        }
+        #homeSlider div:nth-of-type(1) {
+            order: 4;
+        }
+        #homeSlider div:nth-of-type(2) {
+            order: 3;
+            margin-bottom: 0px;
+        }
+        #homeSlider div:nth-of-type(3) {
+            order: 5;
+        }
+        #homeSlider div:nth-of-type(4) {
+            order: 6;
+        }
+        #homeSlider div:nth-of-type(5) {
+            order: 7;
+            margin-bottom: 0px;
+        }
+        #homeSlider-nav {
+            position: relative;
+            text-align: center;
+            font-size: 30px;
+            font-weight: 700;
+            padding: 30px 0px;
+        }
+        #homeSlider-nav a {
+            padding-bottom: 6px;
+            display: block;
+        }
+        #homeSlider-nav a:hover {
+            color: rgba(71, 71, 71, 0.6);
+            text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+        }
+        #banner {
+            margin-top: 30px;
+            margin-bottom: 40px;
+        }
+        .gradient {
+            background: linear-gradient(rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0.3));
+            pointer-events: none;
+            display: none;
+        }
+        .row:not(:last-child) {
+            margin-bottom: 6vw;
+        }
+        .slick-three .slick-slide {
+            padding: 10px;
+        }
+        .blocker {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+        }
+        .slick-next {
+            right: 0px;
+            top: 29.5%;
+        }
+        .slick-prev {
+            left: 13px;
+            top: 29.5%;
+            z-index: 2;
+        }
+        #promo {
+            margin-bottom: 35px;
+        }
+        #promo h3 {
+            font-size: 16px;
+        }
+        .accordion--content {
+            padding-bottom: 20px;
+        }
+        @keyframes swipe {
+            0% {
+                transform: translateX(0px);
+            }
+            40% {
+                transform: translateX(-80px);
+            }
+            70% {
+                transform: translateX(-80px);
+            }
+            100% {
+                transform: translateX(0px);
+            }
+        }
+    }
+</style>
+  `
+
+var nav = `
+  <div id="homeSlider-nav">
+    <a href="${o.categories[0].url1}">${o.categories[0].cat1}</a>
+    <a href="${o.categories[0].url2}">${o.categories[0].cat2}</a>
+    <a href="${o.categories[0].url3}">${o.categories[0].cat3}</a>
+    <a href="${o.categories[0].url4}">${o.categories[0].cat4}</a>
+  </div>
+`
+  fs.writeFileSync(path.join(__dirname, 'output.html'), initStyles)
+  fs.appendFileSync(path.join(__dirname, 'output.html'), myCodeMirror.getValue(), function () {
+    console.log('CSS added');
+  });
+  fs.appendFileSync(path.join(__dirname, 'output.html'), initOutput);
+
+  var addNav = fs.readFileSync(path.join(__dirname, 'output.html'), 'utf-8');
+  var $ = cheerio.load(addNav);
+  $("#homeSlider").prepend(nav);
+  fs.writeFileSync(path.join(__dirname, 'output.html'), $.html())
 
   var inputs = document.querySelectorAll('select');
-
-  fs.appendFileSync(path.join(__dirname, 'output.html'), myCodeMirror.getValue(), function () { console.log('CSS added'); });
 
   Array.prototype.forEach.call(inputs, function(el, i) {
   // console.log(el.options[el.selectedIndex].value, i);
 
-    var f = `
-<div class="row fullwidth" id="row${i+1}">
-  <a href="${o.items[i].url}" class="tracking">
-    <picture>
-      <!-- desktop -->
-      <source media="(min-width: 768px)" srcset="https://media.missguided.co.uk/image/upload/c_scale,w_768,q_70/${o.items[i].image} 768w, https://media.missguided.co.uk/image/upload/c_scale,w_967,q_70/${o.items[i].image} 967w, https://media.missguided.co.uk/image/upload/c_scale,w_1147,q_70/${o.items[i].image} 1147w, https://media.missguided.co.uk/image/upload/c_scale,w_1294,q_70/${o.items[i].image} 1294w, https://media.missguided.co.uk/image/upload/c_scale,w_1453,q_70/${o.items[i].image} 1453w, https://media.missguided.co.uk/image/upload/c_scale,w_1591,q_70/${o.items[i].image} 1591w, https://media.missguided.co.uk/image/upload/c_scale,w_1718,q_70/${o.items[i].image} 1718w, https://media.missguided.co.uk/image/upload/c_scale,w_1856,q_70/${o.items[i].image} 1856w, https://media.missguided.co.uk/image/upload/c_scale,w_1919,q_70/${o.items[i].image} 1919w, https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70/${o.items[i].image} 1920w">
-      <!-- mobile -->
-      <source media="(max-width: 767px)"  srcset="https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_320/${o.items[i].mobile} 320w, https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_375,dpr_1/${o.items[i].mobile} 375w, https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_414,dpr_1/${o.items[i].mobile} 414w"
-      src="https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_768,dpr_1/${o.items[i].mobile}" sizes="100vw">
-      <img src="https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70/${o.items[i].image}" alt="backup">
-    </picture>
-    <div class="${o.items[i].vertical} ${o.items[i].radio}">
-      <h2 class="title2${o.items[i].color}">${o.items[i].title}</h2>
-      <h4 class="subtitle1${o.items[i].color}">${o.items[i].subtitle}</h4>
-      <button class="button">${o.items[i].cta}</button>
-    </div>
-  </a>
-</div>
-    `;
-
     var c= `
-<div class="row" id="row${i+1}">
-  <a href="${o.items[i].url}" class="tracking">
-    <picture>
-      <!-- desktop -->
-      <source media="(min-width: 768px)" srcset="https://media.missguided.co.uk/image/upload/c_scale,w_768,q_70/${o.items[i].image} 768w, https://media.missguided.co.uk/image/upload/c_scale,w_967,q_70/${o.items[i].image} 967w, https://media.missguided.co.uk/image/upload/c_scale,w_1147,q_70/${o.items[i].image} 1147w, https://media.missguided.co.uk/image/upload/c_scale,w_1294,q_70/${o.items[i].image} 1294w, https://media.missguided.co.uk/image/upload/c_scale,w_1453,q_70/${o.items[i].image} 1453w, https://media.missguided.co.uk/image/upload/c_scale,w_1591,q_70/${o.items[i].image} 1591w, https://media.missguided.co.uk/image/upload/c_scale,w_1718,q_70/${o.items[i].image} 1718w, https://media.missguided.co.uk/image/upload/c_scale,w_1856,q_70/${o.items[i].image} 1856w, https://media.missguided.co.uk/image/upload/c_scale,w_1919,q_70/${o.items[i].image} 1919w, https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70/${o.items[i].image} 1920w">
-      <!-- mobile -->
-      <source media="(max-width: 767px)"  srcset="https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_320/${o.items[i].mobile} 320w, https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_375,dpr_1/${o.items[i].mobile} 375w, https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_414,dpr_1/${o.items[i].mobile} 414w"
-      src="https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_768,dpr_1/${o.items[i].mobile}" sizes="100vw">
-      <img src="https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70/${o.items[i].image}" alt="backup">
-    </picture>
-    <div class="${o.items[i].vertical} ${o.items[i].radio}">
-      <h2 class="title2${o.items[i].color}">${o.items[i].title}</h2>
-      <h4 class="subtitle2${o.items[i].color}">${o.items[i].subtitle}</h4>
-      <div class="more-buttons">
-        <button class="button">${o.items[i].cta}</button>
-        <a href="${o.items[i].url2}">
-          <button class="button">${o.items[i].cta2}</button>
-        </a>
-      </div>
-    </div>
-  </a>
-</div>
-    `;
-
-    var l= `
-<div class="row fullwidth" id="row${i+1}">
-  <a href="${o.items[i].url}" class="tracking">
-    <div class="feature-row">
-      <div class="imgContainer left">
-        <img src="https://media.missguided.co.uk/image/upload/q_70/${o.items[i].image}">
-      </div>
-      <div class="title-right">
-        <h2 class="title2">${o.items[i].title}</h2>
-        <h4 class="subtitle2">${o.items[i].subtitle}</h4>
-        <div class="more-buttons">
-          <button class="button">${o.items[i].cta}</button>
-          <a href="${o.items[i].url2}">
-            <button class="button">${o.items[i].cta2}</button>
-          </a>
-        </div>
-      </div>
-    </div>
-  </a>
-</div>
-    `;
-
-    var r= `
-<div class="row fullwidth" id="row${i+1}">
-  <a href="${o.items[i].url}" class="tracking">
-    <div class="feature-row">
-      <div class="imgContainer right">
-        <img src="https://media.missguided.co.uk/image/upload/q_70/${o.items[i].image}">
-      </div>
-      <div class="title-left">
-        <h2 class="title2">${o.items[i].title}</h2>
-        <h4 class="subtitle2">${o.items[i].subtitle}</h4>
-        <div class="more-buttons">
-          <button class="button">${o.items[i].cta}</button>
-          <a href="${o.items[i].url2}">
-            <button class="button">${o.items[i].cta2}</button>
-          </a>
-        </div>
-      </div>
-    </div>
-  </a>
-</div>
-    `;
-    var tw= `
-<div class="row" id="row${i+1}">
-  <div class="two-col">
-    <div>
+  <div class= "row fullwidth row${i + 1}">
       <a href="${o.items[i].url}" class="tracking">
-        <div class="imgContainer"><img src="https://media.missguided.co.uk/image/upload/q_70/${o.items[i].image}">  </div>
-        <div class="title-below">
-          <h2 class="title2">${o.items[i].title}</h2>
-          <h4 class="subtitle2">${o.items[i].subtitle}</h4>
+        <picture>
+          <!-- desktop -->
+          <source media="(min-width: 768px)" srcset="https://media.missguided.co.uk/image/upload/c_scale,w_768,q_70/${o.items[i].image} 768w, https://media.missguided.co.uk/image/upload/c_scale,w_967,q_70/${o.items[i].image} 967w, https://media.missguided.co.uk/image/upload/c_scale,w_1147,q_70/${o.items[i].image} 1147w, https://media.missguided.co.uk/image/upload/c_scale,w_1294,q_70/${o.items[i].image} 1294w, https://media.missguided.co.uk/image/upload/c_scale,w_1453,q_70/${o.items[i].image} 1453w, https://media.missguided.co.uk/image/upload/c_scale,w_1591,q_70/${o.items[i].image} 1591w, https://media.missguided.co.uk/image/upload/c_scale,w_1718,q_70/${o.items[i].image} 1718w, https://media.missguided.co.uk/image/upload/c_scale,w_1856,q_70/${o.items[i].image} 1856w, https://media.missguided.co.uk/image/upload/c_scale,w_1919,q_70/${o.items[i].image} 1919w, https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70/${o.items[i].image} 1920w">
+          <!-- mobile -->
+          <source media="(max-width: 767px)" srcset="https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_320/${o.items[i].mobile} 320w, https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_400,q_70/${o.items[i].mobile} 375w, https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_600,q_70/${o.items[i].mobile} 414w"
+            src="https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_768,dpr_1/${o.items[i].mobile}"
+            sizes="100vw">
+          <img src="https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70/${o.items[i].image}" alt="backup">
+        </picture>
+        <div class="banner_content center">
+          ${o.items[i].svg}
+          <h2 class="title2 white">${o.items[i].title}</h2>
           <div class="more-buttons">
             <button class="button">${o.items[i].cta}</button>
-            <a href = "${o.items[i].url2}">
+            <a href="${o.items[i].url2}">
               <button class="button">${o.items[i].cta2}</button>
             </a>
           </div>
         </div>
       </a>
     </div>
-    <div>
-      <a href="${o.items[i].url3}" class="tracking">
-        <div class="imgContainer"><img src="https://media.missguided.co.uk/image/upload/q_70/${o.items[i].image2}"></div>
-        <div class="title-below">
-          <h2 class="title2">${o.items[i].title2}</h2>
-          <h4 class="subtitle2">${o.items[i].subtitle2}</h4>
-          <div class="more-buttons">
-            <button class="button">${o.items[i].cta3}</button>
-            <a href = "${o.items[i].url4}">
-              <button class="button">${o.items[i].cta4}</button>
-            </a>
-          </div>
-        </div>
-      </a>
-    </div>
-  </div>
-</div>
 `;
 
     var th =`
-<div class="row" id="row${i+1}">
-  <div class="three-col">
-    <div>
-      <a href="${o.items[i].url}" class="tracking">
-        <div class="imgContainer">
-          <img src="https://media.missguided.co.uk/image/upload/w_300,q_70/${o.items[i].image}">
-        </div>
-        <div class="title-below">
-          <h2 class="title4">${o.items[i].title}</h2>
-          <h4 class="subtitle3">${o.items[i].subtitle}</h4>
-          <button class="button">${o.items[i].cta}</button>
-        </div>
-      </a>
-    </div>
-    <div>
-      <a href="${o.items[i].url2}" class="tracking">
-        <div class="imgContainer">
-          <video playsinline="" autoplay loop muted>
-            <source type="video/webm" src="http://media.missguided.co.uk/video/upload/${o.items[i].vid}.webm">
-            <source type="video/mp4" src="http://media.missguided.co.uk/video/upload/${o.items[i].vid}.mp4" onerror="fallback(parentNode)">
-            <img src="http://media.missguided.co.uk/video/upload/${o.items[i].vid}.jpg">
-          </video>
-        </div>
-        <div class="title-below">
-          <h2 class="title4">${o.items[i].title2}</h2>
-          <h4 class="subtitle3">${o.items[i].subtitle2}</h4>
-          <button class="button">${o.items[i].cta2}</button>
-        </div>
-      </a>
-    </div>
-    <div>
-      <a href="${o.items[i].url3}" class="tracking">
-        <div class="imgContainer">
-          <img src="https://media.missguided.co.uk/image/upload/w_300,q_70/${o.items[i].image2}">
-        </div>
-        <div class="title-below">
-          <h2 class="title4">${o.items[i].title3}</h2>
-          <h4 class="subtitle3">${o.items[i].title3}</h4>
-          <button class="button">${o.items[i].cta3}</button>
-        </div>
-      </a>
-    </div>
+  <div>
+    <a href="${o.items[i].url}" class="tracking">
+      <div class="imgContainer">
+        <img src="https://media.missguided.co.uk/image/upload/w_600,q_70/${o.items[i].image}" alt="backup_img">
+      </div>
+      <div class="title-below">
+        <h2 class="title3">${o.items[i].title}</h2>
+        <h4 class="subtitle3">${o.items[i].subtitle}</h4>
+        <button class="button">${o.items[i].cta}</button>
+      </div>
+    </a>
   </div>
-</div>
 `;
     var cu=`
 ${o.items[i].custom}
 `;
 
-    switch(el.options[el.selectedIndex].value){
-      case 'full':
-        fs.appendFileSync(path.join(__dirname, 'output.html'), f);
-        break;
-      case 'center':
-        fs.appendFileSync(path.join(__dirname, 'output.html'), c);
-        break;
-      case 'left':
-        fs.appendFileSync(path.join(__dirname, 'output.html'), l);
-        break;
-      case 'right':
-        fs.appendFileSync(path.join(__dirname, 'output.html'), r);
-        break;
-      case 'two':
-        fs.appendFileSync(path.join(__dirname, 'output.html'), tw);
-        break;
-      case 'three':
-        fs.appendFileSync(path.join(__dirname, 'output.html'), th);
-        break;
-      case 'custom':
-        fs.appendFileSync(path.join(__dirname, 'output.html'), cu);
-        break;
-    }
+      var output = fs.readFileSync(path.join(__dirname, 'output.html'), 'utf-8');
+      // console.log(output);
+      var $ = cheerio.load(output);
+
+      switch (el.options[el.selectedIndex].value) {
+        case 'center':
+          if(o.items[i].custom !== ""){
+            $('#homeSlider').append(cu);
+          }else{
+            $('#homeSlider').append(c);
+          }
+          break;
+        case 'three':
+          $('.slick-three').append(th);
+          break;
+        case 'custom':
+          fs.appendFileSync(path.join(__dirname, 'output.html'), cu);
+          break;
+      }
+      fs.writeFileSync(path.join(__dirname, 'output.html'), $.html())
   });
   fs.readFile(path.join(__dirname, 'output.html'),'utf8', function(err,data) {
     if (err) {
@@ -348,10 +682,17 @@ ${o.items[i].custom}
     }
     do{
       temp = data;
-      data = data.replace(/<(\w+)\b(?:\s+[\w\-.:]+(?:\s*=\s*(?:"[^"]*"|"[^"]*"|[\w\-.:]+))?)*\s*\/?>\s*<\/\1\s*>/gi, '');//removing more that one white space
+      data = data.replace(/<(\w+)\b(?:\s+[\w\-.:]+(?:\s*=\s*(?:"[^"]*"|"[^"]*"|[\w\-.:]+))?)*\s*\/?>\s*<\/\1\s*>/gi, '');//removing more than one white space
     }while(data !== temp);
 
     data = data.replace(/^\s*\n/gm, '');
+
+    var $ = cheerio.load(data);
+    $(".slick-three").prepend(blocker);
+    $(slick).insertAfter('.container');
+    $("#homeSlider").prepend()
+
+    data = $.html();
 
     fs.writeFile(path.join(__dirname, 'output.html'), data, function(err, data) {
       if (err) {
@@ -363,7 +704,7 @@ ${o.items[i].custom}
     // The code snippet you want to highlight, as a string
     var code = data;
 
-    console.log(code);
+    // console.log(code);
 
     // Returns a highlighted HTML string
     var html = Prism.highlight(code, Prism.languages.markup);
@@ -494,10 +835,10 @@ function saveToFile () {
 
 function preview(){
   var preview = document.querySelector('.preview');
-  if(preview.style.display === 'none'){
-    preview.style.display = 'block';
+  if(preview.style.visibility === 'hidden'){
+    preview.style.visibility = 'visible';
   }else{
-    preview.style.display = 'none';
+    preview.style.visibility = 'hidden';
   }
   var m = document.querySelectorAll('.switch');
     m.forEach(function(x){
@@ -528,3 +869,6 @@ var sort = Sortable.create(container, {
      var item = evt.item; // the current dragged HTMLElement
   }
 });
+
+
+

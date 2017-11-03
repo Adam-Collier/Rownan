@@ -4,35 +4,535 @@
     <title>Homepage</title>
     <link rel="stylesheet" href="./css/base.css">
     <link rel="stylesheet" href="./css/homepage.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
   </head>
   <body style="padding-bottom: 80px">
-    <div class="preview-container"><style>
-  body{
-    background: blue;
+    <div class="preview-container"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick-theme.css">
+<style>
+    .container {
+        overflow: hidden;
+    }
+    .slick-dotted.slick-slider {
+        margin-bottom: 0px;
+    }
+    .slick-three .slick-slide {
+        padding: 20px;
+    }
+    .slick-three {
+        padding-bottom: 50px;
+    }
+    #homeSlider {
+        position: relative;
+    }
+    #homeSlider .button {
+        background: transparent;
+        border: white 2px solid;
+        color: #FFFFFF;
+    }
+    #homeSlider .button:hover {
+        background: white;
+        border: white 2px solid;
+        color: #323232
+    }
+    .slick-next:before {
+        content: "";
+    }
+    .slick-next {
+        background: url(https://media.missguided.co.uk/image/upload/v1501081056/chevron-right_x8qrqm.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        height: 30px;
+        width: 30px;
+        right: -35px;
+        top: 37%;
+    }
+    .slick-prev:before {
+        content: "";
+    }
+    .slick-prev {
+        background: url(https://media.missguided.co.uk/image/upload/v1501081056/chevron-left_pbhwk0.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        height: 30px;
+        width: 30px;
+        top: 37%;
+    }
+    .slick-prev:hover,
+    .slick-prev:focus {
+        background: url(https://media.missguided.co.uk/image/upload/v1501081056/chevron-left_pbhwk0.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+    .slick-next:hover,
+    .slick-next:focus {
+        background: url(https://media.missguided.co.uk/image/upload/v1501081056/chevron-right_x8qrqm.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+    .slick-three {
+        height: auto;
+    }
+    .slick-three div {
+        height: auto;
+        padding: 0px;
+        padding-top: 10px;
+    }
+    .slick-three .button {
+        margin-top: 12px;
+    }
+    .slick-three h2 {
+        margin-bottom: 22px;
+    }
+    .gradient {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0.4));
+        pointer-events: none;
+    }
+    #promo {
+        margin-bottom: 50px;
+        padding: 6px 0px;
+    }
+    #promo h3 {
+        font-size: 20px;
+    }
+    .title-below .button {
+        background: transparent;
+        border: #323232 2px solid;
+        color: #323232;
+    }
+    .title-below .button:hover {
+        background: #323232;
+        color: #ffffff;
+    }
+    .slick-slide,
+    .slick-slide * {
+        outline: none !important;
+    }
+    .londunn {
+        width: 30vw;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    @media only screen and (min-width:768px) {
+        #banner {
+            margin-bottom: 65px;
+        }
+        #homeSlider,
+        .slick-three {
+            visibility: hidden;
+        }
+        #homeSlider.slick-initialized,
+        .slick-three.slick-initialized {
+            visibility: visible;
+        }
+        #homeSlider .row {
+            margin-bottom: 0;
+            height: auto;
+        }
+        #homeSlider img,
+        #homeSlider picture {
+            width: 100%;
+            height: auto;
+        }
+        #homeSlider .banner_content {
+            transform: translate(-50% -50%);
+            -webkit-transform: translate(-50%, -50%);
+        }
+        #homeSlider-nav {
+            position: absolute;
+            top: 6%;
+            left: 2%;
+            font-size: 30px;
+            font-weight: 700;
+            padding: 15px;
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+        }
+        #homeSlider-nav a:hover {
+            color: rgba(250, 250, 250, 0.8);
+            text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+        }
+        #homeSlider-nav a {
+            color: white;
+            text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.15);
+            letter-spacing: 0.9px;
+        }
+        ul.slick-dots {
+            bottom: 25px;
+        }
+        .slick-dots li button {
+            font-family: 'slick';
+        }
+        .slick-dots li button:before {
+            font-size: 14px;
+            line-height: 14px;
+            color: #404040;
+            opacity: 1;
+        }
+        .slick-dots li.slick-active button:before {
+            color: white;
+        }
+        .three-col .button {
+            margin-top: 10px;
+        }
+        .three-col h2 {
+            margin-bottom: 20px;
+        }
+        .subtitle3 {
+            padding: 0px 30px;
+        }
+        .slick-three {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            padding-bottom: 50px;
+        }
+        .slick-three div {
+            height: auto;
+            /*padding: 18px;*/
+        }
+        .slick-three ul.slick-dots {
+            display: none !important;
+        }
+    }
+    @media only screen and (max-width: 1100px) {
+        #row3 br,
+        #row2 br {
+            display: none;
+        }
+    }
+    @media only screen and (max-width: 767px) {
+        #homeSlider .banner_content {
+            margin: 0;
+            position: relative;
+            width: 100%!important;
+            background: none;
+        }
+        #homeSlider .button {
+            margin-top: 10px;
+        }
+        .banner_content .title1 {
+            color: #474747;
+        }
+        #homeSlider .banner_content .button {
+            background: transparent;
+            border: #323232 2px solid;
+            color: #323232;
+        }
+        #homeSlider .banner_content .button:hover {
+            background: #323232;
+            border: #323232 2px solid;
+            color: #FFFFFF;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+        }
+        #homeSlider {
+            display: flex;
+            flex-direction: column;
+        }
+        #homeSlider div:nth-of-type(1) {
+            order: 4;
+        }
+        #homeSlider div:nth-of-type(2) {
+            order: 3;
+            margin-bottom: 0px;
+        }
+        #homeSlider div:nth-of-type(3) {
+            order: 5;
+        }
+        #homeSlider div:nth-of-type(4) {
+            order: 6;
+        }
+        #homeSlider div:nth-of-type(5) {
+            order: 7;
+            margin-bottom: 0px;
+        }
+        #homeSlider-nav {
+            position: relative;
+            text-align: center;
+            font-size: 30px;
+            font-weight: 700;
+            padding: 30px 0px;
+        }
+        #homeSlider-nav a {
+            padding-bottom: 6px;
+            display: block;
+        }
+        #homeSlider-nav a:hover {
+            color: rgba(71, 71, 71, 0.6);
+            text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+        }
+        #banner {
+            margin-top: 30px;
+            margin-bottom: 40px;
+        }
+        .gradient {
+            background: linear-gradient(rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0.3));
+            pointer-events: none;
+            display: none;
+        }
+        .row:not(:last-child) {
+            margin-bottom: 6vw;
+        }
+        .slick-three .slick-slide {
+            padding: 10px;
+        }
+        .blocker {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+        }
+        .slick-next {
+            right: 0px;
+            top: 29.5%;
+        }
+        .slick-prev {
+            left: 13px;
+            top: 29.5%;
+            z-index: 2;
+        }
+        #promo {
+            margin-bottom: 35px;
+        }
+        #promo h3 {
+            font-size: 16px;
+        }
+        .accordion--content {
+            padding-bottom: 20px;
+        }
+        @keyframes swipe {
+            0% {
+                transform: translateX(0px);
+            }
+            40% {
+                transform: translateX(-80px);
+            }
+            70% {
+                transform: translateX(-80px);
+            }
+            100% {
+                transform: translateX(0px);
+            }
+        }
+    }
+</style>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,900" rel="stylesheet">
+<style>
+	@media(min-width: 768px) {
+   .row1 .title2, .row3 .title2{
+     display: none;
+   }
+   .row1 .banner_content{
+     top: 74%;
+   }
+   .row2 svg{
+     width: 80%
+   }
+   .row3 .banner_content{
+     top: 64%;
+   }
+  }
+  @media(max-width: 768px){
+    .row svg{
+      display: none;
+    }
   }
 </style>
-<div class="row" id="row1">
-  <a href="" class="tracking">
-    <picture>
-      <!-- desktop -->
-      <source media="(min-width: 768px)" srcset="https://media.missguided.co.uk/image/upload/c_scale,w_768,q_70/ 768w, https://media.missguided.co.uk/image/upload/c_scale,w_967,q_70/ 967w, https://media.missguided.co.uk/image/upload/c_scale,w_1147,q_70/ 1147w, https://media.missguided.co.uk/image/upload/c_scale,w_1294,q_70/ 1294w, https://media.missguided.co.uk/image/upload/c_scale,w_1453,q_70/ 1453w, https://media.missguided.co.uk/image/upload/c_scale,w_1591,q_70/ 1591w, https://media.missguided.co.uk/image/upload/c_scale,w_1718,q_70/ 1718w, https://media.missguided.co.uk/image/upload/c_scale,w_1856,q_70/ 1856w, https://media.missguided.co.uk/image/upload/c_scale,w_1919,q_70/ 1919w, https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70/ 1920w">
-      <!-- mobile -->
-      <source media="(max-width: 767px)" srcset="https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_320/ 320w, https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_375,dpr_1/ 375w, https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_414,dpr_1/ 414w" src="https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_768,dpr_1/" sizes="100vw">
-      <img src="https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70/" alt="backup">
-    </picture>
-  </a>
-</div>
-<div class="row fullwidth" id="row2">
-  <a href="" class="tracking">
-    <picture>
-      <!-- desktop -->
-      <source media="(min-width: 768px)" srcset="https://media.missguided.co.uk/image/upload/c_scale,w_768,q_70/ 768w, https://media.missguided.co.uk/image/upload/c_scale,w_967,q_70/ 967w, https://media.missguided.co.uk/image/upload/c_scale,w_1147,q_70/ 1147w, https://media.missguided.co.uk/image/upload/c_scale,w_1294,q_70/ 1294w, https://media.missguided.co.uk/image/upload/c_scale,w_1453,q_70/ 1453w, https://media.missguided.co.uk/image/upload/c_scale,w_1591,q_70/ 1591w, https://media.missguided.co.uk/image/upload/c_scale,w_1718,q_70/ 1718w, https://media.missguided.co.uk/image/upload/c_scale,w_1856,q_70/ 1856w, https://media.missguided.co.uk/image/upload/c_scale,w_1919,q_70/ 1919w, https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70/ 1920w">
-      <!-- mobile -->
-      <source media="(max-width: 767px)" srcset="https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_320/ 320w, https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_375,dpr_1/ 375w, https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_414,dpr_1/ 414w" src="https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_768,dpr_1/" sizes="100vw">
-      <img src="https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70/" alt="backup">
-    </picture>
-  </a>
-</div>
+<div class="container">
+<div id="homeSlider">
+  <div id="homeSlider-nav">
+    <a href="/clothing/skirts">skirts</a>
+    <a href="/dresses">dresses</a>
+    <a href="/clothing/tops">tops</a>
+    <a href="/clothing/playsuits">playsuits</a>
+  </div>
+  <div class="row fullwidth row1">
+      <a href="/occasion/occasion-dresses" class="tracking">
+        <picture>
+          <!-- desktop -->
+          <source media="(min-width: 768px)" srcset="https://media.missguided.co.uk/image/upload/c_scale,w_768,q_70/v1508759546/Dresses_UK_mlsrzn.jpg 768w, https://media.missguided.co.uk/image/upload/c_scale,w_967,q_70/v1508759546/Dresses_UK_mlsrzn.jpg 967w, https://media.missguided.co.uk/image/upload/c_scale,w_1147,q_70/v1508759546/Dresses_UK_mlsrzn.jpg 1147w, https://media.missguided.co.uk/image/upload/c_scale,w_1294,q_70/v1508759546/Dresses_UK_mlsrzn.jpg 1294w, https://media.missguided.co.uk/image/upload/c_scale,w_1453,q_70/v1508759546/Dresses_UK_mlsrzn.jpg 1453w, https://media.missguided.co.uk/image/upload/c_scale,w_1591,q_70/v1508759546/Dresses_UK_mlsrzn.jpg 1591w, https://media.missguided.co.uk/image/upload/c_scale,w_1718,q_70/v1508759546/Dresses_UK_mlsrzn.jpg 1718w, https://media.missguided.co.uk/image/upload/c_scale,w_1856,q_70/v1508759546/Dresses_UK_mlsrzn.jpg 1856w, https://media.missguided.co.uk/image/upload/c_scale,w_1919,q_70/v1508759546/Dresses_UK_mlsrzn.jpg 1919w, https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70/v1508759546/Dresses_UK_mlsrzn.jpg 1920w">
+          <!-- mobile -->
+          <source media="(max-width: 767px)" srcset="https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_320/v1508759657/Dresses_Mobile_UK_qwhv3y.jpg 320w, https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_400,q_70/v1508759657/Dresses_Mobile_UK_qwhv3y.jpg 375w, https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_600,q_70/v1508759657/Dresses_Mobile_UK_qwhv3y.jpg 414w" src="https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_768,dpr_1/v1508759657/Dresses_Mobile_UK_qwhv3y.jpg" sizes="100vw">
+          <img src="https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70/v1508759546/Dresses_UK_mlsrzn.jpg" alt="backup">
+        </picture>
+        <div class="banner_content center">
+          <h2 class="title2 white">no stress dresses</h2>
+          <div class="more-buttons">
+            <button class="button">shop occasionwear</button>
+          </div>
+        </div>
+      </a>
     </div>
+  <div class="row fullwidth row2">
+      <a href="/clothing/swimwear" class="tracking">
+        <picture>
+          <!-- desktop -->
+          <source media="(min-width: 768px)" srcset="https://media.missguided.co.uk/image/upload/c_scale,w_768,q_70/v1498212673/Swimwear_czmym5.jpg 768w, https://media.missguided.co.uk/image/upload/c_scale,w_967,q_70/v1498212673/Swimwear_czmym5.jpg 967w, https://media.missguided.co.uk/image/upload/c_scale,w_1147,q_70/v1498212673/Swimwear_czmym5.jpg 1147w, https://media.missguided.co.uk/image/upload/c_scale,w_1294,q_70/v1498212673/Swimwear_czmym5.jpg 1294w, https://media.missguided.co.uk/image/upload/c_scale,w_1453,q_70/v1498212673/Swimwear_czmym5.jpg 1453w, https://media.missguided.co.uk/image/upload/c_scale,w_1591,q_70/v1498212673/Swimwear_czmym5.jpg 1591w, https://media.missguided.co.uk/image/upload/c_scale,w_1718,q_70/v1498212673/Swimwear_czmym5.jpg 1718w, https://media.missguided.co.uk/image/upload/c_scale,w_1856,q_70/v1498212673/Swimwear_czmym5.jpg 1856w, https://media.missguided.co.uk/image/upload/c_scale,w_1919,q_70/v1498212673/Swimwear_czmym5.jpg 1919w, https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70/v1498212673/Swimwear_czmym5.jpg 1920w">
+          <!-- mobile -->
+          <source media="(max-width: 767px)" srcset="https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_320/v1498212675/Swimwear_Mobile_ojkljv.jpg 320w, https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_400,q_70/v1498212675/Swimwear_Mobile_ojkljv.jpg 375w, https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_600,q_70/v1498212675/Swimwear_Mobile_ojkljv.jpg 414w" src="https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_768,dpr_1/v1498212675/Swimwear_Mobile_ojkljv.jpg" sizes="100vw">
+          <img src="https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70/v1498212673/Swimwear_czmym5.jpg" alt="backup">
+        </picture>
+        <div class="banner_content center">
+          <h2 class="title2 white">get wet</h2>
+          <div class="more-buttons">
+            <button class="button">shop swimwear</button>
+          </div>
+        </div>
+      </a>
+    </div>
+  <div class="row fullwidth row3">
+      <a href="/catalogsearch/result/?q=jersey" class="tracking">
+        <picture>
+          <!-- desktop -->
+          <source media="(min-width: 768px)" srcset="https://media.missguided.co.uk/image/upload/c_scale,w_768,q_70/v1508755701/JerseyBasics_AUS_pd3qkm.jpg 768w, https://media.missguided.co.uk/image/upload/c_scale,w_967,q_70/v1508755701/JerseyBasics_AUS_pd3qkm.jpg 967w, https://media.missguided.co.uk/image/upload/c_scale,w_1147,q_70/v1508755701/JerseyBasics_AUS_pd3qkm.jpg 1147w, https://media.missguided.co.uk/image/upload/c_scale,w_1294,q_70/v1508755701/JerseyBasics_AUS_pd3qkm.jpg 1294w, https://media.missguided.co.uk/image/upload/c_scale,w_1453,q_70/v1508755701/JerseyBasics_AUS_pd3qkm.jpg 1453w, https://media.missguided.co.uk/image/upload/c_scale,w_1591,q_70/v1508755701/JerseyBasics_AUS_pd3qkm.jpg 1591w, https://media.missguided.co.uk/image/upload/c_scale,w_1718,q_70/v1508755701/JerseyBasics_AUS_pd3qkm.jpg 1718w, https://media.missguided.co.uk/image/upload/c_scale,w_1856,q_70/v1508755701/JerseyBasics_AUS_pd3qkm.jpg 1856w, https://media.missguided.co.uk/image/upload/c_scale,w_1919,q_70/v1508755701/JerseyBasics_AUS_pd3qkm.jpg 1919w, https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70/v1508755701/JerseyBasics_AUS_pd3qkm.jpg 1920w">
+          <!-- mobile -->
+          <source media="(max-width: 767px)" srcset="https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_320/v1508755704/Jersey_Mobile_AUS_wdk6b9.jpg 320w, https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_400,q_70/v1508755704/Jersey_Mobile_AUS_wdk6b9.jpg 375w, https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_600,q_70/v1508755704/Jersey_Mobile_AUS_wdk6b9.jpg 414w" src="https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_768,dpr_1/v1508755704/Jersey_Mobile_AUS_wdk6b9.jpg" sizes="100vw">
+          <img src="https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70/v1508755701/JerseyBasics_AUS_pd3qkm.jpg" alt="backup">
+        </picture>
+        <div class="banner_content center">
+          <h2 class="title2 white">the new basics</h2>
+          <div class="more-buttons">
+            <button class="button">shop basics</button>
+          </div>
+        </div>
+      </a>
+    </div>
+</div>
+<div class="slick-three">
+    <div class="blocker"></div>
+  
+  <div>
+    <a href="/catalogsearch/result/?q=white" class="tracking">
+      <div class="imgContainer">
+        <img src="https://media.missguided.co.uk/image/upload/w_600,q_70/v1508239562/WhiteTrend_AUS_kpnofu.jpg" alt="backup_img">
+      </div>
+      <div class="title-below">
+        <h2 class="title3">#trendingwhite</h2>
+        <button class="button">shop the trend</button>
+      </div>
+    </a>
+  </div>
+  <div>
+    <a href="/clothing/playsuits" class="tracking">
+      <div class="imgContainer">
+        <img src="https://media.missguided.co.uk/image/upload/w_600,q_70/v1506335267/playsuits_AUS_jg380z.jpg" alt="backup_img">
+      </div>
+      <div class="title-below">
+        <h2 class="title3">instant outfits</h2>
+        <button class="button">shop playsuits</button>
+      </div>
+    </a>
+  </div>
+  <div>
+    <a href="/clothing/denim" class="tracking">
+      <div class="imgContainer">
+        <img src="https://media.missguided.co.uk/image/upload/w_600,q_70/v1509453350/Denim_US_sno8ek.jpg" alt="backup_img">
+      </div>
+      <div class="title-below">
+        <h2 class="title3">stop what you&apos;re doing, shop denim</h2>
+        <button class="button">shop denim</button>
+      </div>
+    </a>
+  </div>
+</div>
+</div>
+    <script src="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
+  
+<script type="text/javascript">
+  (function ($) {
+    $(document).ready(function () {
+      $('#homeSlider').slick({
+        infinite: true,
+        adaptiveHeight: true,
+        autoplay: true,
+        autoplaySpeed: 5000,
+        pauseOnHover: false,
+        dots: true,
+        slide: '.fullwidth',
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        responsive: [{
+            breakpoint: 1000,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1
+            }
+          },
+          {
+            breakpoint: 768,
+            settings: "unslick"
+          }
+        ]
+      });
+    });
+  }(jQuery));
+  (function ($) {
+    $(window).on('resize orientationchange', function () {
+      $('#homeSlider').slick('resize');
+    });
+  }(jQuery));
+</script>
+<script type="text/javascript">
+  (function ($) {
+    $(document).ready(function () {
+      $('.slick-three').slick({
+        infinite: true,
+        adaptiveHeight: false,
+        slide: ':not(.blocker)',
+        dots: false,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        arrows: true,
+        centerMode: true,
+        centerPadding: '0',
+        responsive: [{
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          },
+          centerMode: true,
+          centerPadding: '50',
+          variableWidth: true,
+        }]
+      });
+    });
+  }(jQuery));
+  (function ($) {
+    $(window).on('resize orientationchange', function () {
+      $('.slick-three').slick('resize');
+    });
+  }(jQuery));
+</script>
+<script type="text/javascript">
+  (function ($) {
+    $(window).scroll(_.debounce(function () {
+      var wScroll = $(this).scrollTop();
+      console.log(wScroll);
+      if (wScroll > $('.slick-three').offset().top - 400) {
+        $('.slick-slide').css('animation', 'swipe 1200ms ease-in-out forwards');
+        setTimeout(function () {
+          $('.blocker').css('display', 'none');
+        }, 1600);
+      }
+    }, 100));
+  })(jQuery);
+</script>
+  </div>
+  
   </body>
 </html>

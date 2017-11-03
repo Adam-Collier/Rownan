@@ -325,8 +325,8 @@ iframe{
   position: relative;
   -webkit-app-region: no-drag;
 }
-.selection:nth-of-type(1){
-  padding: 40px 20px 20px 20px;
+.container > div:nth-of-type(2){
+  padding: 10px 20px 20px 20px;
 }
 .selection:nth-child(even){
   background-color: #292d2f;
