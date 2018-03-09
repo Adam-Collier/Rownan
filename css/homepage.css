@@ -1,3 +1,9 @@
+
+.preview-container{
+  /* pointer-events: none; */
+}
+
+
 .banner_content .subtitle1, .banner_content .title1, .white {
   color: #fff
 }

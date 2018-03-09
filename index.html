@@ -1,92 +1,164 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Rownan</title>
-    <link rel="stylesheet" href="./node_modules/prismjs/themes/prism.css" />
-    <link rel="stylesheet" href="./css/main.css">
-    </head>
-  <body>
-    <div class="left">
-      <div class = "form">
-        <div class="container">
-          <div class = "selection">
-            <select onchange="drop(this)">
-              <option value="general" selected>Please Select</option>
-              <option value="full">Full Width</option>
-              <option value="center">Center</option>
-              <option value="left">Left</option>
-              <option value="right">Right</option>
-              <option value="two">Two Column</option>
-              <option value="three">Three Column</option>
-            </select>
-            <div class="inputs">
-              <!-- remove this -->
-              <!-- <div class="inline">
-                <div>
-                  <label>URL</label><br>
-                  <input type="text" class="url"><br>
-                </div>
-                <div>
-                  <label>URL2</label><br>
-                  <input type="text" class="url2"><br>
-                </div>
-              </div>
-              <label>Image</label><br>
-              <span>../image/upload/q_70/</span><input type="text" class="image"><br>
-              <label>Mobile Image</label><br>
-              <span>../image/upload/q_70/</span><input type="text" class="mobile"><br>
-              <div id="radio">
-                <label>Text vertical</label><br>
-                <input type="radio" name="vertical" value="banner_content"><p>center</p>
-                <input type="radio" name="vertical" value="text-below"><p>below</p><br>
-              </div>
-              <div id="radio">
-                <label>Text horizontal</label><br>
-                <input type="radio" name="radio" value="center" checked><p>center</p>
-                <input type="radio" name="radio" value="left"><p>left</p>
-                <input type="radio" name="radio" value="center"><p>right</p><br>
-              </div>
-              <label>Title</label><br>
-              <input type="text" class="title"><br>
-              <label>Subtitle</label><br>
-              <input type="text" class="subtitle"><br>
-              <div class="inline">
-                <div>
-                  <label>CTA</label><br>
-                  <input type="text" class="cta"><br>
-                </div>
-                <div>
-                  <label>CTA 2</label><br>
-                  <input type="text" class="cta2"><br>
-                </div>
-              </div> -->
-              <!-- remove this -->
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rownan</title>
+  <link rel="stylesheet" href="./node_modules/prismjs/themes/prism.css" />
+  <link rel="stylesheet" href="./css/main.css">
+  <link rel="stylesheet" href="./css/codemirror.css">
+  <link rel="stylesheet" href="./css/one-dark.css">
+</head>
+
+<body>
+  <div class="left">
+    <div class="form">
+      <div class="container" id="container">
+        <textarea id="editor"><style>
+
+</style></textarea>
+        <div class="categories">
+          <div class="inline">
+            <div>
+              <label>Category 1</label><br>
+              <input type="text" class="cat1"><br>
+            </div>
+            <div>
+              <label>URL</label><br>
+              <input type="text" class="url1"><br>
+            </div>
+          </div>
+          <div class="inline">
+            <div>
+              <label>Category 2</label><br>
+              <input type="text" class="cat2"><br>
+            </div>
+            <div>
+              <label>URL</label><br>
+              <input type="text" class="url2"><br>
+            </div>
+          </div>
+          <div class="inline">
+            <div>
+              <label>Category 3</label><br>
+              <input type="text" class="cat3"><br>
+            </div>
+            <div>
+              <label>URL</label><br>
+              <input type="text" class="url3"><br>
+            </div>
+          </div>
+          <div class="inline">
+            <div>
+              <label>Category 4</label><br>
+              <input type="text" class="cat4"><br>
+            </div>
+            <div>
+              <label>URL</label><br>
+              <input type="text" class="url4"><br>
             </div>
           </div>
         </div>
-        <input class = "button" type="button" value="+"/>
-        <!-- <div id='console'></div> -->
-      </div>
-      <div class = "buttons">
-        <button class="add" id="preview">GENERATE</button>
-        <button id="saveFile" onclick="saveToFile();">SAVE</button>
-      </div>
-    </div>
-    <div class="right">
-      <div class="preview">
-        <iframe src="./preview.html">
-        </iframe>
-      </div>
-      <pre><code class="language-markup"></code></pre>
-      <button class="preview-button">preview</button>
-    </div>
+        <!-- <div class="selection">
 
-    <script src="main.js"></script>
-    <!-- <script>window.$ = window.jQuery = require('./js/jquery.js');</script> -->
-    <script src="./js/script.js"></script>
+        </div> -->
+      </div>
+      <input class="button" type="button" value="+" />
+      <!-- <div id='console'></div> -->
+    </div>
+    <div class="buttons">
+      <button class="add" id="preview" onclick='generate()'>GENERATE</button>
+      <button id="saveFile" onclick="saveToFile();">SAVE</button>
+    </div>
+  </div>
+  <div class="right">
+    <div class="preview">
+      <iframe src="./preview.html">
+      </iframe>
+    </div>
+    <pre><code class="language-markup"></code></pre>
+    <button class="preview-button">preview</button>
 
-  </body>
+    <?xml version="1.0" standalone="no"?>
+    <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+    <svg onclick="saveToFile();" width="100%" height="100%" viewBox="0 0 19 25" version="1.1" xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.41421;">
+      <path d="M13.216,6.558c-0.254,0.006 -0.498,-0.092 -0.677,-0.271c-0.179,-0.179 -0.277,-0.424 -0.271,-0.677c0.04,-1.731 0.12,-5.174 0.12,-5.174c0,0 5.6,5.6 5.981,5.981c0.004,0.004 0.005,0.009 0.003,0.013c-0.002,0.005 -0.006,0.008 -0.011,0.008c-0.335,0.008 -3.507,0.082 -5.145,0.12Z"
+        style="fill:none;stroke-width:0.45px;" />
+      <path d="M18.39,6.309l-5.821,-5.919l-11.21,0c-0.535,0 -0.969,0.434 -0.969,0.969l0,21.311c0,0.535 0.434,0.97 0.969,0.97l16.061,0c0.535,0 0.97,-0.435 0.97,-0.97l0,-16.361Z"
+        style="fill:none;stroke-width:0.45px;" />
+      <rect class="save-icon" x="2.578" y="9.457" width="13.569" height="1.328" style="stroke-width:0.45px;" />
+      <rect x="2.578" y="9.457" width="13.569" height="1.328" style="fill:none;stroke-width:0.45px;" />
+      <rect x="2.578" y="13.929" width="13.569" height="1.328" style="fill:none;stroke-width:0.45px;" />
+      <rect class="save-icon" x="2.578" y="13.929" width="13.569" height="1.328" style="stroke-width:0.45px;" />
+      <rect x="2.578" y="18.505" width="13.569" height="1.328" style="fill:none;stroke-width:0.45px;" />
+      <rect class="save-icon" x="2.578" y="18.505" width="13.569" height="1.328" style="stroke-width:0.45px;" />
+    </svg>
+
+    <?xml version="1.0" standalone="no"?>
+    <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+    <svg onclick="generate();" class="create-icon" width="100%" height="100%" viewBox="0 0 60 39" version="1.1" xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.41421;">
+      <path class="pupil" d="M29.911,4.787c7.905,0 14.324,6.419 14.324,14.324c0,7.906 -6.419,14.324 -14.324,14.324c-7.906,0 -14.324,-6.418 -14.324,-14.324c0,-7.905 6.418,-14.324 14.324,-14.324ZM29.911,13.512c3.09,0 5.599,2.509 5.599,5.599c0,3.09 -2.509,5.599 -5.599,5.599c-3.09,0 -5.599,-2.509 -5.599,-5.599c0,-3.09 2.509,-5.599 5.599,-5.599Z"
+        style=";stroke-width:1.2px;" />
+      <path d="M29.659,0.39c21.56,0 29.795,18.731 29.795,18.731c0,0 -8.883,18.658 -29.812,18.658c-20.93,0 -29.252,-18.658 -29.252,-18.658c0,0 7.709,-18.731 29.269,-18.731Z"
+        style="fill:none;stroke-width:1.2px;" />
+      <circle class="iris" cx="29.92" cy="19.123" r="5.749" style="stroke-width:1.2px;" />
+      <path class="blink" d="M29.659,0.39c21.56,0 29.795,18.875 29.795,18.875c0,0 -9.702,7.287 -30.631,7.287c-20.929,0 -28.433,-7.287 -28.433,-7.287c0,0 7.709,-18.875 29.269,-18.875Z"
+        style="fill:none;stroke-width:1.2px;stroke:none" />
+    </svg>
+
+    <?xml version="1.0" standalone="no"?>
+    <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+    <svg width="100%" height="100%" viewBox="0 0 61 43" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+      xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.41421;"
+      class="preview-button">
+      <path class="switch" d="M13.89,18.615l0,8.775l-13.5,-13.5l13.5,-13.5l0,8.775l28.5,0l0,9.45l-28.5,0Z" style="stroke-width:1.3px;"
+      />
+      <path class="switch" d="M18.39,33.615l0,-9.45l28.5,0l0,-8.775l13.5,13.5l-13.5,13.5l0,-8.775l-28.5,0Z" style="stroke-width:1.3px;"
+      />
+    </svg>
+
+    <?xml version="1.0" standalone="no"?>
+    <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+    <svg class="resize-icon" width="100%" height="100%" viewBox="0 0 28 52" version="1.1" xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.41421;">
+      <path d="M27.211,3.803c0,-1.884 -1.529,-3.413 -3.413,-3.413l-19.995,0c-1.884,0 -3.413,1.529 -3.413,3.413l0,43.984c0,1.884 1.529,3.414 3.413,3.414l19.995,0c1.884,0 3.413,-1.53 3.413,-3.414l0,-43.984Z"
+        style="fill:none;stroke-width:0.7px;" />
+      <circle cx="13.929" cy="46.709" r="2.625" style="fill:none;stroke-width:0.7px;" />
+      <rect x="2.983" y="5.105" height="37.173" class="resize" style="stroke-width:0.7px;" />
+      <rect fill="none" x="2.983" y="5.105" width="21.892" height="37.173" style="stroke-width:0.7px;" />
+      <path d="M10.874,2.499l6,0" style="fill:none;stroke-width:0.7px;" />
+    </svg>
+
+
+  </div>
+
+  <!-- <script>window.$ = window.jQuery = require('./js/jquery.js');</script> -->
+  <script src="./js/codemirror/codemirror.js"></script>
+  <script src="./js/codemirror/css.js"></script>
+  <script src="./js/codemirror/htmlmixed.js"></script>
+  <script src="./js/codemirror/javascript.js"></script>
+  <script src="./js/codemirror/xml.js"></script>
+  <script src="./js/codemirror/closebrackets.js"></script>
+  <script src="./js/codemirror/closetag.js"></script>
+  <script type="text/javascript">
+    var myCodeMirror = CodeMirror.fromTextArea(editor, {
+      lineNumbers: false,
+      mode: "htmlmixed",
+      theme: "one-dark",
+      autoCloseBrackets: true,
+      autoCloseTags: true,
+      tabSize: 1
+    });
+  </script>
+
+  <script src="./js/script.js"></script>
+
+  <!-- <script>
+      require('./js/resize');
+    </script> -->
+</body>
 
 </html>

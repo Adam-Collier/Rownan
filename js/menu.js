@@ -1,176 +1,233 @@
-const {Menu} = require('electron')
-const electron = require('electron')
-const app = electron.app
+const { Menu } = require("electron");
+const electron = require("electron");
+const app = electron.app;
+const BrowserWindow = electron.BrowserWindow;
 
 const template = [
   {
-    label: 'Edit',
+    label: "File",
     submenu: [
       {
-        role: 'undo'
-      },
-      {
-        role: 'redo'
-      },
-      {
-        type: 'separator'
-      },
-      {
-        role: 'cut'
-      },
-      {
-        role: 'copy'
-      },
-      {
-        role: 'paste'
-      },
-      {
-        role: 'pasteandmatchstyle'
-      },
-      {
-        role: 'delete'
-      },
-      {
-        role: 'selectall'
-      }
-    ]
-  },
-  {
-    label: 'View',
-    submenu: [
-      {
-        label: 'Reload',
-        accelerator: 'CmdOrCtrl+R',
-        click (item, focusedWindow) {
-          if (focusedWindow) focusedWindow.reload()
+        label: "Open",
+        accelerator: "CmdOrCtrl+o",
+        click: () => {
+          console.log("Opened");
+          var focusedWindow = BrowserWindow.getFocusedWindow();
+          focusedWindow.webContents.send("openFile");
         }
       },
       {
-        label: 'Toggle Developer Tools',
-        accelerator: process.platform === 'darwin' ? 'Alt+Command+I' : 'Ctrl+Shift+I',
-        click (item, focusedWindow) {
-          if (focusedWindow) focusedWindow.webContents.toggleDevTools()
+        label: "Save",
+        accelerator: "CmdOrCtrl+s",
+        click: () => {
+          console.log("Saved");
+          var focusedWindow = BrowserWindow.getFocusedWindow();
+          focusedWindow.webContents.send("save");
+        }
+      }
+    ]
+  },
+  {
+    label: "Edit",
+    submenu: [
+      {
+        role: "undo"
+      },
+      {
+        role: "redo"
+      },
+      {
+        type: "separator"
+      },
+      {
+        label: "Generate",
+        accelerator: "CmdOrCtrl+enter",
+        click: () => {
+          var focusedWindow = BrowserWindow.getFocusedWindow();
+          focusedWindow.webContents.send("generate");
+          console.log("Generated");
         }
       },
       {
-        type: 'separator'
+        label: "Preview",
+        accelerator: "CmdOrCtrl+p",
+        click: () => {
+          console.log("Preview");
+          var focusedWindow = BrowserWindow.getFocusedWindow();
+          focusedWindow.webContents.send("preview");
+        }
       },
       {
-        role: 'resetzoom'
+        type: "separator"
       },
       {
-        role: 'zoomin'
+        role: "cut"
       },
       {
-        role: 'zoomout'
+        role: "copy"
       },
       {
-        type: 'separator'
+        role: "paste"
       },
       {
-        role: 'togglefullscreen'
+        role: "pasteandmatchstyle"
+      },
+      {
+        role: "delete"
+      },
+      {
+        role: "selectall"
       }
     ]
   },
   {
-    role: 'window',
+    label: "View",
     submenu: [
       {
-        role: 'minimize'
+        label: "Reload",
+        accelerator: "CmdOrCtrl+R",
+        click(item, focusedWindow) {
+          if (focusedWindow) focusedWindow.reload();
+        }
       },
       {
-        role: 'close'
+        label: "Toggle Developer Tools",
+        accelerator:
+          process.platform === "darwin" ? "Alt+Command+I" : "Ctrl+Shift+I",
+        click(item, focusedWindow) {
+          if (focusedWindow) focusedWindow.webContents.toggleDevTools();
+        }
+      },
+      {
+        type: "separator"
+      },
+      {
+        label: "Mobile View",
+        accelerator: "CmdOrCtrl+;",
+        click: () => {
+          console.log("Mobile View");
+          var focusedWindow = BrowserWindow.getFocusedWindow();
+          focusedWindow.webContents.send("mobileView");
+        }
+      },
+      {
+        role: "resetzoom"
+      },
+      {
+        role: "zoomin"
+      },
+      {
+        role: "zoomout"
+      },
+      {
+        type: "separator"
+      },
+      {
+        role: "togglefullscreen"
       }
     ]
   },
   {
-    role: 'help',
+    role: "window",
     submenu: [
       {
-        label: 'Learn More',
-        click () { require('electron').shell.openExternal('http://electron.atom.io') }
+        role: "minimize"
+      },
+      {
+        role: "close"
+      }
+    ]
+  },
+  {
+    role: "help",
+    submenu: [
+      {
+        label: "Learn More",
+        click() {
+          require("electron").shell.openExternal("http://electron.atom.io");
+        }
       }
     ]
   }
-]
+];
 
-if (process.platform === 'darwin') {
-  const name = app.getName()
+if (process.platform === "darwin") {
+  const name = app.getName();
   template.unshift({
     label: name,
     submenu: [
       {
-        role: 'about'
+        role: "about"
       },
       {
-        type: 'separator'
+        type: "separator"
       },
       {
-        role: 'services',
+        role: "services",
         submenu: []
       },
       {
-        type: 'separator'
+        type: "separator"
       },
       {
-        role: 'hide'
+        role: "hide"
       },
       {
-        role: 'hideothers'
+        role: "hideothers"
       },
       {
-        role: 'unhide'
+        role: "unhide"
       },
       {
-        type: 'separator'
+        type: "separator"
       },
       {
-        role: 'quit'
+        role: "quit"
       }
     ]
-  })
+  });
   // Edit menu.
-  template[1].submenu.push(
+  template[2].submenu.push(
     {
-      type: 'separator'
+      type: "separator"
     },
     {
-      label: 'Speech',
+      label: "Speech",
       submenu: [
         {
-          role: 'startspeaking'
+          role: "startspeaking"
         },
         {
-          role: 'stopspeaking'
+          role: "stopspeaking"
         }
       ]
     }
-  )
+  );
   // Window menu.
-  template[3].submenu = [
+  template[4].submenu = [
     {
-      label: 'Close',
-      accelerator: 'CmdOrCtrl+W',
-      role: 'close'
+      label: "Close",
+      accelerator: "CmdOrCtrl+W",
+      role: "close"
     },
     {
-      label: 'Minimize',
-      accelerator: 'CmdOrCtrl+M',
-      role: 'minimize'
+      label: "Minimize",
+      accelerator: "CmdOrCtrl+M",
+      role: "minimize"
     },
     {
-      label: 'Zoom',
-      role: 'zoom'
+      label: "Zoom",
+      role: "zoom"
     },
     {
-      type: 'separator'
+      type: "separator"
     },
     {
-      label: 'Bring All to Front',
-      role: 'front'
+      label: "Bring All to Front",
+      role: "front"
     }
-  ]
+  ];
 }
 
-const menu = Menu.buildFromTemplate(template)
-Menu.setApplicationMenu(menu)
+const menu = Menu.buildFromTemplate(template);
+Menu.setApplicationMenu(menu);

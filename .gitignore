@@ -1,2 +1,6 @@
 node_modules
 Rownan-darwin-x64/
+.DS_Store
+output.html
+output.json
+
