@@ -16,9 +16,9 @@ function showInputs(ind, x, addInputs){
       </div>
     </div>
     <label>Image</label><br>
-    <span>../image/upload/q_70/</span><input type="text" class="image"><br>
+    <span>../image/upload/q_70</span><input type="text" class="image"><br>
     <label>Mobile Image</label><br>
-    <span>../image/upload/q_70/</span><input type="text" class="mobile"><br>
+    <span>../image/upload/q_70</span><input type="text" class="mobile"><br>
     <label>SVG</label><br>
     <input type="text" class="svg"><br>
     <label>Title</label><br>
@@ -48,7 +48,7 @@ function showInputs(ind, x, addInputs){
       </div>
     </div>
     <label>Image</label><br>
-    <span>../image/upload/q_70/</span><input type="text" class="image"><br>
+    <span>../image/upload/q_70</span><input type="text" class="image"><br>
     <label>Title</label><br>
     <input type="text" class="title"><br>
     <label>Subtitle</label><br>
