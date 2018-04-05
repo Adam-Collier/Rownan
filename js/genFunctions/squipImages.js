@@ -1,6 +1,6 @@
 let sqip = require("sqip");
 let svgToMiniDataURI = require("mini-svg-data-uri");
-let request = require("request");
+let request = require("request-promise-native");
 
 let squipImages = () => {
   let arr = ["image", "mobile"];
@@ -15,30 +15,43 @@ let squipImages = () => {
             return new Promise((resolve, reject) => {
               console.log(s);
               console.log(x.image);
-              request.get(
-                {
+              request
+                .get({
                   url: `https://media.missguided.co.uk/image/upload/w_600,q_70/${
                     x.image
                   }`,
                   encoding: "binary"
-                },
-                function(err, response, body) {
-                  fs.writeFileSync(`./sqip-${s}-temp.jpeg`, body, "binary");
-                  const result = sqip({
-                    filename: path.join(__dirname, `../../sqip-${s}-temp.jpeg`),
-                    numberOfPrimitives: 8
-                  });
+                })
+                .then(response => {
+                  fs.writeFile(
+                    `./tempImages/sqip-${s}-temp${i + 1}.jpeg`,
+                    response,
+                    {
+                      encoding: "binary"
+                    },
+                    function(err) {
+                      if (err) throw err;
 
-                  var svg = result.final_svg;
+                      const result = sqip({
+                        filename: path.join(
+                          __dirname,
+                          `../../tempImages/sqip-${s}-temp${i + 1}.jpeg`
+                        ),
+                        numberOfPrimitives: 8
+                      });
 
-                  var optimizedSVGDataURI = svgToMiniDataURI(svg);
+                      var svg = result.final_svg;
 
-                  contentData.items[i]["squip" + s] = optimizedSVGDataURI;
-                  resolve(contentData.items[i]["squip" + s]);
-                  console.log(optimizedSVGDataURI);
-                  console.log("this has been squipped");
-                }
-              );
+                      var optimizedSVGDataURI = svgToMiniDataURI(svg);
+
+                      contentData.items[i]["squip" + s] = optimizedSVGDataURI;
+                      resolve(contentData.items[i]["squip" + s]);
+                      //   console.log(optimizedSVGDataURI);
+                      //   console.log("this has been squipped");
+                    }
+                  );
+                })
+                .catch(err => console.log(err));
             });
           }
         })
