@@ -21,10 +21,10 @@ function generate() {
 
   squipImages();
 
-  // initHomepage();
+  initHomepage();
 
-  // injectContent();
+  injectContent();
 
-  // syntaxHighlight();
+  syntaxHighlight();
 }
 module.exports = generate;
