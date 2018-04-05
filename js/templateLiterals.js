@@ -75,12 +75,10 @@ let initOutput = `
 <script type="text/javascript">
   (function ($) {
     $(window).scroll(_.debounce(function () {
-
       var wScroll = $(this).scrollTop();
       console.log(wScroll);
       if (wScroll > $('.slick-three').offset().top - 400) {
         $('.slick-slide').css('animation', 'swipe 1200ms ease-in-out forwards');
-
         setTimeout(function () {
           $('.blocker').css('display', 'none');
         }, 1600);
@@ -97,36 +95,29 @@ let initStyles = `
   .container {
         overflow: hidden;
     }
-
     .slick-slide,
     .slick-slide * {
         outline: none !important;
     }
-
     .slick-dotted.slick-slider {
         margin-bottom: 0px;
     }
-
     #homeSlider {
         position: relative;
     }
-
     #homeSlider .button {
         background: transparent;
         border: white 2px solid;
         color: #FFFFFF;
     }
-
     #homeSlider .button:hover {
         background: white;
         border: white 2px solid;
         color: #323232
     }
-
     .slick-next:before {
         content: "";
     }
-
     .slick-next {
         background: url(https://media.missguided.co.uk/image/upload/v1501081056/chevron-right_x8qrqm.png);
         background-size: contain;
@@ -136,11 +127,9 @@ let initStyles = `
         right: -35px;
         top: 37%;
     }
-
     .slick-prev:before {
         content: "";
     }
-
     .slick-prev {
         background: url(https://media.missguided.co.uk/image/upload/v1501081056/chevron-left_pbhwk0.png);
         background-size: contain;
@@ -149,54 +138,44 @@ let initStyles = `
         width: 30px;
         top: 37%;
     }
-
     .slick-prev:hover,
     .slick-prev:focus {
         background: url(https://media.missguided.co.uk/image/upload/v1501081056/chevron-left_pbhwk0.png);
         background-size: contain;
         background-repeat: no-repeat;
     }
-
     .slick-next:hover,
     .slick-next:focus {
         background: url(https://media.missguided.co.uk/image/upload/v1501081056/chevron-right_x8qrqm.png);
         background-size: contain;
         background-repeat: no-repeat;
     }
-
     .slick-three {
         height: auto;
         padding-bottom: 50px;
     }
-
     .slick-three .slick-slide {
         padding: 20px;
     }
-
     .slick-three div {
         height: auto;
         padding: 0px;
     }
-
     .slick-three .button {
         margin-top: 12px;
     }
-
     .slick-three h2 {
         margin-bottom: 12px;
     }
-
     .title-below .button {
         background: transparent;
         border: #323232 2px solid;
         color: #323232;
     }
-
     .title-below .button:hover {
         background: #323232;
         color: #ffffff;
     }
-
     @media only screen and (min-width:768px) {
         #homeSlider,
         .slick-three {
@@ -276,7 +255,6 @@ let initStyles = `
             padding: 0px 20px;
         }
     }
-
     @media only screen and (max-width: 767px) {
         .container {
             display: flex;
@@ -465,9 +443,40 @@ var contentSlide = i => {
 `;
 };
 
+let blocker = () => {
+  return `
+  <div class="blocker"></div>`;
+};
+
+let slick = () => {
+  return `
+  <script src="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>`;
+};
+
+let nav = () => {
+  return `
+  <div id="homeSlider-nav">
+    <a href="${contentData.categories[0].url1}">${
+    contentData.categories[0].cat1
+  }</a>
+    <a href="${contentData.categories[0].url2}">${
+    contentData.categories[0].cat2
+  }</a>
+    <a href="${contentData.categories[0].url3}">${
+    contentData.categories[0].cat3
+  }</a>
+    <a href="${contentData.categories[0].url4}">${
+    contentData.categories[0].cat4
+  }</a>
+  </div>`;
+};
+
 module.exports = {
   initOutput,
   initStyles,
   mainSlide,
-  contentSlide
+  contentSlide,
+  nav,
+  blocker,
+  slick
 };
