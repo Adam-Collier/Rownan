@@ -5,7 +5,6 @@ let syntaxHighlight = () => {
     path.join(__dirname, "../../output.html"),
     "utf-8"
   );
-  console.log("syntaxHighlighting", html);
 
   // Returns a highlighted HTML string
   let highlightedCode = Prism.highlight(html, Prism.languages.markup);
