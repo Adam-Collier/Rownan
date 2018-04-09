@@ -363,6 +363,15 @@ let initStyles = `
             }
         }
     }
+    .lazyload,
+    .lazyloading {
+        opacity: 0;
+    }
+
+    .lazyloaded {
+        opacity: 1;
+        transition: opacity 800ms;
+    }
 </style>
 `;
 
@@ -372,7 +381,7 @@ var mainSlide = i => {
     <a href="${contentData.items[i].url}" class="tracking">
       <picture>
         <!-- desktop -->
-        <source media="(min-width: 768px)" srcset="https://media.missguided.co.uk/image/upload/c_scale,w_768,q_70${
+        <source media="(min-width: 768px)" data-srcset="https://media.missguided.co.uk/image/upload/c_scale,w_768,q_70${
           contentData.items[i].image
         } 768w, https://media.missguided.co.uk/image/upload/c_scale,w_967,q_70${
     contentData.items[i].image
@@ -394,7 +403,7 @@ var mainSlide = i => {
     contentData.items[i].image
   } 1920w">
         <!-- mobile -->
-        <source media="(max-width: 767px)" srcset="https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_320${
+        <source media="(max-width: 767px)" data-srcset="https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_320${
           contentData.items[i].mobile
         } 320w, https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_400,q_70${
     contentData.items[i].mobile
@@ -405,9 +414,9 @@ var mainSlide = i => {
             contentData.items[i].mobile
           }"
           sizes="100vw">
-        <img src="https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70${
+        <img class="lazyload" data-expand="-50" data-src="https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70${
           contentData.items[i].image
-        }" alt="backup">
+        }" src="${contentData.items[i].squipimage}" alt="backup">
       </picture>
       <div class="banner_content center">
         ${contentData.items[i].svg}
@@ -429,9 +438,9 @@ var contentSlide = i => {
   <div>
     <a href="${contentData.items[i].url}" class="tracking">
       <div class="imgContainer">
-        <img src="https://media.missguided.co.uk/image/upload/w_600,q_70${
+        <img class="lazyload" data-expand="-50" data-src="https://media.missguided.co.uk/image/upload/w_600,q_70${
           contentData.items[i].image
-        }" alt="backup_img">
+        }" src="${contentData.items[i].squipimage}" alt="backup_img">
       </div>
       <div class="title-below">
         <h2 class="title3">${contentData.items[i].title}</h2>
@@ -450,7 +459,8 @@ let blocker = () => {
 
 let slick = () => {
   return `
-  <script src="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>`;
+  <script src="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/4.0.1/lazysizes.min.js " async=" "></script>`;
 };
 
 let nav = () => {
