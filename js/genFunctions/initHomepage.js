@@ -4,9 +4,10 @@ let initHomepage = () => {
   // write styles
   fs.writeFileSync(path.join(__dirname, "../output.html"), initStyles);
   // add codemirrror styles
+  // append styles from contentData with squipped background images
   fs.appendFileSync(
     path.join(__dirname, "../output.html"),
-    myCodeMirror.getValue(),
+    contentData.styles,
     function() {
       console.log("CSS added");
     }
