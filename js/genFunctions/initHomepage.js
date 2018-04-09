@@ -20,14 +20,6 @@ let initHomepage = () => {
     path.join(__dirname, "../output.html"),
     "utf-8"
   );
-
-  //   // start to inject content
-  //   var $ = cheerio.load(addNav);
-  //   // add the slider nav
-  //   $("#homeSlider").prepend(nav);
-
-  // write the nav
-  //   fs.writeFileSync(path.join(__dirname, "../output.html"), $.html());
 };
 
 module.exports = initHomepage;
