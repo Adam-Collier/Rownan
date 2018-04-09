@@ -57,7 +57,7 @@ let injectContent = () => {
 
   $("#homeSlider").prepend(nav);
   $(".slick-three").prepend(blocker);
-  $(slick).insertAfter(".container");
+  $(slick()).insertAfter(".container");
 
   fs.writeFileSync(path.join(__dirname, "../../output.html"), $.html());
   console.log("clean HTML written");
