@@ -14,6 +14,9 @@ const Sortable = require("sortablejs");
 const saveToFile = require("./js/saveToFile");
 const generate = require("./js/generate");
 const preview = require("./js/preview");
+const browserSync = require("./js/browserSync");
+
+browserSync();
 
 function customEditors(currArea) {
   var customEditor = currArea.querySelector(".custom");
