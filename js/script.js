@@ -73,7 +73,11 @@ function drop(sel) {
 // menu functions
 ipcRenderer.on("generate", function() {
   console.log(generate);
-  generate();
+  generate("sqip");
+});
+ipcRenderer.on("images", function() {
+  console.log(generate);
+  generate("images");
 });
 ipcRenderer.on("save", function() {
   saveToFile();
