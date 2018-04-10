@@ -15,8 +15,20 @@
   <div class="left">
     <div class="form">
       <div class="container" id="container">
-        <textarea id="editor"><style>
-
+        <textarea id="editor">
+<style>
+  @media (min-width:768px){
+    .row1 .title1,
+    .row2 .title1,
+    .row3 .title1{
+      display: none;
+    }
+  }
+  @media (max-width: 767px){
+    .row svg{
+      display: none;
+    }
+  }
 </style></textarea>
         <div class="categories">
           <div class="inline">
@@ -76,6 +88,10 @@
             </div>
           </div>
         </div>
+        <div class="promo-strip">
+          <label>Promo Strip</label>
+          <input type="text" class="promoStrip">
+        </div>
         <!-- <div class="selection">
 
         </div> -->
@@ -117,7 +133,7 @@
     <svg onclick="generate();" class="create-icon" width="100%" height="100%" viewBox="0 0 60 39" version="1.1" xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.41421;">
       <path class="pupil" d="M29.911,4.787c7.905,0 14.324,6.419 14.324,14.324c0,7.906 -6.419,14.324 -14.324,14.324c-7.906,0 -14.324,-6.418 -14.324,-14.324c0,-7.905 6.418,-14.324 14.324,-14.324ZM29.911,13.512c3.09,0 5.599,2.509 5.599,5.599c0,3.09 -2.509,5.599 -5.599,5.599c-3.09,0 -5.599,-2.509 -5.599,-5.599c0,-3.09 2.509,-5.599 5.599,-5.599Z"
-        style=";stroke-width:1.2px;" />
+        style="stroke-width:1.2px;" />
       <path d="M29.659,0.39c21.56,0 29.795,18.731 29.795,18.731c0,0 -8.883,18.658 -29.812,18.658c-20.93,0 -29.252,-18.658 -29.252,-18.658c0,0 7.709,-18.731 29.269,-18.731Z"
         style="fill:none;stroke-width:1.2px;" />
       <circle class="iris" cx="29.92" cy="19.123" r="5.749" style="stroke-width:1.2px;" />
