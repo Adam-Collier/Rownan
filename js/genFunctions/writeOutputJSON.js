@@ -54,16 +54,16 @@ let writeOutputJSON = () => {
     .CodeMirror.getValue();
 
   // write the JSON file
-  // fs.writeFile(
-  //   path.join(__dirname, "../../output.json"),
-  //   JSON.stringify(contentData, null, 2),
-  //   function(err, data) {
-  //     if (err) {
-  //       console.log(error);
-  //     }
-  //     console.log("JSON file created");
-  //   }
-  // );
+  fs.writeFile(
+    path.join(__dirname, "../../output.json"),
+    JSON.stringify(contentData, null, 2),
+    function(err, data) {
+      if (err) {
+        console.log(error);
+      }
+      console.log("JSON file created");
+    }
+  );
 };
 
 module.exports = writeOutputJSON;
