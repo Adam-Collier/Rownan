@@ -49,6 +49,14 @@ const template = [
         }
       },
       {
+        label: "Image Generate",
+        accelerator: "CmdOrCtrl+\\",
+        click: () => {
+          var focusedWindow = BrowserWindow.getFocusedWindow();
+          focusedWindow.webContents.send("images");
+        }
+      },
+      {
         label: "Preview",
         accelerator: "CmdOrCtrl+p",
         click: () => {
