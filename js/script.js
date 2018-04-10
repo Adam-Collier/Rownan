@@ -14,6 +14,9 @@ const Sortable = require("sortablejs");
 const saveToFile = require("./js/saveToFile");
 const generate = require("./js/generate");
 const preview = require("./js/preview");
+const browserSync = require("./js/browserSync");
+
+browserSync();
 
 function customEditors(currArea) {
   var customEditor = currArea.querySelector(".custom");
@@ -73,7 +76,11 @@ function drop(sel) {
 // menu functions
 ipcRenderer.on("generate", function() {
   console.log(generate);
-  generate();
+  generate("sqip");
+});
+ipcRenderer.on("images", function() {
+  console.log(generate);
+  generate("images");
 });
 ipcRenderer.on("save", function() {
   saveToFile();

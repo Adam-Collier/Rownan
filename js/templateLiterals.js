@@ -75,12 +75,10 @@ let initOutput = `
 <script type="text/javascript">
   (function ($) {
     $(window).scroll(_.debounce(function () {
-
       var wScroll = $(this).scrollTop();
       console.log(wScroll);
       if (wScroll > $('.slick-three').offset().top - 400) {
         $('.slick-slide').css('animation', 'swipe 1200ms ease-in-out forwards');
-
         setTimeout(function () {
           $('.blocker').css('display', 'none');
         }, 1600);
@@ -97,36 +95,29 @@ let initStyles = `
   .container {
         overflow: hidden;
     }
-
     .slick-slide,
     .slick-slide * {
         outline: none !important;
     }
-
     .slick-dotted.slick-slider {
         margin-bottom: 0px;
     }
-
     #homeSlider {
         position: relative;
     }
-
     #homeSlider .button {
         background: transparent;
         border: white 2px solid;
         color: #FFFFFF;
     }
-
     #homeSlider .button:hover {
         background: white;
         border: white 2px solid;
         color: #323232
     }
-
     .slick-next:before {
         content: "";
     }
-
     .slick-next {
         background: url(https://media.missguided.co.uk/image/upload/v1501081056/chevron-right_x8qrqm.png);
         background-size: contain;
@@ -136,11 +127,9 @@ let initStyles = `
         right: -35px;
         top: 37%;
     }
-
     .slick-prev:before {
         content: "";
     }
-
     .slick-prev {
         background: url(https://media.missguided.co.uk/image/upload/v1501081056/chevron-left_pbhwk0.png);
         background-size: contain;
@@ -149,54 +138,44 @@ let initStyles = `
         width: 30px;
         top: 37%;
     }
-
     .slick-prev:hover,
     .slick-prev:focus {
         background: url(https://media.missguided.co.uk/image/upload/v1501081056/chevron-left_pbhwk0.png);
         background-size: contain;
         background-repeat: no-repeat;
     }
-
     .slick-next:hover,
     .slick-next:focus {
         background: url(https://media.missguided.co.uk/image/upload/v1501081056/chevron-right_x8qrqm.png);
         background-size: contain;
         background-repeat: no-repeat;
     }
-
     .slick-three {
         height: auto;
         padding-bottom: 50px;
     }
-
     .slick-three .slick-slide {
         padding: 20px;
     }
-
     .slick-three div {
         height: auto;
         padding: 0px;
     }
-
     .slick-three .button {
         margin-top: 12px;
     }
-
     .slick-three h2 {
         margin-bottom: 12px;
     }
-
     .title-below .button {
         background: transparent;
         border: #323232 2px solid;
         color: #323232;
     }
-
     .title-below .button:hover {
         background: #323232;
         color: #ffffff;
     }
-
     @media only screen and (min-width:768px) {
         #homeSlider,
         .slick-three {
@@ -276,7 +255,6 @@ let initStyles = `
             padding: 0px 20px;
         }
     }
-
     @media only screen and (max-width: 767px) {
         .container {
             display: flex;
@@ -385,6 +363,15 @@ let initStyles = `
             }
         }
     }
+    .lazyload,
+    .lazyloading {
+        opacity: 0;
+    }
+
+    .lazyloaded {
+        opacity: 1;
+        transition: opacity 800ms;
+    }
 </style>
 `;
 
@@ -394,7 +381,7 @@ var mainSlide = i => {
     <a href="${contentData.items[i].url}" class="tracking">
       <picture>
         <!-- desktop -->
-        <source media="(min-width: 768px)" srcset="https://media.missguided.co.uk/image/upload/c_scale,w_768,q_70${
+        <source media="(min-width: 768px)" data-srcset="https://media.missguided.co.uk/image/upload/c_scale,w_768,q_70${
           contentData.items[i].image
         } 768w, https://media.missguided.co.uk/image/upload/c_scale,w_967,q_70${
     contentData.items[i].image
@@ -416,7 +403,7 @@ var mainSlide = i => {
     contentData.items[i].image
   } 1920w">
         <!-- mobile -->
-        <source media="(max-width: 767px)" srcset="https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_320${
+        <source media="(max-width: 767px)" data-srcset="https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_320${
           contentData.items[i].mobile
         } 320w, https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_400,q_70${
     contentData.items[i].mobile
@@ -427,13 +414,19 @@ var mainSlide = i => {
             contentData.items[i].mobile
           }"
           sizes="100vw">
-        <img src="https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70${
+        <img class="lazyload" data-expand="-50" data-src="https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70${
           contentData.items[i].image
-        }" alt="backup">
+        }" src="${
+    contentData.items[i].squipimage
+      ? contentData.items[i].squipimage
+      : "https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70" +
+        contentData.items[i].image
+  }" alt="backup">
       </picture>
       <div class="banner_content center">
         ${contentData.items[i].svg}
         <h2 class="title1 white">${contentData.items[i].title}</h2>
+        <h4 class="subtitle1 white">${contentData.items[i].subtitle}</h4>
         <div class="more-buttons">
           <button class="button">${contentData.items[i].cta}</button>
           <a href="${contentData.items[i].url2}">
@@ -451,9 +444,14 @@ var contentSlide = i => {
   <div>
     <a href="${contentData.items[i].url}" class="tracking">
       <div class="imgContainer">
-        <img src="https://media.missguided.co.uk/image/upload/w_600,q_70${
+        <img class="lazyload" data-expand="-50" data-src="https://media.missguided.co.uk/image/upload/w_600,q_70${
           contentData.items[i].image
-        }" alt="backup_img">
+        }" src="${
+    contentData.items[i].squipimage
+      ? contentData.items[i].squipimage
+      : "https://media.missguided.co.uk/image/upload/c_scale,w_600,q_70" +
+        contentData.items[i].image
+  }" alt="backup_img">
       </div>
       <div class="title-below">
         <h2 class="title3">${contentData.items[i].title}</h2>
@@ -465,9 +463,55 @@ var contentSlide = i => {
 `;
 };
 
+let blocker = () => {
+  return `
+  <div class="blocker"></div>`;
+};
+
+let slick = () => {
+  return `
+  <script src="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/4.0.1/lazysizes.min.js " async=" "></script>`;
+};
+
+let nav = () => {
+  return `
+  <div id="homeSlider-nav">
+    <a href="${contentData.categories[0].url1}">${
+    contentData.categories[0].cat1
+  }</a>
+    <a href="${contentData.categories[0].url2}">${
+    contentData.categories[0].cat2
+  }</a>
+    <a href="${contentData.categories[0].url3}">${
+    contentData.categories[0].cat3
+  }</a>
+    <a href="${contentData.categories[0].url4}">${
+    contentData.categories[0].cat4
+  }</a>
+  </div>`;
+};
+
+let promoStrip = () => {
+  return `
+<a href="https://itunes.apple.com/gb/app/missguided/id842503500?mt=8">
+  <div class="row fullwidth" id="banner" style="background: #F3D0D2;margin-bottom: 0px;">
+    <div class="title-center-row" style="padding: 0px 20px 0px 20px;">
+      <h3 class="black" style="margin: 10px 0px 14px 0px;padding:0px;font-size:1.125rem">
+            ${contentData.promoStrip}
+      </h3>
+    </div>
+  </div>
+</a>;`;
+};
+
 module.exports = {
   initOutput,
   initStyles,
   mainSlide,
-  contentSlide
+  contentSlide,
+  nav,
+  blocker,
+  slick,
+  promoStrip
 };
