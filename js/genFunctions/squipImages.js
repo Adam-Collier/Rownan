@@ -14,16 +14,17 @@ let squipImages = () => {
               return;
             } else {
               return new Promise((resolve, reject) => {
-                console.log(s);
-                console.log(x.image);
+                // console.log(s);
+                // console.log(x.image);
                 request
                   .get({
-                    url: `https://media.missguided.co.uk/image/upload/w_600,q_70/${
-                      x.image
+                    url: `https://media.missguided.co.uk/image/upload/w_300,q_70/${
+                      x[s]
                     }`,
                     encoding: "binary"
                   })
                   .then(response => {
+                    console.log("got image", i);
                     fs.writeFile(
                       `./tempImages/sqip-${s}-temp${i + 1}.jpeg`,
                       response,
@@ -40,6 +41,8 @@ let squipImages = () => {
                           ),
                           numberOfPrimitives: 8
                         });
+
+                        console.log("this has been sqipped", i);
 
                         var svg = result.final_svg;
 
