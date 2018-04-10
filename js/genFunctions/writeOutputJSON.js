@@ -1,12 +1,18 @@
 let writeOutputJSON = () => {
   // create object to store category links
   let cats = {};
+
   document
     .querySelectorAll('.categories input[type="text"]')
     .forEach(function(el) {
       cats["" + el.className] = "" + el.value;
     });
   contentData.categories.push(cats);
+
+  let promo = {};
+
+  let promoEl = document.querySelector('.promo-strip input[type="text"]');
+  contentData.promoStrip = promoEl.value;
 
   // create object to store input values
 
