@@ -1,11 +1,4 @@
 let createCSS = () => {
-  //   let rule = document.styleSheets[0].cssRules[0].cssText.slice(0, -1);
-  //   rule += "body{ background: red}}";
-  //   document.styleSheets[0].cssRules[0].cssText = rule;
-  //   console.log(rule);
-  //   // console.log(document.styleSheets[0].cssRules[0].insertRule("body {background: red}"))
-  //   document.styleSheets[0].cssRules[0].insertRule("body {background: blue}", 1);
-
   contentData.items.map((x, i) => {
     // loop through items in the top slider
     if (x.mobile) {
@@ -43,12 +36,10 @@ let createCSS = () => {
     }
   });
 
-  console.log(contentData);
-
-  fs.writeFileSync(
-    path.join(__dirname, "../../output.json"),
-    JSON.stringify(contentData, null, 2)
-  );
+  // fs.writeFileSync(
+  //   path.join(__dirname, "../../output.json"),
+  //   JSON.stringify(contentData, null, 2)
+  // );
   console.log("this has been written;");
 
   // console.log(contentData.styles);
