@@ -416,11 +416,17 @@ var mainSlide = i => {
           sizes="100vw">
         <img class="lazyload" data-expand="-50" data-src="https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70${
           contentData.items[i].image
-        }" src="${contentData.items[i].squipimage}" alt="backup">
+        }" src="${
+    contentData.items[i].squipimage
+      ? contentData.items[i].squipimage
+      : "https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70" +
+        contentData.items[i].image
+  }" alt="backup">
       </picture>
       <div class="banner_content center">
         ${contentData.items[i].svg}
         <h2 class="title1 white">${contentData.items[i].title}</h2>
+        <h4 class="subtitle1 white">${contentData.items[i].subtitle}</h4>
         <div class="more-buttons">
           <button class="button">${contentData.items[i].cta}</button>
           <a href="${contentData.items[i].url2}">
@@ -440,7 +446,12 @@ var contentSlide = i => {
       <div class="imgContainer">
         <img class="lazyload" data-expand="-50" data-src="https://media.missguided.co.uk/image/upload/w_600,q_70${
           contentData.items[i].image
-        }" src="${contentData.items[i].squipimage}" alt="backup_img">
+        }" src="${
+    contentData.items[i].squipimage
+      ? contentData.items[i].squipimage
+      : "https://media.missguided.co.uk/image/upload/c_scale,w_600,q_70" +
+        contentData.items[i].image
+  }" alt="backup_img">
       </div>
       <div class="title-below">
         <h2 class="title3">${contentData.items[i].title}</h2>
