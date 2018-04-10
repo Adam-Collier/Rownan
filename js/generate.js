@@ -14,20 +14,29 @@ let syntaxHighlight = require("./genFunctions/syntaxHighlight");
 let squipImages = require("./genFunctions/squipImages");
 let createCSS = require("./genFunctions/createCSS");
 
-function generate() {
+function generate(command) {
   // create object to store all content
   contentData = { categories: [], items: [], options: [] };
+  if (command === "sqip") {
+    writeOutputJSON();
 
-  writeOutputJSON();
+    squipImages().then(() => {
+      createCSS();
 
-  squipImages().then(() => {
-    createCSS();
+      initHomepage();
+
+      injectContent();
+
+      syntaxHighlight();
+    });
+  } else {
+    writeOutputJSON();
 
     initHomepage();
 
     injectContent();
 
     syntaxHighlight();
-  });
+  }
 }
 module.exports = generate;
