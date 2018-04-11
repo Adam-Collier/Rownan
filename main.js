@@ -5,6 +5,9 @@ const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 //Module to add Menu
 
+// switch from uws to ws in engine.io module
+process.env.EIO_WS_ENGINE = "ws";
+
 const path = require("path");
 const url = require("url");
 
