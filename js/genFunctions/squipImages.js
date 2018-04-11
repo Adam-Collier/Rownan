@@ -10,7 +10,10 @@ let squipImages = () => {
       arr.map(s => {
         return Promise.all(
           contentData.items.map((x, i) => {
-            if (!contentData.items[i].mobile && s === "mobile") {
+            if (
+              (!contentData.items[i].mobile && s === "mobile") ||
+              contentData.items[i].custom !== ""
+            ) {
               return;
             } else {
               return new Promise((resolve, reject) => {
