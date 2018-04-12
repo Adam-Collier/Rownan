@@ -363,65 +363,71 @@ let initStyles = `
 
 var mainSlide = i => {
   return `
-  <div class= "row fullwidth row${i + 1}">
+  <div class="row fullwidth row${i + 1}">
     <a href="${contentData.items[i].url}" class="tracking">
-      <picture>
-        <!-- desktop -->
-        <source media="(min-width: 768px)" data-srcset="https://media.missguided.co.uk/image/upload/c_scale,w_768,q_70${
-          contentData.items[i].image
-        } 768w, https://media.missguided.co.uk/image/upload/c_scale,w_967,q_70${
-    contentData.items[i].image
-  } 967w, https://media.missguided.co.uk/image/upload/c_scale,w_1147,q_70${
-    contentData.items[i].image
-  } 1147w, https://media.missguided.co.uk/image/upload/c_scale,w_1294,q_70${
-    contentData.items[i].image
-  } 1294w, https://media.missguided.co.uk/image/upload/c_scale,w_1453,q_70${
-    contentData.items[i].image
-  } 1453w, https://media.missguided.co.uk/image/upload/c_scale,w_1591,q_70${
-    contentData.items[i].image
-  } 1591w, https://media.missguided.co.uk/image/upload/c_scale,w_1718,q_70${
-    contentData.items[i].image
-  } 1718w, https://media.missguided.co.uk/image/upload/c_scale,w_1856,q_70${
-    contentData.items[i].image
-  } 1856w, https://media.missguided.co.uk/image/upload/c_scale,w_1919,q_70${
-    contentData.items[i].image
-  } 1919w, https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70${
-    contentData.items[i].image
-  } 1920w">
-        <!-- mobile -->
-        <source media="(max-width: 767px)" data-srcset="https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_320${
-          contentData.items[i].mobile
-        } 320w, https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_400,q_70${
+        <picture>
+            <source media="(max-width: 767px)" sizes="(max-width: 767px) 100vw, 767px" data-srcset="https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_300${
+              contentData.items[i].mobile
+            } 300w, https://media.missguided.co.uk/image/upload/w_402${
     contentData.items[i].mobile
-  } 375w, https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_600,q_70${
+  } 402w, https://media.missguided.co.uk/image/upload/w_491${
     contentData.items[i].mobile
-  } 414w"
-          src="https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_768,dpr_1${
-            contentData.items[i].mobile
-          }"
-          sizes="100vw">
-        <img class="lazyload" data-expand="-50" data-src="https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70${
-          contentData.items[i].image
-        }" src="${
+  } 491w, https://media.missguided.co.uk/image/upload/w_569${
+    contentData.items[i].mobile
+  } 569w, https://media.missguided.co.uk/image/upload/w_639${
+    contentData.items[i].mobile
+  } 639w, https://media.missguided.co.uk/image/upload/w_711${
+    contentData.items[i].mobile
+  } 711w, https://media.missguided.co.uk/image/upload/w_756${
+    contentData.items[i].mobile
+  } 756w, https://media.missguided.co.uk/image/upload/w_767${
+    contentData.items[i].mobile
+  } 767w">
+            <source sizes="(max-width: 1920px) 100vw, 1920px" data-srcset="https://media.missguided.co.uk/image/upload/w_768,q_70${
+              contentData.items[i].image
+            } 768w, https://media.missguided.co.uk/image/upload/w_937,q_70${
+    contentData.items[i].image
+  } 937w, https://media.missguided.co.uk/image/upload/w_1086,q_70${
+    contentData.items[i].image
+  } 1086w, https://media.missguided.co.uk/image/upload/w_1226,q_70${
+    contentData.items[i].image
+  } 1226w, https://media.missguided.co.uk/image/upload/w_1353,q_70${
+    contentData.items[i].image
+  } 1353w, https://media.missguided.co.uk/image/upload/w_1474,q_70${
+    contentData.items[i].image
+  } 1474w, https://media.missguided.co.uk/image/upload/w_1582,q_70${
+    contentData.items[i].image
+  } 1582w, https://media.missguided.co.uk/image/upload/w_1686,q_70${
+    contentData.items[i].image
+  } 1686w, https://media.missguided.co.uk/image/upload/w_1792,q_70${
+    contentData.items[i].image
+  } 1792w, https://media.missguided.co.uk/image/upload/w_1905,q_70${
+    contentData.items[i].image
+  } 1905w, https://media.missguided.co.uk/image/upload/w_1920,q_70${
+    contentData.items[i].image
+  } 1920w" alt="image failed">
+            <img class="lazyload" data-expand="-50" data-src="https://media.missguided.co.uk/image/upload/w_1920,q_70${
+              contentData.items[i].image
+            }" src="${
     contentData.items[i].squipimage
       ? contentData.items[i].squipimage
-      : "https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70" +
+      : " https://media.missguided.co.uk/image/upload/c_scale,w_1920,q_70 " +
         contentData.items[i].image
   }" alt="backup">
-      </picture>
-      <div class="banner_content center">
-        ${contentData.items[i].svg}
-        <h2 class="title1 white">${contentData.items[i].title}</h2>
-        <h4 class="subtitle1 white">${contentData.items[i].subtitle}</h4>
-        <div class="more-buttons">
-          <button class="button">${contentData.items[i].cta}</button>
-          <a href="${contentData.items[i].url2}">
-            <button class="button">${contentData.items[i].cta2}</button>
-          </a>
+        </picture>
+        <div class="banner_content center">
+            ${contentData.items[i].svg}
+            <h2 class="title1 white">${contentData.items[i].title}</h2>
+            <h4 class="subtitle1 white">${contentData.items[i].subtitle}</h4>
+            <div class="more-buttons">
+                <button class="button">${contentData.items[i].cta}</button>
+                <a href="${contentData.items[i].url2}">
+                    <button class="button">${contentData.items[i].cta2}</button>
+                </a>
+            </div>
         </div>
-      </div>
     </a>
-  </div>
+</div>
 `;
 };
 
