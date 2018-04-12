@@ -7,84 +7,70 @@ let initOutput = `
 </div>
 <script src="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
 <script type="text/javascript">
-  (function ($) {
-    $(document).ready(function () {
-      $('#homeSlider').slick({
-        infinite: true,
-        adaptiveHeight: true,
-        autoplay: true,
-        autoplaySpeed: 5000,
-        pauseOnHover: false,
-        dots: true,
-        slide: '.fullwidth',
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        responsive: [{
-            breakpoint: 1000,
-            settings: {
-              slidesToShow: 1,
-              slidesToScroll: 1
+    (function ($) {
+        $(document).ready(function () {
+            $('#homeSlider').slick({
+                infinite: true,
+                adaptiveHeight: true,
+                autoplay: true,
+                autoplaySpeed: 5000,
+                pauseOnHover: false,
+                dots: true,
+                slide: '.fullwidth',
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                responsive: [{
+                    breakpoint: 1000,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                },
+                {
+                    breakpoint: 768,
+                    settings: "unslick"
+                }
+                ]
+            });
+            $('.slick-three').slick({
+                infinite: true,
+                adaptiveHeight: false,
+                slide: ':not(.blocker)',
+                dots: false,
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                arrows: true,
+                centerMode: true,
+                centerPadding: '0',
+                responsive: [{
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    },
+                    centerMode: true,
+                    centerPadding: '50',
+                    variableWidth: true,
+                }]
+            });
+        });
+        $(window).on('resize orientationchange', function () {
+            $('#homeSlider').slick('resize');
+            $('.slick-three').slick('resize');
+        });
+        $(window).scroll(_.debounce(function () {
+            if ($(window).width() < 767) {
+                var wScroll = $(this).scrollTop();
+                console.log(wScroll);
+                if (wScroll > $('.slick-three').offset().top - 400) {
+                    $('.slick-three .slick-slide').css('animation', 'swipe 1200ms ease-in-out forwards');
+                    setTimeout(function () {
+                        $('.blocker').css('display', 'none');
+                    }, 1600);
+                }
             }
-          },
-          {
-            breakpoint: 768,
-            settings: "unslick"
-          }
-        ]
-      });
-    });
-  }(jQuery));
-  (function ($) {
-    $(window).on('resize orientationchange', function () {
-      $('#homeSlider').slick('resize');
-    });
-  }(jQuery));
-</script>
-<script type="text/javascript">
-  (function ($) {
-    $(document).ready(function () {
-      $('.slick-three').slick({
-        infinite: true,
-        adaptiveHeight: false,
-        slide: ':not(.blocker)',
-        dots: false,
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        arrows: true,
-        centerMode: true,
-        centerPadding: '0',
-        responsive: [{
-          breakpoint: 768,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1
-          },
-          centerMode: true,
-          centerPadding: '50',
-          variableWidth: true,
-        }]
-      });
-    });
-  }(jQuery));
-  (function ($) {
-    $(window).on('resize orientationchange', function () {
-      $('.slick-three').slick('resize');
-    });
-  }(jQuery));
-</script>
-<script type="text/javascript">
-  (function ($) {
-    $(window).scroll(_.debounce(function () {
-      var wScroll = $(this).scrollTop();
-      console.log(wScroll);
-      if (wScroll > $('.slick-three').offset().top - 400) {
-        $('.slick-slide').css('animation', 'swipe 1200ms ease-in-out forwards');
-        setTimeout(function () {
-          $('.blocker').css('display', 'none');
-        }, 1600);
-      }
-    }, 100));
-  })(jQuery);
+        }, 100));
+    })(jQuery);
 </script>
   `;
 
@@ -497,12 +483,12 @@ let promoStrip = () => {
 <a href="https://itunes.apple.com/gb/app/missguided/id842503500?mt=8">
   <div class="row fullwidth" id="banner" style="background: #F3D0D2;margin-bottom: 0px;">
     <div class="title-center-row" style="padding: 0px 20px 0px 20px;">
-      <h3 class="black" style="margin: 10px 0px 14px 0px;padding:0px;font-size:1.125rem">
+      <h3 class="black" style="margin: 10px 0px 14px 0px; padding:0px; font-size:1.125rem; text-align:center;">
             ${contentData.promoStrip}
       </h3>
     </div>
   </div>
-</a>;`;
+</a>`;
 };
 
 module.exports = {
