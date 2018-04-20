@@ -4,7 +4,6 @@ let {
   contentSlide,
   nav,
   blocker,
-  slick,
   promoStrip
 } = require("../templateLiterals");
 
@@ -58,7 +57,6 @@ let injectContent = () => {
 
   $("#homeSlider").prepend(nav);
   $(".slick-three").prepend(blocker);
-  $(slick()).insertAfter(".container");
 
   if (contentData.promoStrip !== "") {
     $(promoStrip()).insertAfter("#homeSlider");

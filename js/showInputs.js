@@ -1,8 +1,11 @@
-function showInputs(ind, x, addInputs){
-
-  addInputs.addEventListener('webkitAnimationEnd', function(){
-      this.style.webkitAnimationName = '';
-  }, false);
+function showInputs(ind, x, addInputs) {
+  addInputs.addEventListener(
+    "webkitAnimationEnd",
+    function() {
+      this.style.webkitAnimationName = "";
+    },
+    false
+  );
 
   var center = `
     <div class="inline">
@@ -23,6 +26,8 @@ function showInputs(ind, x, addInputs){
     <input type="text" class="svg"><br>
     <label>Title</label><br>
     <input type="text" class="title"><br>
+    <label>Subtitle</label><br>
+    <input type="text" class="subtitle"><br>
     <div class="inline">
       <div>
         <label>CTA</label><br>
@@ -54,48 +59,48 @@ function showInputs(ind, x, addInputs){
     <label>Subtitle</label><br>
     <input type="text" class="subtitle"><br>
   `;
-  
+
   var custom = `
   <textarea class="custom"></textarea>
   `;
 
   switch (x) {
-    case 'full':
+    case "full":
       console.log(x);
       addInputs.innerHTML = full;
-      addInputs.style.webkitAnimationName = 'show';
+      addInputs.style.webkitAnimationName = "show";
       break;
-    case 'center':
+    case "center":
       console.log(x);
       addInputs.innerHTML = center;
       customEditors(addInputs);
-      addInputs.style.webkitAnimationName = 'show';
+      addInputs.style.webkitAnimationName = "show";
       break;
-    case 'left':
+    case "left":
       console.log(x);
       addInputs.innerHTML = left;
-      addInputs.style.webkitAnimationName = 'show';
+      addInputs.style.webkitAnimationName = "show";
       break;
-    case 'right':
+    case "right":
       console.log(x);
       addInputs.innerHTML = right;
-      addInputs.style.webkitAnimationName = 'show';
+      addInputs.style.webkitAnimationName = "show";
       break;
-    case 'two':
+    case "two":
       console.log(x);
       addInputs.innerHTML = two;
-      addInputs.style.webkitAnimationName = 'show';
+      addInputs.style.webkitAnimationName = "show";
       break;
-    case 'three':
+    case "three":
       console.log(x);
       addInputs.innerHTML = three;
-      addInputs.style.webkitAnimationName = 'show';
+      addInputs.style.webkitAnimationName = "show";
       break;
-    case 'custom':
+    case "custom":
       console.log(x);
       addInputs.innerHTML = custom;
       customEditors(addInputs);
-      addInputs.style.webkitAnimationName = 'show';
+      addInputs.style.webkitAnimationName = "show";
       break;
     default:
       addInputs.innerHTML = "";

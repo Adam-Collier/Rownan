@@ -1,11 +1,6 @@
 const cheerio = require("cheerio");
 
-let {
-  initOutput,
-  initStyles,
-  mainSlide,
-  contentSlide
-} = require("./templateLiterals");
+let { initOutput, mainSlide, contentSlide } = require("./templateLiterals");
 
 let writeOutputJSON = require("./genFunctions/writeOutputJSON");
 let initHomepage = require("./genFunctions/initHomepage");
