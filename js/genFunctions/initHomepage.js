@@ -1,10 +1,6 @@
-let { initOutput, initStyles, nav } = require("../templateLiterals");
+let { initOutput, nav } = require("../templateLiterals");
 
 let initHomepage = () => {
-  // write styles
-  // fs.writeFileSync(path.join(__dirname, "../output.html"), initStyles);
-  // add codemirrror styles
-  // append styles from contentData with squipped background images
   fs.writeFileSync(
     path.join(__dirname, "../output.html"),
     contentData.styles,
