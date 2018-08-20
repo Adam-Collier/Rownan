@@ -4,7 +4,9 @@ let writeOutputJSON = () => {
 
   document
     .querySelectorAll('.categories input[type="text"]')
-    .forEach(function(el) {
+    .forEach(function (el) {
+      // if there are any spaces, remove them
+      el.className.includes("url") ? el.value = el.value.replace(/\s/g, '') : null
       cats["" + el.className] = "" + el.value;
     });
   contentData.categories.push(cats);
@@ -19,12 +21,15 @@ let writeOutputJSON = () => {
   // create an object with key items to hold array
   var elements = document.querySelectorAll(".selection");
   // get each selection in an array
-  Array.prototype.forEach.call(elements, function(el) {
+  Array.prototype.forEach.call(elements, function (el) {
     console.log(el);
     let obj = {};
     // loop through the inputs in that section
     // uses class names for obj property names
-    el.querySelectorAll('input[type="text"]').forEach(function(el) {
+    el.querySelectorAll('input[type="text"]').forEach(function (el) {
+      // if there are any rogue spaces at the end, remove them
+      el.className == "url" || el.className == "url2" ? el.value = el.value.replace(/\s/g, '') : null
+
       obj[el.className] = el.value;
       // console.log(obj);
     });
@@ -41,8 +46,8 @@ let writeOutputJSON = () => {
   console.log(contentData);
 
   // var selected = [];
-  // push selection values to contentData
-  document.querySelectorAll("option").forEach(function(x) {
+  // push dropdown values to contentData
+  document.querySelectorAll("option").forEach(function (x) {
     if (x.selected == true) {
       contentData.options.push(x.value);
     }
@@ -57,7 +62,7 @@ let writeOutputJSON = () => {
   fs.writeFile(
     path.join(__dirname, "../../output.json"),
     JSON.stringify(contentData, null, 2),
-    function(err, data) {
+    function (err, data) {
       if (err) {
         console.log(error);
       }
