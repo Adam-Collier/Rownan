@@ -3,14 +3,16 @@ const { dialog } = require("electron").remote;
 function saveToFile() {
   var s = document.querySelectorAll(".save-icon");
 
-  s.forEach(function(x) {
+  // init svg animation
+  s.forEach(function (x) {
     var rect = x.getBoundingClientRect();
-    console.log(rect);
+
     if (rect.width === 0) {
       x.style.webkitAnimation = "save 800ms forwards";
     }
   });
 
+  // open the save dialog
   dialog.showSaveDialog(
     {
       filters: [
@@ -20,33 +22,34 @@ function saveToFile() {
         }
       ]
     },
-    function(fileName) {
-      s.forEach(function(x) {
+    function (fileName) {
+      // once save has been clicked
+
+      // reverse the animation
+      s.forEach(function (x) {
         var rect = x.getBoundingClientRect();
         if (rect.width > 0) {
           x.style.webkitAnimation = "save-reverse 800ms forwards";
         }
       });
 
+      // return if no file selected
       if (fileName === undefined) return;
 
-      //create temp file and get fileName after last slash
-      var temp = fileName.match(/^(.*[\/])/);
-      temp = temp[1] + "savedFiles/";
+      //create jsonDir file and get fileName after last slash
+      var filePath = fileName.match(/^(.*[\/])/);
+      jsonDir = filePath[1] + "savedFiles/";
+      // remove html extension
       var jsonFile = fileName.match(/[^/]+$/);
       jsonFile = jsonFile[0].slice(0, -5);
 
-      fs.readFile(path.join(__dirname, "../output.json"), "utf8", function(
-        err,
-        jsonData
-      ) {
-        console.log(jsonFile);
-        if (fs.existsSync(temp)) {
-          // Do something
-          fs.writeFile(temp + "/" + jsonFile + ".json", jsonData, function(
-            err,
-            data
-          ) {
+      fs.readFile(path.join(__dirname, "../output.json"), "utf8", function (err, jsonData) {
+        if (err) console.log(err);
+
+        // check if json directory exists
+        if (fs.existsSync(jsonDir)) {
+          // if directory exists write file
+          fs.writeFile(jsonDir + "/" + jsonFile + ".json", jsonData, function (err) {
             if (err) {
               console.log(err);
             } else {
@@ -54,11 +57,12 @@ function saveToFile() {
             }
           });
         } else {
-          fs.mkdir(temp, function(err) {
+          // if directory doesnt exist create it then write the json
+          fs.mkdir(jsonDir, function (err) {
             if (err) {
               console.log(err);
             } else {
-              fs.writeFile(temp + "/" + jsonFile + ".json", jsonData, function(
+              fs.writeFile(jsonDir + "/" + jsonFile + ".json", jsonData, function (
                 err,
                 data
               ) {
@@ -69,12 +73,12 @@ function saveToFile() {
                 }
               });
             }
-            console.log("temp created");
+            console.log("json directory created");
           });
         }
       });
 
-      fs.readFile(path.join(__dirname, "../output.html"), "utf8", function(
+      fs.readFile(path.join(__dirname, "../output.html"), "utf8", function (
         err,
         data
       ) {
@@ -82,11 +86,10 @@ function saveToFile() {
           throw err;
         }
         var saveFile = data;
-        fs.writeFile(fileName, saveFile, function(err, data) {
+        fs.writeFile(fileName, saveFile, function (err, data) {
           //write the new JSON to the file
-          if (err) {
-            console.log(error);
-          }
+          if (err) console.log(err);
+
           console.log("file saved");
           const notification = {
             title: "File Saved",
