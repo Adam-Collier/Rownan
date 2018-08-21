@@ -1,38 +1,34 @@
 const { dialog } = require("electron").remote;
-const fs = require("fs");
 
-function openFile() {
-  dialog.showOpenDialog({ filters: [{ extensions: ["json"] }] }, function(
+function openFile(dropdown) {
+  dialog.showOpenDialog({ filters: [{ extensions: ["json"] }] }, function (
     fileNames
   ) {
-    fs.readFile(fileNames[0], "utf8", function(err, data) {
-      // console.log(err);
+    fs.readFile(fileNames[0], "utf8", function (err, data) {
+      if (err) console.log(err)
       // remove existing inputs
       if (document.querySelector(".selection")) {
-        document.querySelectorAll(".selection").forEach(function(x) {
+        document.querySelectorAll(".selection").forEach(function (x) {
           x.remove();
         });
       }
       // parse the read data
       data = JSON.parse(data);
-      // add the styles to the top editor
-      // console.log(data.styles);
+      // add the styles to the CodeMirror editor
       document.querySelector(".CodeMirror").CodeMirror.setValue(data.styles);
-
-      document.querySelectorAll(".categories").forEach(function(x, i) {
+      // add categories
+      document.querySelectorAll(".categories").forEach(function (x, i) {
         console.log(x);
-        x.querySelectorAll("input[type=text]").forEach(function(input) {
-          console.log(data.categories[i]);
+        x.querySelectorAll("input[type=text]").forEach(function (input) {
           input.value = data.categories[i][input.className];
         });
       });
+      // add promo strip
+      document.querySelector(".promo-strip input[type=text]").value = data.promoStrip;
 
-      document.querySelector(".promo-strip input[type=text]").value =
-        data.promoStrip;
-
-      var rowOptions = data.options;
-      // console.log(rowOptions);
-      rowOptions.forEach(function(x, index) {
+      var rowType = data.options;
+      console.log(rowType);
+      rowType.forEach(function (x, index) {
         document
           .querySelector(".container")
           .insertAdjacentHTML("beforeend", dropdown);
@@ -40,7 +36,7 @@ function openFile() {
         var rowVal = document.querySelectorAll("select");
 
         rowVal = rowVal[rowVal.length - 1];
-        rowVal.querySelectorAll("option").forEach(function(v, i) {
+        rowVal.querySelectorAll("option").forEach(function (v, i) {
           if (v.value == x) {
             rowVal.selectedIndex = i;
           }
@@ -48,30 +44,16 @@ function openFile() {
 
         var addInputs = rowVal.parentNode.querySelector("div");
 
-        showInputs(index, x, addInputs);
+        showInputs(x, addInputs);
       });
-      document.querySelectorAll(".selection").forEach(function(x, i) {
-        // console.log(x);
+      document.querySelectorAll(".selection").forEach(function (x, i) {
 
-        x.querySelectorAll("input[type=text]").forEach(function(input) {
-          // console.log(data.items[i]);
+        x.querySelectorAll("input[type=text]").forEach(function (input) {
           input.value = data.items[i][input.className];
         });
 
-        Array.prototype.slice
-          .call(x.querySelectorAll("input[type=radio]"))
-          .forEach(function(input) {
-            if (input.value == data.items[i].vertical) {
-              input.checked = true;
-            }
-            if (input.value == data.items[i].radio) {
-              input.checked = true;
-            }
-          });
-
         if (x.querySelector(".CodeMirror")) {
-          x
-            .querySelector(".CodeMirror")
+          x.querySelector(".CodeMirror")
             .CodeMirror.setValue(data.items[i].custom);
         }
       });
