@@ -1,7 +1,7 @@
-function showInputs(ind, x, addInputs) {
+function showInputs(x, addInputs) {
   addInputs.addEventListener(
     "webkitAnimationEnd",
-    function() {
+    function () {
       this.style.webkitAnimationName = "";
     },
     false
