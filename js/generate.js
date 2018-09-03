@@ -9,12 +9,9 @@ function generate(command) {
   // create object to store all content
   contentData = { categories: [], items: [], options: [] };
   if (command === "sqip") {
-
     writeOutputJSON();
 
     squipImages().then(() => {
-      document.querySelector(".loader").classList.remove("loader-show");
-
       createCSS();
 
       initHomepage();
