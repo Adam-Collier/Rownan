@@ -1,7 +1,7 @@
 function showInputs(x, addInputs) {
   addInputs.addEventListener(
     "webkitAnimationEnd",
-    function () {
+    function() {
       this.style.webkitAnimationName = "";
     },
     false
@@ -65,41 +65,15 @@ function showInputs(x, addInputs) {
   `;
 
   switch (x) {
-    case "full":
-      console.log(x);
-      addInputs.innerHTML = full;
-      addInputs.style.webkitAnimationName = "show";
-      break;
     case "center":
       console.log(x);
       addInputs.innerHTML = center;
       customEditors(addInputs);
       addInputs.style.webkitAnimationName = "show";
       break;
-    case "left":
-      console.log(x);
-      addInputs.innerHTML = left;
-      addInputs.style.webkitAnimationName = "show";
-      break;
-    case "right":
-      console.log(x);
-      addInputs.innerHTML = right;
-      addInputs.style.webkitAnimationName = "show";
-      break;
-    case "two":
-      console.log(x);
-      addInputs.innerHTML = two;
-      addInputs.style.webkitAnimationName = "show";
-      break;
     case "three":
       console.log(x);
       addInputs.innerHTML = three;
-      addInputs.style.webkitAnimationName = "show";
-      break;
-    case "custom":
-      console.log(x);
-      addInputs.innerHTML = custom;
-      customEditors(addInputs);
       addInputs.style.webkitAnimationName = "show";
       break;
     default:
