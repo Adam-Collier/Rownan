@@ -1,9 +1,9 @@
 let sqip = require("sqip");
 let svgToMiniDataURI = require("mini-svg-data-uri");
 let request = require("request-promise-native");
+let { errorStrip } = require("./error.js");
 
 let squipImages = () => {
-
   document.querySelector(".loader").classList.add("loader-show");
 
   return new Promise((resolve, reject) => {
@@ -22,13 +22,11 @@ let squipImages = () => {
               return;
             } else {
               return new Promise((resolve, reject) => {
-                // console.log(s);
-                // console.log(x.image);
                 request
                   .get({
                     url: `https://media.missguided.co.uk/image/upload/w_300,q_70/${
                       x[s]
-                      }`,
+                    }`,
                     encoding: "binary"
                   })
                   .then(response => {
@@ -39,7 +37,7 @@ let squipImages = () => {
                       {
                         encoding: "binary"
                       },
-                      function (err) {
+                      function(err) {
                         if (err) throw err;
 
                         const result = sqip({
@@ -58,26 +56,34 @@ let squipImages = () => {
 
                         contentData.items[i]["squip" + s] = optimizedSVGDataURI;
                         resolve(contentData.items[i]["squip" + s]);
-                        //   console.log(optimizedSVGDataURI);
-                        //   console.log("this has been squipped");
                       }
                     );
                   })
-                  .catch(err => console.log(err));
+                  .catch(err => {
+                    console.log(err);
+                    document
+                      .querySelector(".loader")
+                      .classList.remove("loader-show");
+
+                    errorStrip(
+                      "You are missing an image or the image no longer exists"
+                    );
+                  });
               });
             }
           })
         );
       })
     ).then(() => {
-      //   write the JSON file
+      // write the JSON file
       fs.writeFile(
         path.join(__dirname, "../../output.json"),
         JSON.stringify(contentData, null, 2),
-        function (err, data) {
+        function(err, data) {
           if (err) {
             console.log(error);
           }
+          document.querySelector(".loader").classList.remove("loader-show");
           resolve(console.log("JSON file created"));
         }
       );
