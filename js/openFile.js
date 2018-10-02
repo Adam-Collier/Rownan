@@ -1,14 +1,14 @@
 const { dialog } = require("electron").remote;
 
 function openFile(dropdown) {
-  dialog.showOpenDialog({ filters: [{ extensions: ["json"] }] }, function (
+  dialog.showOpenDialog({ filters: [{ extensions: ["json"] }] }, function(
     fileNames
   ) {
-    fs.readFile(fileNames[0], "utf8", function (err, data) {
-      if (err) console.log(err)
+    fs.readFile(fileNames[0], "utf8", function(err, data) {
+      if (err) console.log(err);
       // remove existing inputs
       if (document.querySelector(".selection")) {
-        document.querySelectorAll(".selection").forEach(function (x) {
+        document.querySelectorAll(".selection").forEach(function(x) {
           x.remove();
         });
       }
@@ -17,18 +17,19 @@ function openFile(dropdown) {
       // add the styles to the CodeMirror editor
       document.querySelector(".CodeMirror").CodeMirror.setValue(data.styles);
       // add categories
-      document.querySelectorAll(".categories").forEach(function (x, i) {
+      document.querySelectorAll(".categories").forEach(function(x, i) {
         console.log(x);
-        x.querySelectorAll("input[type=text]").forEach(function (input) {
+        x.querySelectorAll("input[type=text]").forEach(function(input) {
           input.value = data.categories[i][input.className];
         });
       });
       // add promo strip
-      document.querySelector(".promo-strip input[type=text]").value = data.promoStrip;
+      document.querySelector(".promoStrip").value = data.promoStrip;
+      document.querySelector(".promoUrl").value = data.promoUrl;
 
       var rowType = data.options;
       console.log(rowType);
-      rowType.forEach(function (x, index) {
+      rowType.forEach(function(x, index) {
         document
           .querySelector(".container")
           .insertAdjacentHTML("beforeend", dropdown);
@@ -36,7 +37,7 @@ function openFile(dropdown) {
         var rowVal = document.querySelectorAll("select");
 
         rowVal = rowVal[rowVal.length - 1];
-        rowVal.querySelectorAll("option").forEach(function (v, i) {
+        rowVal.querySelectorAll("option").forEach(function(v, i) {
           if (v.value == x) {
             rowVal.selectedIndex = i;
           }
@@ -46,15 +47,15 @@ function openFile(dropdown) {
 
         showInputs(x, addInputs);
       });
-      document.querySelectorAll(".selection").forEach(function (x, i) {
-
-        x.querySelectorAll("input[type=text]").forEach(function (input) {
+      document.querySelectorAll(".selection").forEach(function(x, i) {
+        x.querySelectorAll("input[type=text]").forEach(function(input) {
           input.value = data.items[i][input.className];
         });
 
         if (x.querySelector(".CodeMirror")) {
-          x.querySelector(".CodeMirror")
-            .CodeMirror.setValue(data.items[i].custom);
+          x.querySelector(".CodeMirror").CodeMirror.setValue(
+            data.items[i].custom
+          );
         }
       });
     });
