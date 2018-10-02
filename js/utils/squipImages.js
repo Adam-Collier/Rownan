@@ -66,7 +66,10 @@ let squipImages = () => {
                       .classList.remove("loader-show");
 
                     errorStrip(
-                      "You are missing an image or the image no longer exists"
+                      `${
+                        s == "image" ? "Desktop" : "Mobile"
+                      } image missing in row #${i +
+                        1} or the image no longer exists`
                     );
                   });
               });
