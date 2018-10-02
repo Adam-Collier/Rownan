@@ -126,8 +126,8 @@ let nav = () => {
 
 let promoStrip = () => {
   return `
-<a href="https://itunes.apple.com/gb/app/missguided/id842503500?mt=8">
-  <div class="row fullwidth" id="banner" style="background: #F3D0D2;margin-bottom: 0px;">
+<a href="${contentData.promoUrl}">
+  <div class="row fullwidth" id="banner" style="background: #F3D0D2">
     <div class="title-center-row" style="padding: 0px 20px 0px 20px;">
       <h3 class="black" style="margin: 10px 0px 14px 0px; padding:0px; font-size:1.125rem; text-align:center;">
             ${contentData.promoStrip}
