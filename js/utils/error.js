@@ -13,7 +13,7 @@ let errorStrip = message => {
 
   setTimeout(() => {
     document.querySelector(".error").remove();
-  }, 5000);
+  }, 7000);
 };
 
 module.exports = {
