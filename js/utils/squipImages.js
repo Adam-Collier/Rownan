@@ -32,7 +32,10 @@ let squipImages = () => {
                   .then(response => {
                     console.log("got image", i);
                     fs.writeFile(
-                      `./tempImages/sqip-${s}-temp${i + 1}.jpeg`,
+                      path.join(
+                        __dirname,
+                        `../../tempImages/sqip-${s}-temp${i + 1}.jpeg`
+                      ),
                       response,
                       {
                         encoding: "binary"
