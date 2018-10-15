@@ -92,12 +92,11 @@
           </div>
         </div>
         <div class="promo-strip">
-          <label>Promo Strip</label>
+          <label>Promo Title</label>
           <input type="text" class="promoStrip">
+          <label>Promo Url</label>
+          <input type="text" class="promoUrl">
         </div>
-        <!-- <div class="selection">
-
-        </div> -->
       </div>
       <input class="button" type="button" value="+" />
       <!-- <div id='console'></div> -->
@@ -149,10 +148,8 @@
     <svg width="100%" height="100%" viewBox="0 0 61 43" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
       xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.41421;"
       class="preview-button">
-      <path class="switch" d="M13.89,18.615l0,8.775l-13.5,-13.5l13.5,-13.5l0,8.775l28.5,0l0,9.45l-28.5,0Z" style="stroke-width:1.3px;"
-      />
-      <path class="switch" d="M18.39,33.615l0,-9.45l28.5,0l0,-8.775l13.5,13.5l-13.5,13.5l0,-8.775l-28.5,0Z" style="stroke-width:1.3px;"
-      />
+      <path class="switch" d="M13.89,18.615l0,8.775l-13.5,-13.5l13.5,-13.5l0,8.775l28.5,0l0,9.45l-28.5,0Z" style="stroke-width:1.3px;" />
+      <path class="switch" d="M18.39,33.615l0,-9.45l28.5,0l0,-8.775l13.5,13.5l-13.5,13.5l0,-8.775l-28.5,0Z" style="stroke-width:1.3px;" />
     </svg>
 
     <?xml version="1.0" standalone="no"?>
@@ -167,8 +164,12 @@
       <path d="M10.874,2.499l6,0" style="fill:none;stroke-width:0.7px;" />
     </svg>
 
-
+    <div class="loader">
+      <h4>Squipping Images</h4>
+    </div>
   </div>
+
+
 
   <!-- <script>window.$ = window.jQuery = require('./js/jquery.js');</script> -->
   <script src="./js/codemirror/codemirror.js"></script>
@@ -188,12 +189,7 @@
       tabSize: 1
     });
   </script>
-
   <script src="./js/script.js"></script>
-
-  <!-- <script>
-      require('./js/resize');
-    </script> -->
 </body>
 
 </html>

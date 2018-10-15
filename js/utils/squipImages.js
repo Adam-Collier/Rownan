@@ -1,8 +1,11 @@
 let sqip = require("sqip");
 let svgToMiniDataURI = require("mini-svg-data-uri");
 let request = require("request-promise-native");
+let { errorStrip } = require("./error.js");
 
 let squipImages = () => {
+  document.querySelector(".loader").classList.add("loader-show");
+
   return new Promise((resolve, reject) => {
     let arr = ["image", "mobile"];
 
@@ -19,8 +22,6 @@ let squipImages = () => {
               return;
             } else {
               return new Promise((resolve, reject) => {
-                // console.log(s);
-                // console.log(x.image);
                 request
                   .get({
                     url: `https://media.missguided.co.uk/image/upload/w_300,q_70/${
@@ -31,7 +32,10 @@ let squipImages = () => {
                   .then(response => {
                     console.log("got image", i);
                     fs.writeFile(
-                      `./tempImages/sqip-${s}-temp${i + 1}.jpeg`,
+                      path.join(
+                        __dirname,
+                        `../../tempImages/sqip-${s}-temp${i + 1}.jpeg`
+                      ),
                       response,
                       {
                         encoding: "binary"
@@ -55,19 +59,29 @@ let squipImages = () => {
 
                         contentData.items[i]["squip" + s] = optimizedSVGDataURI;
                         resolve(contentData.items[i]["squip" + s]);
-                        //   console.log(optimizedSVGDataURI);
-                        //   console.log("this has been squipped");
                       }
                     );
                   })
-                  .catch(err => console.log(err));
+                  .catch(err => {
+                    console.log(err);
+                    document
+                      .querySelector(".loader")
+                      .classList.remove("loader-show");
+
+                    errorStrip(
+                      `${
+                        s == "image" ? "Desktop" : "Mobile"
+                      } image missing in row #${i +
+                        1} or the image no longer exists`
+                    );
+                  });
               });
             }
           })
         );
       })
     ).then(() => {
-      //   write the JSON file
+      // write the JSON file
       fs.writeFile(
         path.join(__dirname, "../../output.json"),
         JSON.stringify(contentData, null, 2),
@@ -75,6 +89,7 @@ let squipImages = () => {
           if (err) {
             console.log(error);
           }
+          document.querySelector(".loader").classList.remove("loader-show");
           resolve(console.log("JSON file created"));
         }
       );

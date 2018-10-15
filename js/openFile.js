@@ -1,12 +1,11 @@
 const { dialog } = require("electron").remote;
-const fs = require("fs");
 
-function openFile() {
+function openFile(dropdown) {
   dialog.showOpenDialog({ filters: [{ extensions: ["json"] }] }, function(
     fileNames
   ) {
     fs.readFile(fileNames[0], "utf8", function(err, data) {
-      // console.log(err);
+      if (err) console.log(err);
       // remove existing inputs
       if (document.querySelector(".selection")) {
         document.querySelectorAll(".selection").forEach(function(x) {
@@ -15,24 +14,22 @@ function openFile() {
       }
       // parse the read data
       data = JSON.parse(data);
-      // add the styles to the top editor
-      // console.log(data.styles);
+      // add the styles to the CodeMirror editor
       document.querySelector(".CodeMirror").CodeMirror.setValue(data.styles);
-
+      // add categories
       document.querySelectorAll(".categories").forEach(function(x, i) {
         console.log(x);
         x.querySelectorAll("input[type=text]").forEach(function(input) {
-          console.log(data.categories[i]);
           input.value = data.categories[i][input.className];
         });
       });
+      // add promo strip
+      document.querySelector(".promoStrip").value = data.promoStrip;
+      document.querySelector(".promoUrl").value = data.promoUrl;
 
-      document.querySelector(".promo-strip input[type=text]").value =
-        data.promoStrip;
-
-      var rowOptions = data.options;
-      // console.log(rowOptions);
-      rowOptions.forEach(function(x, index) {
+      var rowType = data.options;
+      console.log(rowType);
+      rowType.forEach(function(x, index) {
         document
           .querySelector(".container")
           .insertAdjacentHTML("beforeend", dropdown);
@@ -48,31 +45,17 @@ function openFile() {
 
         var addInputs = rowVal.parentNode.querySelector("div");
 
-        showInputs(index, x, addInputs);
+        showInputs(x, addInputs);
       });
       document.querySelectorAll(".selection").forEach(function(x, i) {
-        // console.log(x);
-
         x.querySelectorAll("input[type=text]").forEach(function(input) {
-          // console.log(data.items[i]);
           input.value = data.items[i][input.className];
         });
 
-        Array.prototype.slice
-          .call(x.querySelectorAll("input[type=radio]"))
-          .forEach(function(input) {
-            if (input.value == data.items[i].vertical) {
-              input.checked = true;
-            }
-            if (input.value == data.items[i].radio) {
-              input.checked = true;
-            }
-          });
-
         if (x.querySelector(".CodeMirror")) {
-          x
-            .querySelector(".CodeMirror")
-            .CodeMirror.setValue(data.items[i].custom);
+          x.querySelector(".CodeMirror").CodeMirror.setValue(
+            data.items[i].custom
+          );
         }
       });
     });

@@ -5,14 +5,21 @@ let writeOutputJSON = () => {
   document
     .querySelectorAll('.categories input[type="text"]')
     .forEach(function(el) {
+      // if there are any spaces, remove them
+      el.className.includes("url")
+        ? (el.value = el.value.replace(/\s/g, ""))
+        : null;
       cats["" + el.className] = "" + el.value;
     });
   contentData.categories.push(cats);
 
-  let promo = {};
-
-  let promoEl = document.querySelector('.promo-strip input[type="text"]');
-  contentData.promoStrip = promoEl.value;
+  document
+    .querySelectorAll('.promo-strip input[type="text"]')
+    .forEach((x, i) => {
+      i == 0
+        ? (contentData.promoStrip = x.value)
+        : (contentData.promoUrl = x.value);
+    });
 
   // create object to store input values
 
@@ -25,6 +32,11 @@ let writeOutputJSON = () => {
     // loop through the inputs in that section
     // uses class names for obj property names
     el.querySelectorAll('input[type="text"]').forEach(function(el) {
+      // if there are any rogue spaces at the end, remove them
+      el.className == "url" || el.className == "url2"
+        ? (el.value = el.value.replace(/\s/g, ""))
+        : null;
+
       obj[el.className] = el.value;
       // console.log(obj);
     });
@@ -41,7 +53,7 @@ let writeOutputJSON = () => {
   console.log(contentData);
 
   // var selected = [];
-  // push selection values to contentData
+  // push dropdown values to contentData
   document.querySelectorAll("option").forEach(function(x) {
     if (x.selected == true) {
       contentData.options.push(x.value);

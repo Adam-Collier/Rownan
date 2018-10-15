@@ -1,12 +1,9 @@
 function preview() {
   var preview = document.querySelector(".preview");
-  if (preview.style.visibility === "hidden") {
-    preview.style.visibility = "visible";
-  } else {
-    preview.style.visibility = "hidden";
-  }
-  var m = document.querySelectorAll(".switch");
-  m.forEach(function(x) {
+  preview.style.visibility === "hidden" ? preview.style.visibility = "visible" : preview.style.visibility = "hidden";
+
+  var a = document.querySelectorAll(".switch");
+  a.forEach(function (x) {
     if (x.style.fill === "rgb(160, 160, 160)") {
       x.style.fill = "none";
     } else {

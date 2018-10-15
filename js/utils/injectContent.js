@@ -8,11 +8,11 @@ let {
 } = require("../templateLiterals");
 
 let injectContent = () => {
-  let output = fs.readFileSync(path.join(__dirname, "../output.html"), "utf-8");
+  let output = fs.readFileSync(path.join(__dirname, "../../output.html"), "utf-8");
   let $ = cheerio.load(output);
 
   let inputs = document.querySelectorAll("select");
-  Array.prototype.forEach.call(inputs, function(el, i) {
+  Array.prototype.forEach.call(inputs, function (el, i) {
     console.log(el.options[el.selectedIndex].value, i);
 
     // grab the template literals
@@ -55,7 +55,10 @@ let injectContent = () => {
 
   $ = cheerio.load(cleanHTML);
 
-  $("#homeSlider").prepend(nav);
+  if (contentData.categories[0].cat1 !== "") {
+    $("#homeSlider").prepend(nav);
+  }
+
   $(".slick-three").prepend(blocker);
 
   if (contentData.promoStrip !== "") {

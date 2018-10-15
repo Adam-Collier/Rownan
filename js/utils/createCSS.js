@@ -1,6 +1,7 @@
 let createCSS = () => {
   contentData.items.map((x, i) => {
     // loop through items in the top slider
+    // x.mobile property only exists in the top slider
     if (x.mobile) {
       // create template literals of the css
       let desktop = `.row${i + 1} { background: url("${
@@ -18,31 +19,37 @@ let createCSS = () => {
 
       // grab the style tag
       let styleElement = doc.getElementsByTagName("style")[0].sheet;
-      console.log(styleElement.cssRules[0]);
+
+      // create array to capture the index of the media queries
+      let mediaIndex = [];
+      // loop through CSS rules
+      // if media exists then push the index to the array
+      Array.from(styleElement.cssRules).forEach((x, i) => {
+        if (x.media !== undefined) {
+          mediaIndex.push(i);
+        }
+      });
+
       // insert the template literals into the parsed dom element
-      // to keep in order i is passed in the as index argument
-      styleElement.cssRules[0].insertRule(desktop, i);
-      styleElement.cssRules[1].insertRule(mobile, i);
+      // pass mediaIndex in to correctly insert the rules
+      styleElement.cssRules[mediaIndex[0]].insertRule(desktop, i);
+      styleElement.cssRules[mediaIndex[1]].insertRule(mobile, i);
 
       // create an empty style tag
-      let blah = document.createElement("style");
+      let styleTags = document.createElement("style");
 
-      // add each media query to the empty style tag
-      blah.innerHTML += styleElement.cssRules[0].cssText;
-      blah.innerHTML += styleElement.cssRules[1].cssText;
+      // create array from styleElement object
+      // loop through and add each set of CSS rules
+      Array.from(styleElement.cssRules).forEach(x => {
+        styleTags.innerHTML += x.cssText;
+      });
 
       // change the style property values in contentData
-      contentData.styles = blah.outerHTML;
+      contentData.styles = styleTags.outerHTML;
     }
   });
 
-  // fs.writeFileSync(
-  //   path.join(__dirname, "../../output.json"),
-  //   JSON.stringify(contentData, null, 2)
-  // );
-  console.log("this has been written;");
-
-  // console.log(contentData.styles);
+  console.log("the CSS has been written!");
 };
 
 module.exports = createCSS;

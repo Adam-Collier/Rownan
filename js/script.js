@@ -36,7 +36,6 @@ var dropdown = `
       <option value="general" selected>Please Select</option>
       <option value="center">Home Slider</option>
       <option value="three">Three Slider</option>
-      <option value="custom">Custom</option>
     </select>
     <a href='#' class='remove'>Remove</a>
     <svg class="handle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 23"><title>Asset 3</title><polyline points="1 5 5 1 9 5" style="fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px"/><polyline points="9 18 5 22 1 18" style="fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px"/><line x1="5" y1="1.5" x2="5" y2="21.5" style="fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px"/></svg>
@@ -70,7 +69,7 @@ function drop(sel) {
   ind = Array.prototype.slice
     .call(document.querySelectorAll("select"))
     .indexOf(sel);
-  showInputs(ind, sel.value, s);
+  showInputs(sel.value, s);
 }
 
 // menu functions
@@ -79,7 +78,6 @@ ipcRenderer.on("generate", function() {
   generate("sqip");
 });
 ipcRenderer.on("images", function() {
-  console.log(generate);
   generate("images");
 });
 ipcRenderer.on("save", function() {
@@ -92,7 +90,7 @@ ipcRenderer.on("mobileView", function() {
   mobileSize();
 });
 ipcRenderer.on("openFile", function() {
-  openFile();
+  openFile(dropdown);
 });
 
 // switches to the code view
@@ -102,6 +100,7 @@ document
     preview();
   });
 
+// generated the content
 document.querySelector("#preview").addEventListener("click", generate());
 
 // resizes the window to a mobile view
@@ -110,9 +109,9 @@ document.querySelector(".resize-icon").addEventListener("click", function() {
   mobileSize(m);
 });
 
-// inputs be drag and dropped to change position
+// inputs can be drag and dropped to change position
 var container = document.getElementById("container");
-var sort = Sortable.create(container, {
+Sortable.create(container, {
   animation: 150, // ms, animation speed moving items when sorting, `0` — without animation
   handle: "svg", // Restricts sort start click/touch to the specified element
   draggable: ".selection", // Specifies which items inside the element should be sortable
