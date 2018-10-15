@@ -1,9 +1,11 @@
+const { app } = require("electron").remote;
+
 // require the module as normal
 let bs = require("browser-sync").create();
 
 let browserSync = () => {
   // .init starts the server
-  bs.init({ server: "./", index: "preview.html" });
+  bs.init({ watch: true, server: app.getAppPath(), index: "/preview.html" });
 
   // Now call methods on bs instead of the
   // main browserSync module export
