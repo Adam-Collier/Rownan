@@ -1,5 +1,6 @@
 // npm packages
 const fs = require("fs");
+const { app } = require("electron").remote;
 const path = require("path");
 const Prism = require("prismjs");
 const ipcRenderer = require("electron").ipcRenderer;
@@ -15,6 +16,15 @@ const saveToFile = require("./js/saveToFile");
 const generate = require("./js/generate");
 const preview = require("./js/preview");
 const browserSync = require("./js/browserSync");
+
+fs.copyFile(
+  "../preview.html",
+  `${app.getPath("userData")}/preview.html`,
+  err => {
+    if (err) throw err;
+    console.log("successfully copied preview.html");
+  }
+);
 
 browserSync();
 

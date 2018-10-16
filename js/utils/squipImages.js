@@ -2,6 +2,7 @@ let sqip = require("sqip");
 let svgToMiniDataURI = require("mini-svg-data-uri");
 let request = require("request-promise-native");
 let { errorStrip } = require("./error.js");
+const { app } = require("electron").remote;
 
 let squipImages = () => {
   document.querySelector(".loader").classList.add("loader-show");
@@ -32,10 +33,8 @@ let squipImages = () => {
                   .then(response => {
                     console.log("got image", i);
                     fs.writeFile(
-                      path.join(
-                        __dirname,
-                        `../../tempImages/sqip-${s}-temp${i + 1}.jpeg`
-                      ),
+                      `${app.getPath("userData")}/tempImages/sqip-${s}-temp${i +
+                        1}.jpeg`,
                       response,
                       {
                         encoding: "binary"
@@ -44,10 +43,9 @@ let squipImages = () => {
                         if (err) throw err;
 
                         const result = sqip({
-                          filename: path.join(
-                            __dirname,
-                            `../../tempImages/sqip-${s}-temp${i + 1}.jpeg`
-                          ),
+                          filename: `${app.getPath(
+                            "userData"
+                          )}/tempImages/sqip-${s}-temp${i + 1}.jpeg`,
                           numberOfPrimitives: 8
                         });
 
@@ -83,7 +81,7 @@ let squipImages = () => {
     ).then(() => {
       // write the JSON file
       fs.writeFile(
-        path.join(__dirname, "../../output.json"),
+        `${app.getPath("userData")}/output.json`,
         JSON.stringify(contentData, null, 2),
         function(err, data) {
           if (err) {

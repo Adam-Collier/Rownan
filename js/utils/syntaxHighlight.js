@@ -1,10 +1,8 @@
+const { app } = require("electron").remote;
 let cheerio = require("cheerio");
 
 let syntaxHighlight = () => {
-  let html = fs.readFileSync(
-    path.join(__dirname, "../../output.html"),
-    "utf-8"
-  );
+  let html = fs.readFileSync(`${app.getPath("userData")}/output.html`, "utf-8");
 
   // Returns a highlighted HTML string
   let highlightedCode = Prism.highlight(html, Prism.languages.markup);
@@ -12,11 +10,13 @@ let syntaxHighlight = () => {
   let syntax = document.getElementsByTagName("code")[0];
   syntax.innerHTML = highlightedCode;
 
-  fs.readFile(path.join(__dirname, "../../preview.html"), function(err, data) {
+  fs.readFile(`${app.getPath("userData")}/preview.html`, function(err, data) {
+    if (err) console.log(err);
+
     let $ = cheerio.load(data);
 
     $(".preview-container").html(html);
-    fs.writeFile(path.join(__dirname, "../../preview.html"), $.html(), function(
+    fs.writeFile(`${app.getPath("userData")}/preview.html`, $.html(), function(
       err
     ) {
       if (err) {

@@ -1,15 +1,16 @@
+const { app } = require("electron").remote;
 let { initOutput } = require("../templateLiterals");
 
 let initHomepage = () => {
   fs.writeFileSync(
-    path.join(__dirname, "../../output.html"),
+    `${app.getPath("userData")}/output.html`,
     contentData.styles,
-    function () {
+    function() {
       console.log("CSS added");
     }
   );
   // append the basic structure
-  fs.appendFileSync(path.join(__dirname, "../../output.html"), initOutput);
+  fs.appendFileSync(`${app.getPath("userData")}/output.html`, initOutput);
 };
 
 module.exports = initHomepage;

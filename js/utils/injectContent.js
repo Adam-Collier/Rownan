@@ -1,4 +1,6 @@
 const cheerio = require("cheerio");
+const { app } = require("electron").remote;
+
 let {
   mainSlide,
   contentSlide,
@@ -8,11 +10,14 @@ let {
 } = require("../templateLiterals");
 
 let injectContent = () => {
-  let output = fs.readFileSync(path.join(__dirname, "../../output.html"), "utf-8");
+  let output = fs.readFileSync(
+    `${app.getPath("userData")}/output.html`,
+    "utf-8"
+  );
   let $ = cheerio.load(output);
 
   let inputs = document.querySelectorAll("select");
-  Array.prototype.forEach.call(inputs, function (el, i) {
+  Array.prototype.forEach.call(inputs, function(el, i) {
     console.log(el.options[el.selectedIndex].value, i);
 
     // grab the template literals
@@ -35,7 +40,7 @@ let injectContent = () => {
         $(".slick-three").append(contentSlide(i));
         break;
       case "custom":
-        fs.appendFileSync(path.join(__dirname, "../../output.html"), cu);
+        fs.appendFileSync(`${app.getPath("userData")}/output.html`, cu);
         break;
     }
   });
@@ -65,7 +70,7 @@ let injectContent = () => {
     $(promoStrip()).insertAfter("#homeSlider");
   }
 
-  fs.writeFileSync(path.join(__dirname, "../../output.html"), $.html());
+  fs.writeFileSync(`${app.getPath("userData")}/output.html`, $.html());
   console.log("clean HTML written");
 };
 
