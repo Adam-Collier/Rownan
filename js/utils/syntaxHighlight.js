@@ -1,4 +1,7 @@
 let cheerio = require("cheerio");
+const Prism = require("prismjs");
+const path = require("path");
+const fs = require("fs");
 
 let syntaxHighlight = () => {
   let html = fs.readFileSync(

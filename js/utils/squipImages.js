@@ -2,6 +2,8 @@ let sqip = require("sqip");
 let svgToMiniDataURI = require("mini-svg-data-uri");
 let request = require("request-promise-native");
 let { errorStrip } = require("./error.js");
+const path = require("path");
+const fs = require("fs");
 
 let squipImages = () => {
   document.querySelector(".loader").classList.add("loader-show");

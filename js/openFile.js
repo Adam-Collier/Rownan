@@ -1,4 +1,5 @@
 const { dialog } = require("electron").remote;
+const fs = require("fs");
 
 function openFile(dropdown) {
   dialog.showOpenDialog({ filters: [{ extensions: ["json"] }] }, function(
@@ -16,13 +17,6 @@ function openFile(dropdown) {
       data = JSON.parse(data);
       // add the styles to the CodeMirror editor
       document.querySelector(".CodeMirror").CodeMirror.setValue(data.styles);
-      // add categories
-      document.querySelectorAll(".categories").forEach(function(x, i) {
-        console.log(x);
-        x.querySelectorAll("input[type=text]").forEach(function(input) {
-          input.value = data.categories[i][input.className];
-        });
-      });
       // add promo strip
       document.querySelector(".promoStrip").value = data.promoStrip;
       document.querySelector(".promoUrl").value = data.promoUrl;

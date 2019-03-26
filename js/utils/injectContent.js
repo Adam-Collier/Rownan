@@ -1,18 +1,23 @@
 const cheerio = require("cheerio");
+const fs = require("fs");
+const path = require("path");
+
 let {
   mainSlide,
   contentSlide,
-  nav,
   blocker,
   promoStrip
 } = require("../templateLiterals");
 
 let injectContent = () => {
-  let output = fs.readFileSync(path.join(__dirname, "../../output.html"), "utf-8");
+  let output = fs.readFileSync(
+    path.join(__dirname, "../../output.html"),
+    "utf-8"
+  );
   let $ = cheerio.load(output);
 
   let inputs = document.querySelectorAll("select");
-  Array.prototype.forEach.call(inputs, function (el, i) {
+  Array.prototype.forEach.call(inputs, function(el, i) {
     console.log(el.options[el.selectedIndex].value, i);
 
     // grab the template literals
@@ -54,10 +59,6 @@ let injectContent = () => {
   let cleanHTML = uglyHTML.replace(/^\s*\n/gm, "");
 
   $ = cheerio.load(cleanHTML);
-
-  if (contentData.categories[0].cat1 !== "") {
-    $("#homeSlider").prepend(nav);
-  }
 
   $(".slick-three").prepend(blocker);
 

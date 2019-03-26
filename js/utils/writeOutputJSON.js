@@ -1,18 +1,7 @@
+const path = require("path");
+const fs = require("fs");
+
 let writeOutputJSON = () => {
-  // create object to store category links
-  let cats = {};
-
-  document
-    .querySelectorAll('.categories input[type="text"]')
-    .forEach(function(el) {
-      // if there are any spaces, remove them
-      el.className.includes("url")
-        ? (el.value = el.value.replace(/\s/g, ""))
-        : null;
-      cats["" + el.className] = "" + el.value;
-    });
-  contentData.categories.push(cats);
-
   document
     .querySelectorAll('.promo-strip input[type="text"]')
     .forEach((x, i) => {

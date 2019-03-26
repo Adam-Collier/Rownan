@@ -1,10 +1,5 @@
 // npm packages
-const fs = require("fs");
-const path = require("path");
-const Prism = require("prismjs");
 const ipcRenderer = require("electron").ipcRenderer;
-const cheerio = require("cheerio");
-const cleaner = require("clean-html");
 
 // js files
 const mobileSize = require("./js/mobileSize");

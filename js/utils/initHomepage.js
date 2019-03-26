@@ -1,10 +1,12 @@
 let { initOutput } = require("../templateLiterals");
+const path = require("path");
+const fs = require("fs");
 
 let initHomepage = () => {
   fs.writeFileSync(
     path.join(__dirname, "../../output.html"),
     contentData.styles,
-    function () {
+    function() {
       console.log("CSS added");
     }
   );

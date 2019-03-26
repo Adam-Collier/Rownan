@@ -1,10 +1,11 @@
 const { dialog } = require("electron").remote;
+const fs = require("fs");
 
 function saveToFile() {
   var s = document.querySelectorAll(".save-icon");
 
   // init svg animation
-  s.forEach(function (x) {
+  s.forEach(function(x) {
     var rect = x.getBoundingClientRect();
 
     if (rect.width === 0) {
@@ -22,11 +23,11 @@ function saveToFile() {
         }
       ]
     },
-    function (fileName) {
+    function(fileName) {
       // once save has been clicked
 
       // reverse the animation
-      s.forEach(function (x) {
+      s.forEach(function(x) {
         var rect = x.getBoundingClientRect();
         if (rect.width > 0) {
           x.style.webkitAnimation = "save-reverse 800ms forwards";
@@ -43,13 +44,18 @@ function saveToFile() {
       var jsonFile = fileName.match(/[^/]+$/);
       jsonFile = jsonFile[0].slice(0, -5);
 
-      fs.readFile(path.join(__dirname, "../output.json"), "utf8", function (err, jsonData) {
+      fs.readFile(path.join(__dirname, "../output.json"), "utf8", function(
+        err,
+        jsonData
+      ) {
         if (err) console.log(err);
 
         // check if json directory exists
         if (fs.existsSync(jsonDir)) {
           // if directory exists write file
-          fs.writeFile(jsonDir + "/" + jsonFile + ".json", jsonData, function (err) {
+          fs.writeFile(jsonDir + "/" + jsonFile + ".json", jsonData, function(
+            err
+          ) {
             if (err) {
               console.log(err);
             } else {
@@ -58,27 +64,28 @@ function saveToFile() {
           });
         } else {
           // if directory doesnt exist create it then write the json
-          fs.mkdir(jsonDir, function (err) {
+          fs.mkdir(jsonDir, function(err) {
             if (err) {
               console.log(err);
             } else {
-              fs.writeFile(jsonDir + "/" + jsonFile + ".json", jsonData, function (
-                err,
-                data
-              ) {
-                if (err) {
-                  console.log(err);
-                } else {
-                  console.log("json file created");
+              fs.writeFile(
+                jsonDir + "/" + jsonFile + ".json",
+                jsonData,
+                function(err, data) {
+                  if (err) {
+                    console.log(err);
+                  } else {
+                    console.log("json file created");
+                  }
                 }
-              });
+              );
             }
             console.log("json directory created");
           });
         }
       });
 
-      fs.readFile(path.join(__dirname, "../output.html"), "utf8", function (
+      fs.readFile(path.join(__dirname, "../output.html"), "utf8", function(
         err,
         data
       ) {
@@ -86,7 +93,7 @@ function saveToFile() {
           throw err;
         }
         var saveFile = data;
-        fs.writeFile(fileName, saveFile, function (err, data) {
+        fs.writeFile(fileName, saveFile, function(err, data) {
           //write the new JSON to the file
           if (err) console.log(err);
 

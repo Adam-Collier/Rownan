@@ -106,24 +106,6 @@ let blocker = () => {
   <div class="blocker"></div>`;
 };
 
-let nav = () => {
-  return `
-  <div id="homeSlider-nav">
-    <a href="${contentData.categories[0].url1}">${
-    contentData.categories[0].cat1
-  }</a>
-    <a href="${contentData.categories[0].url2}">${
-    contentData.categories[0].cat2
-  }</a>
-    <a href="${contentData.categories[0].url3}">${
-    contentData.categories[0].cat3
-  }</a>
-    <a href="${contentData.categories[0].url4}">${
-    contentData.categories[0].cat4
-  }</a>
-  </div>`;
-};
-
 let promoStrip = () => {
   return `
 <a href="${contentData.promoUrl}">
@@ -141,7 +123,6 @@ module.exports = {
   initOutput,
   mainSlide,
   contentSlide,
-  nav,
   blocker,
   promoStrip
 };
