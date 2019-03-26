@@ -1,6 +1,7 @@
 // npm packages
 const ipcRenderer = require("electron").ipcRenderer;
 
+require("./js/codemirror/keymap");
 // js files
 const mobileSize = require("./js/mobileSize");
 const openFile = require("./js/openFile");
@@ -12,17 +13,6 @@ const preview = require("./js/preview");
 const browserSync = require("./js/browserSync");
 
 browserSync();
-
-function customEditors(currArea) {
-  var customEditor = currArea.querySelector(".custom");
-  CodeMirror.fromTextArea(customEditor, {
-    matchBrackets: true,
-    mode: "htmlmixed",
-    theme: "one-dark",
-    autoCloseBrackets: true,
-    autoCloseTags: true
-  });
-}
 
 // dropdown menu template literal
 var dropdown = `

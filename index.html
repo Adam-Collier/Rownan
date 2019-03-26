@@ -233,12 +233,14 @@
       <script>window.$ = window.jQuery = require('./js/jquery.js');</script>
     -->
     <script src="./js/codemirror/codemirror.js"></script>
+    <script src="./js/codemirror/keymap.js"></script>
     <script src="./js/codemirror/css.js"></script>
     <script src="./js/codemirror/htmlmixed.js"></script>
     <script src="./js/codemirror/javascript.js"></script>
     <script src="./js/codemirror/xml.js"></script>
     <script src="./js/codemirror/closebrackets.js"></script>
     <script src="./js/codemirror/closetag.js"></script>
+
     <script type="text/javascript">
       var myCodeMirror = CodeMirror.fromTextArea(editor, {
         lineNumbers: false,
@@ -246,7 +248,8 @@
         theme: "one-dark",
         autoCloseBrackets: true,
         autoCloseTags: true,
-        tabSize: 1
+        tabSize: 1,
+        keyMap: "sublime"
       });
     </script>
     <script src="./js/script.js"></script>
